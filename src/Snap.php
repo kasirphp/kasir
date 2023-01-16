@@ -68,4 +68,17 @@ class Snap extends Kasir
 
         return $this;
     }
+
+    /**
+     * Get token for Snap
+     *
+     * @throws ZeroGrossAmountException
+     * @throws MidtransKeyException
+     * @throws NoItemDetailsException
+     * @throws NoPriceAndQuantityAttributeException
+     */
+    public function getToken(): string
+    {
+        return $this->pay()->token;
+    }
 }

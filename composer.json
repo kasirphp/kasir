@@ -1,0 +1,62 @@
+{
+    "name": "kasir/kasir",
+    "description": "Kasir helps integrating Midtrans in Laravel way.",
+    "authors" : [
+        {
+            "name": "Risang Baskoro",
+            "email": "risangbaskoro@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "8.1",
+        "illuminate/contracts": "^9.0",
+        "illuminate/support": "^9.26",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.1",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kasir\\Kasir\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kasir\\Kasir\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kasir\\Kasir\\KasirServiceProvider"
+            ],
+            "aliases": {
+                "Kasir": "Kasir\\Kasir\\Facades\\Kasir"
+            }
+        }
+    }
+}

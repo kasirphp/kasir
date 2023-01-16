@@ -11,7 +11,7 @@ class KasirServiceProvider extends ServiceProvider
     {
         $this->publishConfig();
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'kasir');
-        Blade::componentNamespace('Nightshade\\Views\\Components', 'kasir');
+        Blade::componentNamespace('Kasir\\Views\\Components', 'kasir');
         $this->publishViews();
     }
 

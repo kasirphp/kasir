@@ -2,7 +2,7 @@
 
 namespace Kasir\Kasir\Exceptions;
 
-class MidtransAPIException extends \Exception
+class MidtransApiException extends \Exception
 {
     public function __construct(string $message = '', int $code = 0, ?\Throwable $previous = null)
     {

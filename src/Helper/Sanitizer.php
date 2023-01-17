@@ -85,7 +85,7 @@ class Sanitizer
         }
     }
 
-    private static function fieldAddress(string &$field): void
+    private static function fieldAddress(array &$field): void
     {
         $fields = [
             'first_name' => 255,

@@ -3,7 +3,7 @@
 namespace Kasir\Kasir\Helper;
 
 use Exception;
-use Kasir\Kasir\Exceptions\MidtransAPIException;
+use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Helper\Deprecated\Config;
 
@@ -104,10 +104,10 @@ class Requestor
             }
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             if (isset($result_array->status_code) && $result_array->status_code >= 401 && $result_array->status_code != 407) {
-                throw new MidtransAPIException('Midtrans API is returning API error. HTTP status code: '.$result_array->status_code.': '."'{$result_array->status_message}'",
+                throw new MidtransApiException('Midtrans API is returning API error. HTTP status code: '.$result_array->status_code.': '."'{$result_array->status_message}'",
                     $result_array->status_code);
             } elseif ($httpCode >= 400) {
-                throw new MidtransAPIException('Midtrans API is returning API error. HTTP status code: '.$httpCode.' API response: '.$result,
+                throw new MidtransApiException('Midtrans API is returning API error. HTTP status code: '.$httpCode.' API response: '.$result,
                     $httpCode);
             } else {
                 return $result_array;

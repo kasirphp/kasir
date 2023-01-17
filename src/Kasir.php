@@ -5,8 +5,10 @@ namespace Kasir\Kasir;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\Configurable;
 use Kasir\Kasir\Concerns\EvaluateClosures;
+use Kasir\Kasir\Concerns\HasBillingAddress;
 use Kasir\Kasir\Concerns\HasCustomerDetails;
 use Kasir\Kasir\Concerns\HasItemDetails;
+use Kasir\Kasir\Concerns\HasShippingAddress;
 use Kasir\Kasir\Concerns\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
@@ -17,8 +19,10 @@ class Kasir
 {
     use Configurable;
     use EvaluateClosures;
+    use HasBillingAddress;
     use HasCustomerDetails;
     use HasItemDetails;
+    use HasShippingAddress;
     use HasTransactionDetails;
     use Validation;
 
@@ -76,8 +80,15 @@ class Kasir
         if (! is_null($this->getItemDetails())) {
             $array['item_details'] = array_values($this->getItemDetails());
         }
+
         if (! is_null($this->getCustomerDetails())) {
             $array['customer_details'] = $this->getCustomerDetails();
+            if (! is_null($this->getBillingAddress())) {
+                $array['customer_details']['billing_address'] = $this->getBillingAddress();
+            }
+            if (! is_null($this->getShippingAddress())) {
+                $array['customer_details']['shipping_address'] = $this->getShippingAddress();
+            }
         }
 
         return $array;

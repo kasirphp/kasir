@@ -2,13 +2,11 @@
 
 namespace Kasir\Kasir\Concerns;
 
-use Illuminate\Support\Collection;
-
 trait HasItemDetails
 {
-    protected Collection|array|\Closure|null $item_details = null;
+    protected array|\Closure|null $item_details = null;
 
-    public function itemDetails(Collection|array|\Closure|null $item_details): static
+    public function itemDetails(array|\Closure|null $item_details): static
     {
         $this->item_details = $item_details;
 

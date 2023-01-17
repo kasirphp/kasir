@@ -5,6 +5,7 @@ namespace Kasir\Kasir;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\Configurable;
 use Kasir\Kasir\Concerns\EvaluateClosures;
+use Kasir\Kasir\Concerns\HasCustomerDetails;
 use Kasir\Kasir\Concerns\HasItemDetails;
 use Kasir\Kasir\Concerns\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
@@ -16,6 +17,7 @@ class Kasir
 {
     use Configurable;
     use EvaluateClosures;
+    use HasCustomerDetails;
     use HasItemDetails;
     use HasTransactionDetails;
     use Validation;
@@ -73,6 +75,9 @@ class Kasir
 
         if (! is_null($this->getItemDetails())) {
             $array['item_details'] = array_values($this->getItemDetails());
+        }
+        if (! is_null($this->getCustomerDetails())) {
+            $array['customer_details'] = $this->getCustomerDetails();
         }
 
         return $array;

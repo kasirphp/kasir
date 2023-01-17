@@ -72,7 +72,7 @@ class Kasir
         ];
 
         if (! is_null($this->getItemDetails())) {
-            $array['item_details'] = $this->getItemDetails();
+            $array['item_details'] = array_values($this->getItemDetails());
         }
 
         return $array;

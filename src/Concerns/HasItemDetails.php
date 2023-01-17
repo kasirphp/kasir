@@ -15,6 +15,6 @@ trait HasItemDetails
 
     public function getItemDetails(): array|null
     {
-        return array_values($this->evaluate($this->item_details));
+        return $this->evaluate($this->item_details);
     }
 }

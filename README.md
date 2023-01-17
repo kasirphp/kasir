@@ -27,7 +27,9 @@ Snap::make(200000)
     ->redirect();
 ```
 
-Documentation is coming soon...
+## Installation
+
+Please refer to [Kasir Installation Page](https://github.com/kasirphp/kasir/wiki/Installation).
 
 ## Contributing
 

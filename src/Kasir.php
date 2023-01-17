@@ -7,6 +7,7 @@ use Kasir\Kasir\Concerns\Configurable;
 use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\HasBillingAddress;
 use Kasir\Kasir\Concerns\HasCustomerDetails;
+use Kasir\Kasir\Concerns\HasEnabledPayments;
 use Kasir\Kasir\Concerns\HasItemDetails;
 use Kasir\Kasir\Concerns\HasShippingAddress;
 use Kasir\Kasir\Concerns\HasTransactionDetails;
@@ -21,6 +22,7 @@ class Kasir
     use EvaluateClosures;
     use HasBillingAddress;
     use HasCustomerDetails;
+    use HasEnabledPayments;
     use HasItemDetails;
     use HasShippingAddress;
     use HasTransactionDetails;
@@ -89,6 +91,10 @@ class Kasir
             if (! is_null($this->getShippingAddress())) {
                 $array['customer_details']['shipping_address'] = $this->getShippingAddress();
             }
+        }
+
+        if (! is_null($this->getEnabledPayments())) {
+            $array['enabled_payments'] = array_values($this->getEnabledPayments());
         }
 
         return $array;

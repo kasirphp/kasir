@@ -18,7 +18,7 @@ trait Validation
      */
     public function validate(): static
     {
-        if ($this->getGrossAmount() === null && $this->getItemDetails() === null) {
+        if (($this->getGrossAmount() === null || ! $this->getGrossAmount() > 0) && $this->getItemDetails() === null) {
             throw new ZeroGrossAmountException();
         }
 

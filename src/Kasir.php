@@ -64,11 +64,7 @@ class Kasir
      */
     public function toArray(): array
     {
-        try {
-            $this->validate();
-        } catch (NoItemDetailsException|ZeroGrossAmountException|NoPriceAndQuantityAttributeException $exception) {
-            throw new $exception();
-        }
+        $this->validate();
 
         $array = [
             'transaction_details' => $this->transaction_details,

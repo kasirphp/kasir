@@ -3,7 +3,6 @@
 namespace Kasir\Kasir;
 
 use Illuminate\Support\Str;
-use Kasir\Kasir\Concerns\Configurable;
 use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\HasBillingAddress;
 use Kasir\Kasir\Concerns\HasCustomerDetails;
@@ -18,7 +17,6 @@ use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 
 class Kasir
 {
-    use Configurable;
     use EvaluateClosures;
     use HasBillingAddress;
     use HasCustomerDetails;
@@ -50,12 +48,9 @@ class Kasir
      */
     public static function make(?int $gross_amount = null): static
     {
-        $static = app(static::class, [
+        return app(static::class, [
             'gross_amount' => $gross_amount ?? null,
         ]);
-        $static->configure();
-
-        return $static;
     }
 
     /**

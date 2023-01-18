@@ -4,7 +4,7 @@ namespace Kasir\Kasir\Concerns;
 
 trait HasShippingAddress
 {
-    protected array|\Closure|null $shipping_address;
+    protected array|\Closure|null $shipping_address = null;
 
     public function shippingAddress(array|\Closure|null $shipping_address): static
     {

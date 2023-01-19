@@ -16,6 +16,10 @@ jobs:
         include:
           - laravel: 9.*
             testbench: 7.*
+    env:
+      KASIR_PRODUCTION: false
+      MIDTRANS_CLIENT_KEY_SANDBOX: ${{ secrets.MIDTRANS_CLIENT_KEY_SANDBOX }}
+      MIDTRANS_SERVER_KEY_SANDBOX: ${{ secrets.MIDTRANS_SERVER_KEY_SANDBOX }}
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
     steps:
       - uses: actions/checkout@v3

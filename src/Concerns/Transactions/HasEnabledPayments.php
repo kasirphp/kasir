@@ -1,6 +1,6 @@
 <?php
 
-namespace Kasir\Kasir\Concerns;
+namespace Kasir\Kasir\Concerns\Transactions;
 
 trait HasEnabledPayments
 {

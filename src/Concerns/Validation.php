@@ -2,6 +2,8 @@
 
 namespace Kasir\Kasir\Concerns;
 
+use Kasir\Kasir\Concerns\Transactions\HasGrossAmount;
+use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;

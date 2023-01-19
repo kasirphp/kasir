@@ -67,7 +67,7 @@ class Requestor
                 'Content-Type: application/json',
                 'Accept: application/json',
                 'User-Agent: midtrans-php-v2.5.2',
-                'Authorization: Basic '.base64_encode($server_key.':'),
+                'Authorization: Basic ' . base64_encode($server_key . ':'),
             ],
             CURLOPT_RETURNTRANSFER => 1,
         ];
@@ -95,20 +95,24 @@ class Requestor
         $result = curl_exec($ch);
 
         if ($result === false) {
-            throw new MidtransKeyException('Curl Error: '.curl_error($ch));
+            throw new MidtransKeyException('Curl Error: ' . curl_error($ch));
         } else {
             try {
                 $result_array = json_decode($result);
             } catch (Exception $e) {
-                throw new \Exception('Invalid JSON in API response: '.$result);
+                throw new \Exception('Invalid JSON in API response: ' . $result);
             }
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             if (isset($result_array->status_code) && $result_array->status_code >= 401 && $result_array->status_code != 407) {
-                throw new MidtransApiException('Midtrans API is returning API error. HTTP status code: '.$result_array->status_code.': '."'{$result_array->status_message}'",
-                    $result_array->status_code);
+                throw new MidtransApiException(
+                    'Midtrans API is returning API error. HTTP status code: ' . $result_array->status_code . ': ' . "'{$result_array->status_message}'",
+                    $result_array->status_code
+                );
             } elseif ($httpCode >= 400) {
-                throw new MidtransApiException('Midtrans API is returning API error. HTTP status code: '.$httpCode.' API response: '.$result,
-                    $httpCode);
+                throw new MidtransApiException(
+                    'Midtrans API is returning API error. HTTP status code: ' . $httpCode . ' API response: ' . $result,
+                    $httpCode
+                );
             } else {
                 return $result_array;
             }

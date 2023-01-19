@@ -7,9 +7,9 @@ trait HasTransactionDetails
     use HasGrossAmount;
     use HasOrderId;
 
-    protected array|\Closure $transaction_details;
+    protected array | \Closure $transaction_details;
 
-    public function transactionDetails(array|\Closure $transaction_details): static
+    public function transactionDetails(array | \Closure $transaction_details): static
     {
         $this->transaction_details = $transaction_details;
 

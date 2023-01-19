@@ -29,7 +29,7 @@ dataset('enabled_payments', function () {
     for ($i = 0; $i < $num_array; $i++) {
         shuffle($available_payments);
         $num_items = rand(1, count($available_payments));
-        $payments[$num_items.' items'][] = array_slice($available_payments, 0, $num_items);
+        $payments[$num_items . ' items'][] = array_slice($available_payments, 0, $num_items);
     }
 
     return $payments;

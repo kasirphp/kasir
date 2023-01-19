@@ -17,7 +17,7 @@ class TestCase extends BaseTestCase
 
     protected function defineEnvironment($app)
     {
-        $app->useEnvironmentPath(__DIR__.'/..');
+        $app->useEnvironmentPath(__DIR__ . '/..');
         $app->bootstrapWith([LoadEnvironmentVariables::class]);
 
         $app['config']->set('kasir.server_key', env('MIDTRANS_SERVER_KEY_SANDBOX'));

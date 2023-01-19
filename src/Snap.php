@@ -24,7 +24,7 @@ class Snap extends Kasir
         $payloads = static::configurePayload(static::toArray());
 
         return Requestor::post(
-            static::getSnapBaseUrl().'/transactions',
+            static::getSnapBaseUrl() . '/transactions',
             config('kasir.server_key'),
             $payloads
         );

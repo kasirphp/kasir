@@ -14,6 +14,7 @@ use Kasir\Kasir\Concerns\Validation;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
+use Kasir\Kasir\Helper\Sanitizer;
 
 class Kasir
 {
@@ -113,5 +114,28 @@ class Kasir
         return config('kasir.production_mode') === true
             ? self::SNAP_PRODUCTION_BASE_URL
             : self::SNAP_SANDBOX_BASE_URL;
+    }
+
+    public static function configurePayload($params): array
+    {
+        $payloads = [
+            'credit_card' => [
+                'secure' => config('kasir.3ds'),
+            ],
+        ];
+
+        if (isset($params['item_details'])) {
+            $gross_amount = 0;
+            foreach ($params['item_details'] as $item) {
+                $gross_amount += $item['quantity'] * $item['price'];
+            }
+            $params['transaction_details']['gross_amount'] = $gross_amount;
+        }
+
+        if (config('kasir.sanitize')) {
+            Sanitizer::json($params);
+        }
+
+        return array_replace_recursive($payloads, $params);
     }
 }

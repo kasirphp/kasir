@@ -38,7 +38,7 @@ class Requestor
      */
     private static function validateServerKey($server_key): string
     {
-        if (! $server_key) {
+        if (is_null($server_key)) {
             throw new MidtransKeyException('The Server/Client Key is null. Please double check the config or env file.');
         } else {
             if ($server_key == '') {

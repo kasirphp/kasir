@@ -37,6 +37,10 @@ expect()->extend('isInvalid', function (...$errors) {
     }
 });
 
+expect()->extend('toBeValidUrl', function () {
+    return filter_var($this->value, FILTER_VALIDATE_URL) !== false;
+});
+
 /*
 |--------------------------------------------------------------------------
 | Functions

@@ -3,14 +3,13 @@
 namespace Kasir\Kasir;
 
 use Illuminate\Support\Str;
-use Kasir\Kasir\Concerns\Configurable;
 use Kasir\Kasir\Concerns\EvaluateClosures;
-use Kasir\Kasir\Concerns\HasBillingAddress;
-use Kasir\Kasir\Concerns\HasCustomerDetails;
-use Kasir\Kasir\Concerns\HasEnabledPayments;
-use Kasir\Kasir\Concerns\HasItemDetails;
-use Kasir\Kasir\Concerns\HasShippingAddress;
-use Kasir\Kasir\Concerns\HasTransactionDetails;
+use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
+use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
+use Kasir\Kasir\Concerns\Transactions\HasEnabledPayments;
+use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
+use Kasir\Kasir\Concerns\Transactions\HasShippingAddress;
+use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
@@ -18,7 +17,6 @@ use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 
 class Kasir
 {
-    use Configurable;
     use EvaluateClosures;
     use HasBillingAddress;
     use HasCustomerDetails;
@@ -50,12 +48,9 @@ class Kasir
      */
     public static function make(?int $gross_amount = null): static
     {
-        $static = app(static::class, [
+        return app(static::class, [
             'gross_amount' => $gross_amount ?? null,
         ]);
-        $static->configure();
-
-        return $static;
     }
 
     /**
@@ -69,11 +64,7 @@ class Kasir
      */
     public function toArray(): array
     {
-        try {
-            $this->validate();
-        } catch (NoItemDetailsException|ZeroGrossAmountException|NoPriceAndQuantityAttributeException $exception) {
-            throw new $exception();
-        }
+        $this->validate();
 
         $array = [
             'transaction_details' => $this->transaction_details,

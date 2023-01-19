@@ -2,6 +2,8 @@
 
 namespace Kasir\Kasir\Concerns;
 
+use Kasir\Kasir\Concerns\Transactions\HasGrossAmount;
+use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
@@ -18,7 +20,7 @@ trait Validation
      */
     public function validate(): static
     {
-        if ($this->getGrossAmount() === null && $this->getItemDetails() === null) {
+        if (($this->getGrossAmount() === null || ! $this->getGrossAmount() > 0) && $this->getItemDetails() === null) {
             throw new ZeroGrossAmountException();
         }
 

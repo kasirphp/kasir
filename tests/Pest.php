@@ -26,8 +26,15 @@ uses(TestCase::class)->in('Feature');
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+expect()->extend('isInvalid', function (...$errors) {
+    try {
+        $this->value->__invoke();
+        test()->fail('No validation exception was thrown.');
+    } catch (\Exception $exception) {
+        foreach ($errors as $key => $error) {
+            expect(json_encode($exception->errors()[$key]))->toContain($error);
+        }
+    }
 });
 
 /*

@@ -47,3 +47,24 @@ it('has the correct keys', function ($key, $keys) {
         ],
     ],
 ]);
+
+it('can create transactions from array', function ($items, $customer, $address, $payments) {
+    $payload = [
+        'transaction_details' => [
+            'gross_amount' => rand(1, 100) * 1000,
+            'order_id' => Str::orderedUuid()->toString(),
+        ],
+    ];
+    $payload['item_details'] = $items;
+    $payload['customer_details'] = $customer;
+    $payload['customer_details']['billing_address'] = array_merge($customer, $address);
+    $payload['customer_details']['shipping_address'] = array_merge($customer, $address);
+    $payload['enabled_payments'] = $payments;
+
+    $kasir = Kasir::fromArray($payload);
+
+    expect($kasir->toArray())->toBeArray()->toBe($payload);
+})->with('item_details')
+    ->with('customer_details')
+    ->with('address')
+    ->with('enabled_payments');

@@ -94,6 +94,19 @@ class Kasir implements ShouldConfigurePayload
         return $array;
     }
 
+    public static function fromArray(array $data): static
+    {
+        $static = static::make($data['transaction_details']['gross_amount'] ?? null);
+        $static->orderId($data['transaction_details']['order_id'] ?? Str::orderedUuid());
+        $static->itemDetails($data['item_details'] ?? null);
+        $static->customerDetails($data['customer_details'] ?? null);
+        $static->billingAddress($data['customer_details']['billing_address'] ?? null);
+        $static->shippingAddress($data['customer_details']['shipping_address'] ?? null);
+        $static->enablePayments($data['enabled_payments'] ?? null);
+
+        return $static;
+    }
+
     /**
      * Get Base URL for the API
      *

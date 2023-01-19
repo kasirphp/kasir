@@ -2,13 +2,16 @@
     <img src="art/svg/logo-wordmark-side.svg" alt="Kasir Logo">
 </p>
 
-<!--
 <p align="center">
     <a href="https://packagist.org/packages/kasir/kasir"><img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/kasir/kasir"></a>
-    <a href="https://packagist.org/packages/kasir/kasir"><img alt="Packagist PHP Version Support" src="https://img.shields.io/packagist/php-v/kasirphp/kasir"></a>
+    <a href="https://packagist.org/packages/kasir/kasir"><img alt="Packagist PHP Version" src="https://img.shields.io/packagist/dependency-v/kasir/kasir/illuminate/contracts"></a>
+    <a href="https://packagist.org/packages/kasir/kasir"><img alt="Packagist PHP Version" src="https://img.shields.io/packagist/dependency-v/kasir/kasir/php"></a>
     <a href="https://packagist.org/packages/kasir/kasir"><img src="https://img.shields.io/packagist/l/kasir/kasir" alt="License"></a>
 </p>
--->
+
+<p align="center">
+    <a href="https://github.com/kasirphp/kasir/actions/workflows/tests.yml"><img src="https://github.com/kasirphp/kasir/actions/workflows/tests.yml/badge.svg" /></a>
+</p>
 
 ## Introduction
 

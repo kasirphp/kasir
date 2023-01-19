@@ -1,5 +1,7 @@
 <?php
 
+use Kasir\Kasir\Kasir;
+
 it('has the correct array keys', function () {
     $keys = [
         'transaction_details',
@@ -8,7 +10,7 @@ it('has the correct array keys', function () {
         'enabled_payments',
     ];
 
-    $kasir = \Kasir\Kasir\Kasir::make()
+    $kasir = Kasir::make()
         ->grossAmount(100)
         ->orderId('order-id')
         ->itemDetails([])
@@ -19,7 +21,7 @@ it('has the correct array keys', function () {
 });
 
 it('has the correct keys', function ($key, $keys) {
-    $kasir = \Kasir\Kasir\Kasir::make()
+    $kasir = Kasir::make()
         ->grossAmount(1)
         ->orderId('order-id')
         ->itemDetails([])

@@ -3,6 +3,7 @@
 namespace Kasir\Kasir;
 
 use Illuminate\Support\Str;
+use Kasir\Kasir\Concerns\CanConfigurePayload;
 use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
@@ -11,12 +12,14 @@ use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
 use Kasir\Kasir\Concerns\Transactions\HasShippingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
+use Kasir\Kasir\Contracts\ShouldConfigurePayload;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 
-class Kasir
+class Kasir implements ShouldConfigurePayload
 {
+    use CanConfigurePayload;
     use EvaluateClosures;
     use HasBillingAddress;
     use HasCustomerDetails;

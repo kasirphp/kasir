@@ -1,7 +1,11 @@
 <?php
 
-it('throws MidtransKeyException when the server/client key is not defined', function () {
-    $snap = \Kasir\Kasir\Snap::make(1000);
+use Kasir\Kasir\Snap;
 
-    $snap->pay();
-})->throws(\Kasir\Kasir\Exceptions\MidtransKeyException::class);
+it('can request snap token and redirect url', function () {
+    $snap = Snap::make(1);
+
+    expect($snap->pay())->toHaveKeys(['token', 'redirect_url'])
+        ->and($snap->getToken())->toBeString()
+        ->and($snap->redirect())->toBeValidUrl();
+});

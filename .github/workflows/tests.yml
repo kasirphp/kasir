@@ -16,6 +16,10 @@ jobs:
         include:
           - laravel: 9.*
             testbench: 7.*
+    env:
+      KASIR_PRODUCTION: false
+      MIDTRANS_CLIENT_KEY_SANDBOX: ${{ secrets.MIDTRANS_CLIENT_KEY_SANDBOX }}
+      MIDTRANS_SERVER_KEY_SANDBOX: ${{ secrets.MIDTRANS_SERVER_KEY_SANDBOX }}
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
     steps:
       - uses: actions/checkout@v3
@@ -32,7 +36,7 @@ jobs:
           coverage: none
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "filament/support" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
       - name: Execute tests
         run: ./vendor/bin/pest --verbose

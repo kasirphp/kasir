@@ -2,6 +2,7 @@
 
 namespace Kasir\Kasir;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\CanConfigurePayload;
 use Kasir\Kasir\Concerns\EvaluateClosures;
@@ -17,7 +18,7 @@ use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 
-class Kasir implements ShouldConfigurePayload
+class Kasir implements Arrayable, ShouldConfigurePayload
 {
     use CanConfigurePayload;
     use EvaluateClosures;

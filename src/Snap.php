@@ -2,7 +2,7 @@
 
 namespace Kasir\Kasir;
 
-use Exception;
+use Illuminate\Http\RedirectResponse;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
@@ -24,7 +24,7 @@ class Snap extends Kasir
         $payloads = static::configurePayload(static::toArray());
 
         return Requestor::post(
-            static::getSnapBaseUrl().'/transactions',
+            static::getSnapBaseUrl() . '/transactions',
             config('kasir.server_key'),
             $payloads
         );
@@ -33,19 +33,18 @@ class Snap extends Kasir
     /**
      * Redirect To Snap Page
      *
-     * @return $this
+     * @return RedirectResponse
      *
+     * @throws MidtransKeyException
      * @throws NoItemDetailsException
-     * @throws ZeroGrossAmountException
      * @throws NoPriceAndQuantityAttributeException
-     * @throws Exception
+     * @throws ZeroGrossAmountException
      */
-    public function redirect(): static
+    public function redirect(): RedirectResponse
     {
-        $url = $this->pay()->redirect_url;
-        redirect($url);
+        $url = $this->getUrl();
 
-        return $this;
+        return redirect()->away($url);
     }
 
     /**
@@ -59,5 +58,20 @@ class Snap extends Kasir
     public function getToken(): string
     {
         return $this->pay()->token;
+    }
+
+    /**
+     * Get Redirect Url for Snap
+     *
+     * @return mixed
+     *
+     * @throws MidtransKeyException
+     * @throws NoItemDetailsException
+     * @throws NoPriceAndQuantityAttributeException
+     * @throws ZeroGrossAmountException
+     */
+    public function getUrl()
+    {
+        return $this->pay()->redirect_url;
     }
 }

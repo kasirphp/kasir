@@ -11,7 +11,7 @@ namespace Kasir\Kasir\Helper;
  */
 class Sanitizer
 {
-    private array|null $filters;
+    private array | null $filters;
 
     public function __construct()
     {
@@ -127,7 +127,7 @@ class Sanitizer
             ->apply($field);
 
         if ($hasPlus) {
-            $field = '+'.$field;
+            $field = '+' . $field;
         }
         $self = new self;
         $field = $self

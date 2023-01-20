@@ -21,7 +21,7 @@ class SnapScript extends Component
         $this->token = $token;
     }
 
-    public function render(): View|Factory|Htmlable|Closure|string|Application
+    public function render(): View | Factory | Htmlable | Closure | string | Application
     {
         return view('kasir::components.snap-script');
     }

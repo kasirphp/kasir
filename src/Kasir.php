@@ -2,6 +2,7 @@
 
 namespace Kasir\Kasir;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\CanConfigurePayload;
 use Kasir\Kasir\Concerns\EvaluateClosures;
@@ -17,7 +18,7 @@ use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 
-class Kasir implements ShouldConfigurePayload
+class Kasir implements Arrayable, ShouldConfigurePayload
 {
     use CanConfigurePayload;
     use EvaluateClosures;
@@ -92,6 +93,19 @@ class Kasir implements ShouldConfigurePayload
         }
 
         return $array;
+    }
+
+    public static function fromArray(array $data): static
+    {
+        $static = static::make($data['transaction_details']['gross_amount'] ?? null);
+        $static->orderId($data['transaction_details']['order_id'] ?? Str::orderedUuid());
+        $static->itemDetails($data['item_details'] ?? null);
+        $static->customerDetails($data['customer_details'] ?? null);
+        $static->billingAddress($data['customer_details']['billing_address'] ?? null);
+        $static->shippingAddress($data['customer_details']['shipping_address'] ?? null);
+        $static->enablePayments($data['enabled_payments'] ?? null);
+
+        return $static;
     }
 
     /**

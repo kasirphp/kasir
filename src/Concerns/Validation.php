@@ -24,10 +24,11 @@ trait Validation
             throw new ZeroGrossAmountException();
         }
 
-        if ($this->getGrossAmount() === null && $this->getItemDetails() === []) {
+        if (($this->getGrossAmount() === null || ! $this->getGrossAmount() > 0)) {
             $item_details_has_price_and_quantity_attr = array_map(
                 fn ($a) => array_key_exists('price', $a) && array_key_exists('quantity', $a),
-                $this->getItemDetails());
+                $this->getItemDetails()
+            );
 
             if (in_array(false, $item_details_has_price_and_quantity_attr)) {
                 throw new NoPriceAndQuantityAttributeException();

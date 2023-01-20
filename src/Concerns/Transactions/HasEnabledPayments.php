@@ -25,25 +25,25 @@ trait HasEnabledPayments
         'kredivo',
     ];
 
-    protected array|null $enabled_payments = null;
+    protected array | null $enabled_payments = null;
 
-    protected array|null $disabled_payments = null;
+    protected array | null $disabled_payments = null;
 
-    public function enablePayments(array|\Closure|null $payments): static
+    public function enablePayments(array | \Closure | null $payments): static
     {
         $this->enabled_payments = $payments;
 
         return $this;
     }
 
-    public function disablePayments(array|\Closure|null $payments): static
+    public function disablePayments(array | \Closure | null $payments): static
     {
         $this->disabled_payments = $payments;
 
         return $this;
     }
 
-    public function getEnabledPayments(): array|null
+    public function getEnabledPayments(): array | null
     {
         if (! is_null($this->disabled_payments) && is_null($this->enabled_payments)) {
             return array_diff($this->available_payments, $this->evaluate($this->disabled_payments));

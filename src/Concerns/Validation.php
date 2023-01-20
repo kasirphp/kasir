@@ -20,11 +20,17 @@ trait Validation
      */
     public function validate(): static
     {
-        if (($this->getGrossAmount() === null || ! $this->getGrossAmount() > 0) && $this->getItemDetails() === null) {
-            throw new ZeroGrossAmountException();
-        }
+        $gross_amount_is_null_or_zero = ($this->getGrossAmount() === null || ! $this->getGrossAmount() > 0);
 
-        if (($this->getGrossAmount() === null || ! $this->getGrossAmount() > 0)) {
+        if ($gross_amount_is_null_or_zero) {
+            if ($this->getItemDetails() === null) {
+                throw new ZeroGrossAmountException();
+            }
+
+            if ($this->getItemDetails() === []) {
+                throw new NoItemDetailsException();
+            }
+
             $item_details_has_price_and_quantity_attr = array_map(
                 fn ($a) => array_key_exists('price', $a) && array_key_exists('quantity', $a),
                 $this->getItemDetails()
@@ -33,8 +39,6 @@ trait Validation
             if (in_array(false, $item_details_has_price_and_quantity_attr)) {
                 throw new NoPriceAndQuantityAttributeException();
             }
-
-            throw new NoItemDetailsException();
         }
 
         return $this;

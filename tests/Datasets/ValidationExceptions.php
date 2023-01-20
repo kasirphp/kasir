@@ -30,6 +30,7 @@ dataset('validation_exceptions', [
         Kasir::make()
             ->itemDetails([
                 [
+                    'id' => 1,
                     'name' => 'foo',
                 ],
             ]),
@@ -39,6 +40,8 @@ dataset('validation_exceptions', [
         Kasir::make()
             ->itemDetails([
                 [
+                    'id' => 1,
+                    'name' => 'foo',
                     'price' => 1000,
                 ],
             ]),
@@ -48,6 +51,8 @@ dataset('validation_exceptions', [
         Kasir::make()
             ->itemDetails([
                 [
+                    'id' => 1,
+                    'name' => 'foo',
                     'quantity' => 1,
                 ],
             ]),
@@ -57,6 +62,7 @@ dataset('validation_exceptions', [
         Kasir::make(0)
             ->itemDetails([
                 [
+                    'id' => 1,
                     'name' => 'foo',
                 ],
             ]),
@@ -66,6 +72,8 @@ dataset('validation_exceptions', [
         Kasir::make(0)
             ->itemDetails([
                 [
+                    'id' => 1,
+                    'name' => 'foo',
                     'price' => 1000,
                 ],
             ]),
@@ -75,6 +83,8 @@ dataset('validation_exceptions', [
         Kasir::make()
             ->itemDetails([
                 [
+                    'id' => 1,
+                    'name' => 'foo',
                     'quantity' => 1,
                 ],
             ]),

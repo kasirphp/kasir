@@ -27,7 +27,7 @@ class Snap extends Kasir
             static::getSnapBaseUrl() . '/transactions',
             config('kasir.server_key'),
             $payloads
-        );
+        )->object();
     }
 
     /**

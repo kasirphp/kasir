@@ -2,38 +2,61 @@
 
 namespace Kasir\Kasir\Helper;
 
-use Exception;
+use Http;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
-use Kasir\Kasir\Helper\Deprecated\Config;
+use Str;
 
 class Requestor
 {
     /**
+     * @param $url
+     * @param $server_key
+     * @param $data_hash
+     * @return mixed
+     *
+     * @throws MidtransApiException
      * @throws MidtransKeyException
      */
-    public static function get($url, $server_key, $data_hash)
+    public static function get($url, $server_key, $data_hash): mixed
     {
         return self::call($url, $server_key, $data_hash, 'GET');
     }
 
     /**
+     * @param $url
+     * @param $server_key
+     * @param $data_hash
+     * @return mixed
+     *
+     * @throws MidtransApiException
      * @throws MidtransKeyException
      */
-    public static function post($url, $server_key, $data_hash)
+    public static function post($url, $server_key, $data_hash): mixed
     {
         return self::call($url, $server_key, $data_hash, 'POST');
     }
 
     /**
+     * @param $url
+     * @param $server_key
+     * @param $data_hash
+     * @return mixed
+     *
+     * @throws MidtransApiException
      * @throws MidtransKeyException
      */
-    public static function patch($url, $server_key, $data_hash)
+    public static function patch($url, $server_key, $data_hash): mixed
     {
         return self::call($url, $server_key, $data_hash, 'PATCH');
     }
 
     /**
+     * Validates the server and client key
+     *
+     * @param $server_key
+     * @return string
+     *
      * @throws MidtransKeyException
      */
     private static function validateServerKey($server_key): string
@@ -52,69 +75,71 @@ class Requestor
     }
 
     /**
+     * Make the request
+     *
+     * @param $url
+     * @param $server_key
+     * @param $data_hash
+     * @param $method
+     * @return mixed
+     *
+     * @throws MidtransApiException
      * @throws MidtransKeyException
-     * @throws Exception
      */
-    public static function call($url, $server_key, $data_hash, $method)
+    public static function call($url, $server_key, $data_hash, $method): mixed
     {
-        $ch = curl_init();
-
         $server_key = self::validateServerKey($server_key);
+        $method = Str::lower($method);
 
-        $curl_options = [
-            CURLOPT_URL => $url,
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Accept: application/json',
-                'User-Agent: midtrans-php-v2.5.2',
-                'Authorization: Basic ' . base64_encode($server_key . ':'),
-            ],
-            CURLOPT_RETURNTRANSFER => 1,
-        ];
+        $response = Http::withBasicAuth($server_key, '')
+            ->accept('application/json')
+            ->withUserAgent('midtrans-php-v2.5.2')
+            ->withBody(json_encode($data_hash), 'application/json')
+            ->$method($url);
 
         // TODO: set notifications in header
 
         // TODO: Merge with config curl options
 
-        if ($method != 'GET') {
-            if ($data_hash) {
-                $body = json_encode($data_hash);
-                $curl_options[CURLOPT_POSTFIELDS] = $body;
-            } else {
-                $curl_options[CURLOPT_POSTFIELDS] = '';
-            }
-            if ($method == 'POST') {
-                $curl_options[CURLOPT_POST] = 1;
-            } elseif ($method == 'PATCH') {
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
-            }
-        }
+        self::validateResponse($response);
 
-        curl_setopt_array($ch, $curl_options);
+        return $response;
+    }
 
-        $result = curl_exec($ch);
-
-        if ($result === false) {
-            throw new MidtransKeyException('Curl Error: ' . curl_error($ch));
-        } else {
-            try {
-                $result_array = json_decode($result);
-            } catch (Exception $e) {
-                throw new \Exception('Invalid JSON in API response: ' . $result);
-            }
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            if (isset($result_array->status_code) && $result_array->status_code >= 401 && $result_array->status_code != 407) {
+    /**
+     * Validates Response
+     *
+     * @param $response
+     * @return void
+     *
+     * @throws MidtransApiException
+     */
+    public static function validateResponse($response): void
+    {
+        if ($response->failed()) {
+            if (array_key_exists('error_messages', $response->json())) {
                 throw new MidtransApiException(
-                    'Midtrans API is returning API error. HTTP status code: ' . $result_array->status_code . ': ' . "'{$result_array->status_message}'",
-                    $result_array->status_code
+                    $response->status() . ' ' . $response->reason() . ': '
+                    . implode('. ', $response->object()->error_messages) . '.',
+                    $response->status()
                 );
-            } elseif ($httpCode >= 400) {
+            } elseif (array_key_exists('status_messages', $response->json())) {
                 throw new MidtransApiException(
-                    'Midtrans API is returning API error. HTTP status code: ' . $httpCode . ' API response: ' . $result,
-                    $httpCode
+                    $response->status() . ' ' . $response->reason() . ': '
+                    . implode('. ', $response->object()->status_messages) . '.',
+                    $response->status()
                 );
             } else {
-                return $result_array;
+                $messages = [];
+                foreach ($response->json() as $value) {
+                    $messages[] = implode('. ', $value);
+                }
+
+                throw new MidtransApiException(
+                    $response->status() . ' ' . $response->reason() . ': '
+                    . implode('. ', $messages) . '.',
+                    $response->status()
+                );
             }
         }
     }

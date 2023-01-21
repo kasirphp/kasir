@@ -14,6 +14,23 @@ trait CanConfigurePayload
             ],
         ];
 
+        $params = static::calculateGrossAmount($params);
+
+        if (config('kasir.sanitize')) {
+            Sanitizer::json($params);
+        }
+
+        return $params;
+    }
+
+    /**
+     * Calculate transaction_details.gross_amount from item_details
+     *
+     * @param $params
+     * @return array
+     */
+    public static function calculateGrossAmount($params): array
+    {
         if (isset($params['item_details'])) {
             $gross_amount = 0;
             foreach ($params['item_details'] as $item) {
@@ -22,10 +39,6 @@ trait CanConfigurePayload
             $params['transaction_details']['gross_amount'] = $gross_amount;
         }
 
-        if (config('kasir.sanitize')) {
-            Sanitizer::json($params);
-        }
-
-        return array_replace_recursive($payloads, $params);
+        return $params;
     }
 }

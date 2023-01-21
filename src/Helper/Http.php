@@ -2,10 +2,12 @@
 
 namespace Kasir\Kasir\Helper;
 
+use GuzzleHttp\Promise\PromiseInterface;
 use Http as BaseHttp;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\Response;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
-use Str;
 
 class Http
 {
@@ -13,42 +15,51 @@ class Http
      * @param $url
      * @param $server_key
      * @param $data_hash
-     * @return mixed
+     * @return Response|PromiseInterface
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
      */
-    public static function get($url, $server_key, $data_hash): mixed
+    public static function get($url, $server_key, $data_hash): Response | PromiseInterface
     {
-        return self::call($url, $server_key, $data_hash, 'GET');
+        $response = self::request($server_key, $data_hash)->get($url);
+        self::validateResponse($response);
+
+        return $response;
     }
 
     /**
      * @param $url
      * @param $server_key
      * @param $data_hash
-     * @return mixed
+     * @return PromiseInterface|Response
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
      */
-    public static function post($url, $server_key, $data_hash): mixed
+    public static function post($url, $server_key, $data_hash): PromiseInterface | Response
     {
-        return self::call($url, $server_key, $data_hash, 'POST');
+        $response = self::request($server_key, $data_hash)->post($url);
+        self::validateResponse($response);
+
+        return $response;
     }
 
     /**
      * @param $url
      * @param $server_key
      * @param $data_hash
-     * @return mixed
+     * @return PromiseInterface|Response
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
      */
-    public static function patch($url, $server_key, $data_hash): mixed
+    public static function patch($url, $server_key, $data_hash): PromiseInterface | Response
     {
-        return self::call($url, $server_key, $data_hash, 'PATCH');
+        $response = self::request($server_key, $data_hash)->patch($url);
+        self::validateResponse($response);
+
+        return $response;
     }
 
     /**
@@ -77,30 +88,21 @@ class Http
     /**
      * Make the request
      *
-     * @param $url
      * @param $server_key
      * @param $data_hash
-     * @param $method
-     * @return mixed
+     * @return PendingRequest
      *
-     * @throws MidtransApiException
      * @throws MidtransKeyException
      */
-    public static function call($url, $server_key, $data_hash, $method): mixed
+    public static function request($server_key, $data_hash): PendingRequest
     {
         $server_key = self::validateServerKey($server_key);
-        $method = Str::lower($method);
 
-        $response = BaseHttp::withBasicAuth($server_key, '')
+        return BaseHttp::withBasicAuth($server_key, '')
             ->accept('application/json')
             ->withUserAgent('midtrans-php-v2.5.2')
             ->withHeaders(static::notificationHeader())
-            ->withBody(json_encode($data_hash), 'application/json')
-            ->$method($url);
-
-        self::validateResponse($response);
-
-        return $response;
+            ->withBody(json_encode($data_hash), 'application/json');
     }
 
     /**

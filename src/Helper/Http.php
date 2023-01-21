@@ -94,16 +94,39 @@ class Http
         $response = BaseHttp::withBasicAuth($server_key, '')
             ->accept('application/json')
             ->withUserAgent('midtrans-php-v2.5.2')
+            ->withHeaders(static::notificationHeader())
             ->withBody(json_encode($data_hash), 'application/json')
             ->$method($url);
-
-        // TODO: set notifications in header
-
-        // TODO: Merge with config curl options
 
         self::validateResponse($response);
 
         return $response;
+    }
+
+    /**
+     * Set Notification Header for the Request
+     *
+     * @return array
+     */
+    public static function notificationHeader(): array
+    {
+        $header = [];
+
+        if (config('kasir.notification_url.append')) {
+            $header['X-Append-Notification'] = implode(
+                ',',
+                array_slice(config('kasir.notification_url.append'), 0, 3)
+            );
+        }
+
+        if (config('kasir.notification_url.override')) {
+            $header['X-Override-Notification'] = implode(
+                ',',
+                array_slice(config('kasir.notification_url.override'), 0, 3)
+            );
+        }
+
+        return $header;
     }
 
     /**

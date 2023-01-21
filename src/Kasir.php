@@ -105,6 +105,11 @@ class Kasir implements Arrayable, ShouldConfigurePayload
         $static->shippingAddress($data['customer_details']['shipping_address'] ?? null);
         $static->enablePayments($data['enabled_payments'] ?? null);
 
+        if (! empty($static->getItemDetails())) {
+            $gross_amount = self::calculateGrossAmount($data)['transaction_details']['gross_amount'];
+            $static->grossAmount($gross_amount);
+        }
+
         return $static;
     }
 

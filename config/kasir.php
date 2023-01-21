@@ -61,4 +61,19 @@ return [
 
     '3ds' => true,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Notification URL
+    |--------------------------------------------------------------------------
+    |
+    | HTTP POST notifications or Webhooks are sent to your server when the
+    | customer when transaction status changes. These notifications help you
+    | to update payment status or take suitable actions in real-time.
+    |
+    */
+
+    'notification_url' => [
+        'append' => [],
+        'override' => [],
+    ],
 ];

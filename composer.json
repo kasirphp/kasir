@@ -10,9 +10,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2|^8.1",
+        "ext-curl": "*",
+        "guzzlehttp/guzzle": "^7.5",
         "illuminate/contracts": "^9.0",
-        "illuminate/support": "^9.26",
-        "ext-curl": "*"
+        "illuminate/support": "^9.26"
     },
     "require-dev": {
         "laravel/pint": "^1.1",

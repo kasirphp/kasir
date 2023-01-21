@@ -92,7 +92,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload
             $array['enabled_payments'] = array_values($this->getEnabledPayments());
         }
 
-        return $array;
+        return static::configurePayload($array);
     }
 
     public static function fromArray(array $data): static
@@ -104,6 +104,11 @@ class Kasir implements Arrayable, ShouldConfigurePayload
         $static->billingAddress($data['customer_details']['billing_address'] ?? null);
         $static->shippingAddress($data['customer_details']['shipping_address'] ?? null);
         $static->enablePayments($data['enabled_payments'] ?? null);
+
+        if (! empty($static->getItemDetails())) {
+            $gross_amount = self::calculateGrossAmount($data)['transaction_details']['gross_amount'];
+            $static->grossAmount($gross_amount);
+        }
 
         return $static;
     }

@@ -2,12 +2,12 @@
 
 namespace Kasir\Kasir\Helper;
 
-use Http;
+use Http as BaseHttp;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Str;
 
-class Requestor
+class Http
 {
     /**
      * @param $url
@@ -91,7 +91,7 @@ class Requestor
         $server_key = self::validateServerKey($server_key);
         $method = Str::lower($method);
 
-        $response = Http::withBasicAuth($server_key, '')
+        $response = BaseHttp::withBasicAuth($server_key, '')
             ->accept('application/json')
             ->withUserAgent('midtrans-php-v2.5.2')
             ->withBody(json_encode($data_hash), 'application/json')

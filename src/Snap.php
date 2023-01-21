@@ -7,7 +7,7 @@ use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
-use Kasir\Kasir\Helper\Requestor;
+use Kasir\Kasir\Helper\Http;
 
 class Snap extends Kasir
 {
@@ -23,7 +23,7 @@ class Snap extends Kasir
     {
         $payloads = static::toArray();
 
-        return Requestor::post(
+        return Http::post(
             static::getSnapBaseUrl() . '/transactions',
             config('kasir.server_key'),
             $payloads

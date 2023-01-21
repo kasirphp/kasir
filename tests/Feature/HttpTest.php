@@ -1,10 +1,10 @@
 <?php
 
 use Kasir\Kasir\Exceptions\MidtransKeyException;
-use Kasir\Kasir\Helper\Requestor;
+use Kasir\Kasir\Helper\Http;
 
 it('throws MidtransKeyException when validating client/server key', function ($server_key, $message) {
-    expect(fn () => Requestor::call('http://example.com', $server_key, [], 'POST'))->toThrow(MidtransKeyException::class, $message);
+    expect(fn () => Http::call('http://example.com', $server_key, [], 'POST'))->toThrow(MidtransKeyException::class, $message);
 })->with([
     'null' => [
         null,

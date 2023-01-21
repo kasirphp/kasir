@@ -8,12 +8,6 @@ trait CanConfigurePayload
 {
     public static function configurePayload($params): array
     {
-        $payloads = [
-            'credit_card' => [
-                'secure' => config('kasir.3ds'),
-            ],
-        ];
-
         $params = static::calculateGrossAmount($params);
 
         if (config('kasir.sanitize')) {

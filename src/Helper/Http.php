@@ -155,14 +155,9 @@ class Http
                     $response->status()
                 );
             } else {
-                $messages = [];
-                foreach ($response->json() as $value) {
-                    $messages[] = implode('. ', $value);
-                }
-
                 throw new MidtransApiException(
                     $response->status() . ' ' . $response->reason() . ': '
-                    . implode('. ', $messages) . '.',
+                    . implode('. ', $response->json()) . '.',
                     $response->status()
                 );
             }

@@ -92,7 +92,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload
             $array['enabled_payments'] = array_values($this->getEnabledPayments());
         }
 
-        return $array;
+        return static::configurePayload($array);
     }
 
     public static function fromArray(array $data): static

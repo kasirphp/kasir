@@ -63,7 +63,9 @@ it('can create transactions from array', function ($items, $customer, $address, 
 
     $kasir = Kasir::fromArray($payload);
 
-    expect($kasir->toArray())->toBeArray()->toBe($payload);
+    $configured_payload = Kasir::configurePayload($payload);
+
+    expect($kasir->toArray())->toBeArray()->toBe($configured_payload);
 })->with('item_details')
     ->with('customer_details')
     ->with('address')

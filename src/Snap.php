@@ -21,7 +21,7 @@ class Snap extends Kasir
      */
     public function pay()
     {
-        $payloads = static::configurePayload(static::toArray());
+        $payloads = static::toArray();
 
         return Requestor::post(
             static::getSnapBaseUrl() . '/transactions',

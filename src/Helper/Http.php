@@ -141,6 +141,14 @@ class Http
      */
     public static function validateResponse($response): void
     {
+        if ($response->ok() && array_key_exists('status_code', $response->json()) && (int) $response->json()['status_code'] >= 400) {
+            throw new MidtransApiException(
+                $response->object()->status_code . ' Error' . ': '
+                . $response->object()->status_message,
+                $response->object()->status_code
+            );
+        }
+
         if ($response->failed()) {
             if (array_key_exists('error_messages', $response->json())) {
                 throw new MidtransApiException(
@@ -148,11 +156,11 @@ class Http
                     . implode('. ', $response->object()->error_messages) . '.',
                     $response->status()
                 );
-            } elseif (array_key_exists('status_messages', $response->json())) {
+            } elseif (array_key_exists('status_message', $response->json())) {
                 throw new MidtransApiException(
-                    $response->status() . ' ' . $response->reason() . ': '
-                    . implode('. ', $response->object()->status_messages) . '.',
-                    $response->status()
+                    $response->object()->status_code . ' ' . $response->reason() . ': '
+                    . $response->object()->status_message . '.',
+                    $response->object()->status_code
                 );
             } else {
                 throw new MidtransApiException(

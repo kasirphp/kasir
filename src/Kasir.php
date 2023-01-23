@@ -10,15 +10,17 @@ use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
 use Kasir\Kasir\Concerns\Transactions\HasEnabledPayments;
 use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
+use Kasir\Kasir\Concerns\Transactions\HasPaymentType;
 use Kasir\Kasir\Concerns\Transactions\HasShippingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
+use Kasir\Kasir\Contracts\CanConfigurePaymentType;
 use Kasir\Kasir\Contracts\ShouldConfigurePayload;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 
-class Kasir implements Arrayable, ShouldConfigurePayload
+class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentType
 {
     use CanConfigurePayload;
     use EvaluateClosures;
@@ -26,6 +28,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload
     use HasCustomerDetails;
     use HasEnabledPayments;
     use HasItemDetails;
+    use HasPaymentType;
     use HasShippingAddress;
     use HasTransactionDetails;
     use Validation;
@@ -90,6 +93,11 @@ class Kasir implements Arrayable, ShouldConfigurePayload
 
         if (! is_null($this->getEnabledPayments())) {
             $array['enabled_payments'] = array_values($this->getEnabledPayments());
+        }
+
+        if (! empty($this->getPaymentType())) {
+            $array['payment_type'] = $this->getPaymentType();
+            $array[$this->getPaymentOptionKey()] = $this->getPaymentOptions();
         }
 
         return static::configurePayload($array);

@@ -15,7 +15,8 @@ it('has the correct array keys', function () {
         ->orderId('order-id')
         ->itemDetails([])
         ->customerDetails([])
-        ->enablePayments([]);
+        ->enablePayments([])
+        ->paymentType(null);
 
     expect($kasir->toArray())->toHaveKeys($keys);
 });
@@ -70,3 +71,13 @@ it('can create transactions from array', function ($items, $customer, $address, 
     ->with('customer_details')
     ->with('address')
     ->with('enabled_payments');
+
+it('can create payment type object', function ($method, $type, $option_key, $options, $expected_options) {
+    $kasir = Kasir::make(1)
+        ->$method(...$options);
+
+    expect($kasir->toArray())->toHaveKey('payment_type')
+        ->and($kasir->getPaymentType())->toBe($type)
+        ->and($kasir->getPaymentOptionKey())->toBe($option_key)
+        ->and($kasir->getPaymentOptions())->toBe($expected_options)->toBe($kasir->toArray()[$option_key]);
+})->with('payment_type');

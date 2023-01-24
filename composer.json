@@ -1,10 +1,22 @@
 {
     "name": "kasir/kasir",
     "description": "Kasir helps integrating Midtrans in Laravel way.",
-    "authors" : [
+    "authors": [
         {
             "name": "Risang Baskoro",
             "email": "risangbaskoro@gmail.com"
+        }
+    ],
+    "support": {
+        "email": "risangbaskoro@gmail.com",
+        "issues": "https://github.com/kasirphp/kasir/issues",
+        "forum": "https://github.com/kasirphp/kasir/discussions",
+        "wiki": "https://github.com/kasirphp/kasir/wiki"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/risangbaskoro"
         }
     ],
     "license": "MIT",

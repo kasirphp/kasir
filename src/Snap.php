@@ -25,13 +25,11 @@ class Snap extends Kasir
     {
         $payload = static::toArray();
 
-        $response = Request::post(
+        return Request::post(
             static::getSnapBaseUrl() . '/transactions',
             config('kasir.server_key'),
             $payload
         );
-
-        return new MidtransResponse($response);
     }
 
     /**

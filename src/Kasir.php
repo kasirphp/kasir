@@ -19,7 +19,6 @@ use Kasir\Kasir\Contracts\ShouldConfigurePayload;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
-use Kasir\Kasir\Helper\MidtransResponse;
 use Kasir\Kasir\Helper\Request;
 
 class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentType
@@ -149,12 +148,10 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
 
     public function charge()
     {
-        $response = Request::post(
+        return Request::post(
             self::getBaseUrl() . '/v2/charge',
             config('kasir.server_key'),
             static::toArray()
         );
-
-        return new MidtransResponse($response);
     }
 }

@@ -6,28 +6,73 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request as BaseRequest;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
-use Psr\Http\Message\ResponseInterface;
 
 class Request extends BaseRequest
 {
+    /**
+     * Send a GET request.
+     *
+     * @param  string  $uri
+     * @param  string|null  $server_key
+     * @param  array|null  $data_hash
+     * @return MidtransResponse
+     *
+     * @throws GuzzleException
+     * @throws MidtransKeyException
+     */
+    public static function get(string $uri, string | null $server_key, array | null $data_hash = null): MidtransResponse
+    {
+        $client = new Client();
+        $headers = static::configureHeader($server_key);
+        $body = json_encode($data_hash);
+
+        $response = $client->get($uri, compact('headers', 'body'));
+
+        return new MidtransResponse($response);
+    }
+
     /**
      * Send a POST request.
      *
      * @param  string  $uri
      * @param  string|null  $server_key
      * @param  array|null  $data_hash
-     * @return ResponseInterface
+     * @return MidtransResponse
      *
      * @throws GuzzleException
      * @throws MidtransKeyException
      */
-    public static function post(string $uri, string | null $server_key, array | null $data_hash = null): ResponseInterface
+    public static function post(string $uri, string | null $server_key, array | null $data_hash = null): MidtransResponse
     {
         $client = new Client();
         $headers = static::configureHeader($server_key);
         $body = json_encode($data_hash);
 
-        return $client->post($uri, compact('headers', 'body'));
+        $response = $client->post($uri, compact('headers', 'body'));
+
+        return new MidtransResponse($response);
+    }
+
+    /**
+     * Send a PATCH request.
+     *
+     * @param  string  $uri
+     * @param  string|null  $server_key
+     * @param  array|null  $data_hash
+     * @return MidtransResponse
+     *
+     * @throws GuzzleException
+     * @throws MidtransKeyException
+     */
+    public static function patch(string $uri, string | null $server_key, array | null $data_hash = null): MidtransResponse
+    {
+        $client = new Client();
+        $headers = static::configureHeader($server_key);
+        $body = json_encode($data_hash);
+
+        $response = $client->patch($uri, compact('headers', 'body'));
+
+        return new MidtransResponse($response);
     }
 
     /**

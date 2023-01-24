@@ -50,8 +50,11 @@ class MidtransResponse implements ArrayAccess
      */
     public function __construct(ResponseInterface $response)
     {
-        $this->response = $response;
         $this->decoded = json_decode($response->getBody(), true);
+        $this->response = $response->withStatus(
+            $this->json('status_code') ?? 200,
+            $this->json('status_message') ?? 'OK'
+        );
     }
 
     /**

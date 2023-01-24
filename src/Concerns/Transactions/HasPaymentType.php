@@ -30,6 +30,10 @@ trait HasPaymentType
 
     protected string | null $payment_option_key = null;
 
+    public function creditCard()
+    {
+    }
+
     /**
      * Using Permata Virtual Account as payment type.
      *

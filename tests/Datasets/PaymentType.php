@@ -84,19 +84,19 @@ dataset('payment_type', [
     ],
 
     // This payment channel is not currently activated for my account.
-    'KlikBCA' => [
-        'method' => 'klikBca',
-        'type' => 'bca_klikbca',
-        'option_key' => 'bca_klikbca',
-        'options' => [
-            'description' => 'some string',
-            'user_id' => 'some string',
-        ],
-        'expected_options' => [
-            'description' => 'some string',
-            'user_id' => 'some string',
-        ],
-    ],
+    //    'KlikBCA' => [
+    //        'method' => 'klikBca',
+    //        'type' => 'bca_klikbca',
+    //        'option_key' => 'bca_klikbca',
+    //        'options' => [
+    //            'description' => 'some string',
+    //            'user_id' => 'some string',
+    //        ],
+    //        'expected_options' => [
+    //            'description' => 'some string',
+    //            'user_id' => 'some string',
+    //        ],
+    //    ],
 
     'BRImo' => [
         'method' => 'briMo',

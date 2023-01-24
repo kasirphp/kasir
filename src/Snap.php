@@ -2,12 +2,14 @@
 
 namespace Kasir\Kasir;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\RedirectResponse;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
-use Kasir\Kasir\Helper\Http;
+use Kasir\Kasir\Helper\MidtransResponse;
+use Kasir\Kasir\Helper\Request;
 
 class Snap extends Kasir
 {
@@ -17,17 +19,19 @@ class Snap extends Kasir
      * @throws MidtransKeyException
      * @throws NoItemDetailsException
      * @throws NoPriceAndQuantityAttributeException
-     * @throws ZeroGrossAmountException
+     * @throws ZeroGrossAmountException|GuzzleException
      */
-    public function pay()
+    public function pay(): MidtransResponse
     {
         $payload = static::toArray();
 
-        return Http::post(
+        $response = Request::post(
             static::getSnapBaseUrl() . '/transactions',
             config('kasir.server_key'),
             $payload
-        )->object();
+        );
+
+        return new MidtransResponse($response);
     }
 
     /**
@@ -39,12 +43,12 @@ class Snap extends Kasir
      * @throws NoItemDetailsException
      * @throws NoPriceAndQuantityAttributeException
      * @throws ZeroGrossAmountException
+     *
+     * @deprecated Use getUrl() to get URL and redirect it manually.
      */
     public function redirect(): RedirectResponse
     {
-        $url = $this->getUrl();
-
-        return redirect()->away($url);
+        return redirect()->away($this->getUrl());
     }
 
     /**
@@ -57,7 +61,7 @@ class Snap extends Kasir
      */
     public function getToken(): string
     {
-        return $this->pay()->token;
+        return $this->pay()->json('token');
     }
 
     /**
@@ -70,8 +74,8 @@ class Snap extends Kasir
      * @throws NoPriceAndQuantityAttributeException
      * @throws ZeroGrossAmountException
      */
-    public function getUrl()
+    public function getUrl(): mixed
     {
-        return $this->pay()->redirect_url;
+        return $this->pay()->json('redirect_url');
     }
 }

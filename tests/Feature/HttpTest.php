@@ -1,10 +1,10 @@
 <?php
 
 use Kasir\Kasir\Exceptions\MidtransKeyException;
-use Kasir\Kasir\Helper\Http;
+use Kasir\Kasir\Helper\Request;
 
 it('throws MidtransKeyException when validating client/server key', function ($server_key, $message) {
-    expect(fn () => Http::get('https://example.com', $server_key, []))
+    expect(fn () => Request::post('https://example.com', $server_key, []))
         ->toThrow(MidtransKeyException::class, $message);
 })->with([
     'null' => [
@@ -25,9 +25,7 @@ it('creates notification header if exists', function ($urls) {
     Config::set('kasir.notification_url.append', $urls);
     Config::set('kasir.notification_url.override', $urls);
 
-    $request = Http::request(config('kasir.server_key'), []);
-    $headers = $request->getOptions()['headers'];
-
+    $headers = Request::configureHeader('foo');
     $header_expectation = implode(',', array_slice($urls, 0, 3));
 
     if (! $urls) {

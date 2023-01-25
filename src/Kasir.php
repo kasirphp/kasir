@@ -156,11 +156,9 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
         );
     }
 
-    public function status(string $id = null): MidtransResponse
+    public function status(): MidtransResponse
     {
-        if (is_null($id)) {
-            $id = $this->transaction_details['order_id'];
-        }
+        $id = $this->transaction_details['order_id'];
 
         return static::getStatus($id);
     }

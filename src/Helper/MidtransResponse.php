@@ -2,6 +2,8 @@
 
 namespace Kasir\Kasir\Helper;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Kasir;
 use Psr\Http\Message\ResponseInterface;
 
@@ -68,6 +70,9 @@ class MidtransResponse extends Response
      * Capture this transaction.
      *
      * @return MidtransResponse
+     *
+     * @throws GuzzleException
+     * @throws MidtransKeyException
      */
     public function capture(): MidtransResponse
     {

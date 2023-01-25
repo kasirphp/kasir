@@ -19,11 +19,9 @@ dataset('payment_type', [
         'method' => 'bcaVA',
         'type' => 'bank_transfer',
         'option_key' => 'bank_transfer',
-        'options' => [
-            'va_number' => '1234567890',
-        ],
+        'options' => [],
         'expected_options' => [
-            'va_number' => '1234567890',
+            'va_number' => null,
             'bank' => 'bca',
             'bca' => [
                 'sub_company_code' => null,

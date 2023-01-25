@@ -66,23 +66,23 @@ If you want to contribute to Kasir package, you may want to test it in a real La
 
 ### Payment API
 
-- [x] `/v2/token`: Tokenize payment card information before being charged.
-- [x] `/v2/charge`: Perform a transaction with various available payment methods and features.
-- [ ] `/v2/capture`: Capture an authorized transaction for card payment.
-- [ ] `/v2/order_id/approve`: Approve a transaction with certain `order_id` which gets challenge status from Fraud Detection System.
-- [ ] `/v2/order_id/deny`: Deny a transaction with a specific `order_id`, flagged as challenge by Fraud Detection System.
-- [ ] `/v2/order_id/cancel`: Cancel a transaction with a specific `order_id`. Cancelation can only be done before settlement process.
-- [ ] `/v2/order_id/expire`: Expire a transaction with a specific `order_id`. Expiration can only be done before settlement process.
-- [ ] `/v2/order_id/refund`: Refund a transaction with a specific `order_id`. Refund can only be done after settlement process.
-- [ ] `/v2/order_id/refund/online/direct`: Send refund to the customer's bank or the payment provider and update the transaction status to `refund`.
-- [x] `/v2/order_id/status`: Get the transaction status of a specific `order_id`.
-- [ ] `/v2/order_id/status/b2b`: Get the transaction status multiple B2B transactions related to certain `order_id`.
-- [ ] `/v2/card/register`: Register customer's card information (card number and expiry) to be used for One Click and Two Click transactions.
-- [ ] `/v2/point_inquiry/token_id`: Get the point balance of the card in denomination amount.
-- [ ] `/v2/pay/account`: Used to link the customer's account to create payment for certain channel.
-- [ ] `/v2/pay/account/account_id`: Get customer payment account details.
-- [ ] `/v2/pay/account/account_id/unbind`: Unbind a linked customer account.
-- [ ] `/v1/bins/bin_number`: Get Bin Metadata.
+- [x] Tokenize payment card information before being charged.
+- [x] Perform a transaction with various available payment methods and features.
+- [ ] Capture an authorized transaction for card payment.
+- [ ] Approve a transaction with certain `order_id` which gets challenge status from Fraud Detection System.
+- [ ] Deny a transaction with a specific `order_id`, flagged as challenge by Fraud Detection System.
+- [ ] Cancel a transaction with a specific `order_id`. Cancelation can only be done before settlement process.
+- [ ] Expire a transaction with a specific `order_id`. Expiration can only be done before settlement process.
+- [ ] Refund a transaction with a specific `order_id`. Refund can only be done after settlement process.
+- [ ] Send refund to the customer's bank or the payment provider and update the transaction status to `refund`.
+- [x] Get the transaction status of a specific `order_id`.
+- [ ] Get the transaction status multiple B2B transactions related to certain `order_id`.
+- [ ] Register customer's card information (card number and expiry) to be used for One Click and Two Click transactions.
+- [ ] Get the point balance of the card in denomination amount.
+- [ ] Used to link the customer's account to create payment for certain channel.
+- [ ] Get customer payment account details.
+- [ ] Unbind a linked customer account.
+- [ ] Get Bin Metadata.
 
 ## License
 

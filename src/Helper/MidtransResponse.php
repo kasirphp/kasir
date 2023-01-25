@@ -17,7 +17,7 @@ class MidtransResponse extends Response
         $this->actions = $this->json('actions');
     }
 
-    public function transactionId(): string
+    public function transactionId(): string | null
     {
         return $this->transaction_id;
     }
@@ -48,7 +48,7 @@ class MidtransResponse extends Response
      * @param  string  $name
      * @return mixed|null
      */
-    public function action($name): mixed
+    public function action(string $name): mixed
     {
         if (! $this->actions()) {
             return null;

@@ -117,10 +117,21 @@ test('capture an authorized card transaction using response', function () {
         ->creditCard(CreditCard::make('4811 1111 1111 1114', '01', '2025', '123'));
 
     $response = $kasir->charge();
-
     $capture = Kasir::capture($response);
 
     expect($response->ok())->toBeTrue()
             ->and($capture->ok())->toBeTrue()
             ->and($capture->json('channel_response_code'))->toBe('00');
+});
+
+test('capture an authorized card transaction using transaction_id', function () {
+    $kasir = Kasir::make(1)
+        ->creditCard(CreditCard::make('4811 1111 1111 1114', '01', '2025', '123'));
+
+    $response = $kasir->charge();
+    $capture = Kasir::capture($response->transactionId());
+
+    expect($response->ok())->toBeTrue()
+        ->and($capture->ok())->toBeTrue()
+        ->and($capture->json('channel_response_code'))->toBe('00');
 });

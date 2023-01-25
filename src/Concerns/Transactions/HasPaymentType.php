@@ -10,6 +10,9 @@ use Kasir\Kasir\Payment\BankTransfer\MandiriBill;
 use Kasir\Kasir\Payment\BankTransfer\PermataVA;
 use Kasir\Kasir\Payment\CardlessCredit\Akulaku;
 use Kasir\Kasir\Payment\CardlessCredit\Kredivo;
+use Kasir\Kasir\Payment\CreditCard\CardToken;
+use Kasir\Kasir\Payment\CreditCard\CreditCard;
+use Kasir\Kasir\Payment\CreditCard\CreditCardPayment;
 use Kasir\Kasir\Payment\CStore\Alfamart;
 use Kasir\Kasir\Payment\CStore\Indomaret;
 use Kasir\Kasir\Payment\EMoney\GoPay;
@@ -30,8 +33,25 @@ trait HasPaymentType
 
     protected string | null $payment_option_key = null;
 
-    public function creditCard()
-    {
+    public function creditCard(
+        CreditCard | CardToken | string | null $token_id = null,
+        string | null $bank = null,
+        int | null $installment_term = null,
+        array | null $bins = null,
+        string | null $type = 'authorize',
+        bool | null $save_token_id = null
+    ) {
+        $payment = CreditCardPayment::make(
+            $token_id,
+            $bank,
+            $installment_term,
+            $bins,
+            $type,
+            $save_token_id
+        );
+        $this->paymentType($payment);
+
+        return $this;
     }
 
     /**

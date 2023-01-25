@@ -15,14 +15,14 @@ class CreditCardPayment extends PaymentObject implements PaymentType
         string | null $type = 'authorize',
         bool | null $save_token_id = null
     ): static {
-        $options = array_filter(get_defined_vars(), 'strlen');
-
+        $options = [];
         if (! is_string($token_id)) {
             if ($token_id instanceof CreditCard) {
                 $token_id = $token_id->getToken();
             }
-            $options['token_id'] = $token_id->token();
+            $token_id = $token_id->token();
         }
+        $options = get_defined_vars();
 
         return app(static::class)
             ->type('credit_card')

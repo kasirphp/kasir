@@ -17,6 +17,7 @@ use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
 use Kasir\Kasir\Contracts\CanConfigurePaymentType;
 use Kasir\Kasir\Contracts\ShouldConfigurePayload;
+use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
@@ -176,11 +177,12 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
     /**
      * Capture the transaction of a given ID or Response.
      *
-     * @param  MidtransResponse|string  $transaction_id
+     * @param  MidtransResponse|string  $transaction_id  Transaction ID or MidtransResponse
      * @return MidtransResponse
      *
-     * @throws MidtransKeyException
      * @throws GuzzleException
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
      */
     public static function capture(MidtransResponse | string $transaction_id): MidtransResponse
     {
@@ -190,10 +192,18 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
 
         $payload = get_defined_vars();
 
-        return Request::post(
-            static::getBaseUrl() . '/v2/capture',
-            config('kasir.server_key'),
-            $payload
-        );
+        try {
+            return Request::post(
+                static::getBaseUrl() . '/v2/capture',
+                config('kasir.server_key'),
+                $payload
+            );
+        } catch (GuzzleException $e) {
+            $response = $e->getResponse();
+            $validation_messages = json_decode($response->getBody()->getContents())->validation_messages;
+            $messages = implode(', ', $validation_messages);
+
+            throw new MidtransApiException($messages, $response->getStatusCode());
+        }
     }
 }

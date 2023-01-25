@@ -57,7 +57,7 @@ dataset('payment_type', [
         ],
     ],
 
-    'Mandiri VA' => [
+    'Mandiri Bill' => [
         'method' => 'mandiriBill',
         'type' => 'echannel',
         'option_key' => 'echannel',

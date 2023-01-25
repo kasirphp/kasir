@@ -2,8 +2,26 @@
 
 namespace Kasir\Kasir\Helper;
 
+use Psr\Http\Message\ResponseInterface;
+
 class MidtransResponse extends Response
 {
+    private string | null $transaction_id;
+
+    private array | null $actions;
+
+    public function __construct(ResponseInterface $response)
+    {
+        parent::__construct($response);
+        $this->transaction_id = $this->json('transaction_id');
+        $this->actions = $this->json('actions');
+    }
+
+    public function transactionId(): string
+    {
+        return $this->transaction_id;
+    }
+
     /**
      * Get response actions.
      *
@@ -11,7 +29,7 @@ class MidtransResponse extends Response
      */
     public function actions(): mixed
     {
-        return $this->json('actions');
+        return $this->actions;
     }
 
     /**

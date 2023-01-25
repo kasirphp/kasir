@@ -2,6 +2,7 @@
 
 namespace Kasir\Kasir\Helper;
 
+use Kasir\Kasir\Kasir;
 use Psr\Http\Message\ResponseInterface;
 
 class MidtransResponse extends Response
@@ -61,5 +62,15 @@ class MidtransResponse extends Response
         $result = call_user_func_array('array_merge', $array);
 
         return ! empty($result) ? $result : null;
+    }
+
+    /**
+     * Capture this transaction.
+     *
+     * @return MidtransResponse
+     */
+    public function capture(): MidtransResponse
+    {
+        return Kasir::capture($this->transactionId());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Kasir\Kasir;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\CanConfigurePayload;
@@ -16,6 +17,7 @@ use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
 use Kasir\Kasir\Contracts\CanConfigurePaymentType;
 use Kasir\Kasir\Contracts\ShouldConfigurePayload;
+use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
@@ -168,6 +170,30 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
         return Request::get(
             static::getBaseUrl() . '/v2/' . $id . '/status',
             config('kasir.server_key'),
+        );
+    }
+
+    /**
+     * Capture the transaction of a given ID or Response.
+     *
+     * @param  MidtransResponse|string  $transaction_id
+     * @return MidtransResponse
+     *
+     * @throws MidtransKeyException
+     * @throws GuzzleException
+     */
+    public static function capture(MidtransResponse | string $transaction_id): MidtransResponse
+    {
+        if ($transaction_id instanceof MidtransResponse) {
+            $transaction_id = $transaction_id->transactionId();
+        }
+
+        $payload = get_defined_vars();
+
+        return Request::post(
+            static::getBaseUrl() . '/v2/capture',
+            config('kasir.server_key'),
+            $payload
         );
     }
 }

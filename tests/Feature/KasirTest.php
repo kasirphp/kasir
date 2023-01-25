@@ -99,3 +99,28 @@ test('get transaction status from non-static method or static method with transa
         ->toBe($status_static->json())
         ->toBe($status_static_transaction_id->json());
 });
+
+test('capture an authorized card transaction as response', function () {
+    $kasir = Kasir::make(1)
+        ->creditCard(CreditCard::make('4811 1111 1111 1114', '01', '2025', '123'));
+
+    $charge = $kasir->charge();
+    $capture = $charge->capture();
+
+    expect($charge->ok())->toBeTrue()
+        ->and($capture->ok())->toBeTrue()
+        ->and($capture->json('channel_response_code'))->toBe('00');
+});
+
+test('capture an authorized card transaction using response', function () {
+    $kasir = Kasir::make(1)
+        ->creditCard(CreditCard::make('4811 1111 1111 1114', '01', '2025', '123'));
+
+    $response = $kasir->charge();
+
+    $capture = Kasir::capture($response);
+
+    expect($response->ok())->toBeTrue()
+            ->and($capture->ok())->toBeTrue()
+            ->and($capture->json('channel_response_code'))->toBe('00');
+});

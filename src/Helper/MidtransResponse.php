@@ -47,6 +47,16 @@ class MidtransResponse extends Response
     }
 
     /**
+     * Get Credit Card fraud status.
+     *
+     * @return string|null
+     */
+    public function fraudStatus(): string | null
+    {
+        return $this->json('fraud_status');
+    }
+
+    /**
      * Get response action by name.
      *
      * @param  string  $name

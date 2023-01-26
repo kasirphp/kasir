@@ -177,7 +177,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
     /**
      * Capture the transaction of a given ID or Response.
      *
-     * @param  MidtransResponse|string  $transaction_id  Transaction ID or MidtransResponse
+     * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse
      * @return MidtransResponse
      *
      * @throws GuzzleException
@@ -210,7 +210,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
     /**
      * Approve this challenged transaction.
      *
-     * @param  MidtransResponse|string  $transaction_id  Transaction ID or MidtransResponse.
+     * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
      * @return MidtransResponse
      *
      * @throws MidtransApiException

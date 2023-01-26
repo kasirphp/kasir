@@ -13,7 +13,7 @@ test('perform transaction with credit card as payment method', function ($card_n
     $response = $kasir->charge();
 
     expect($response->successful())->toBeTrue();
-})->with('credit_card')->depends('get credit card token from Midtrans');
+})->with('credit_card');
 
 test(
     'perform transaction with various available payment methods',

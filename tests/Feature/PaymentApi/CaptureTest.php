@@ -14,7 +14,7 @@ test('capture an authorized card transaction as response', function () {
     expect($charge->ok())->toBeTrue()
         ->and($capture->ok())->toBeTrue()
         ->and($capture->json('channel_response_code'))->toBe('00');
-})->depends('perform transaction with credit card as payment method');
+});
 
 test('capture an authorized card transaction using response', function () {
     $kasir = Kasir::make(1)
@@ -26,7 +26,7 @@ test('capture an authorized card transaction using response', function () {
     expect($response->ok())->toBeTrue()
         ->and($capture->ok())->toBeTrue()
         ->and($capture->json('channel_response_code'))->toBe('00');
-})->depends('perform transaction with credit card as payment method');
+});
 
 test('capture an authorized card transaction using transaction_id', function () {
     $kasir = Kasir::make(1)
@@ -38,7 +38,7 @@ test('capture an authorized card transaction using transaction_id', function () 
     expect($response->ok())->toBeTrue()
         ->and($capture->ok())->toBeTrue()
         ->and($capture->json('channel_response_code'))->toBe('00');
-})->depends('perform transaction with credit card as payment method');
+});
 
 test('capture throws MidtransApiException if the card is challenged', function () {
     $kasir = Kasir::make(1)
@@ -46,4 +46,4 @@ test('capture throws MidtransApiException if the card is challenged', function (
 
     $response = $kasir->charge();
     expect(fn () => $response->capture())->toThrow(MidtransApiException::class);
-})->depends('perform transaction with credit card as payment method');
+});

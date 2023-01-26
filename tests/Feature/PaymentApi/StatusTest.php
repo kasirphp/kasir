@@ -18,4 +18,4 @@ test('get transaction status from non-static method or static method with transa
     expect($status_non_static->json())
         ->toBe($status_static->json())
         ->toBe($status_static_transaction_id->json());
-})->depends('perform transaction with credit card as payment method');
+});

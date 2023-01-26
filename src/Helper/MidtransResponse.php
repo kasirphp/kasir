@@ -80,4 +80,17 @@ class MidtransResponse extends Response
     {
         return Kasir::capture($this->transactionId());
     }
+
+    /**
+     * Approve this challenged transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function approve(): MidtransResponse
+    {
+        return Kasir::approve($this->transactionId());
+    }
 }

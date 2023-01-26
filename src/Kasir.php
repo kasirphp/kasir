@@ -206,4 +206,31 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
             throw new MidtransApiException($messages, $response->getStatusCode());
         }
     }
+
+    /**
+     * Approve this challenged transaction.
+     *
+     * @param  MidtransResponse|string  $transaction_id  Transaction ID or MidtransResponse.
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public static function approve(MidtransResponse | string $transaction_id): MidtransResponse
+    {
+        if ($transaction_id instanceof MidtransResponse) {
+            $transaction_id = $transaction_id->transactionId();
+        }
+
+        try {
+            return Request::post(
+                static::getBaseUrl() . '/v2/' . $transaction_id . '/approve',
+                config('kasir.server_key'),
+            );
+        } catch (GuzzleException $e) {
+            $response = $e->getResponse();
+
+            throw new MidtransApiException($response->getBody()->getContents(), $response->getStatusCode());
+        }
+    }
 }

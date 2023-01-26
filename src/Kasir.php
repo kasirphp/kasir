@@ -2,6 +2,7 @@
 
 namespace Kasir\Kasir;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\CanConfigurePayload;
@@ -10,15 +11,21 @@ use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
 use Kasir\Kasir\Concerns\Transactions\HasEnabledPayments;
 use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
+use Kasir\Kasir\Concerns\Transactions\HasPaymentType;
 use Kasir\Kasir\Concerns\Transactions\HasShippingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
+use Kasir\Kasir\Contracts\CanConfigurePaymentType;
 use Kasir\Kasir\Contracts\ShouldConfigurePayload;
+use Kasir\Kasir\Exceptions\MidtransApiException;
+use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
 use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
+use Kasir\Kasir\Helper\MidtransResponse;
+use Kasir\Kasir\Helper\Request;
 
-class Kasir implements Arrayable, ShouldConfigurePayload
+class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentType
 {
     use CanConfigurePayload;
     use EvaluateClosures;
@@ -26,6 +33,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload
     use HasCustomerDetails;
     use HasEnabledPayments;
     use HasItemDetails;
+    use HasPaymentType;
     use HasShippingAddress;
     use HasTransactionDetails;
     use Validation;
@@ -92,6 +100,11 @@ class Kasir implements Arrayable, ShouldConfigurePayload
             $array['enabled_payments'] = array_values($this->getEnabledPayments());
         }
 
+        if (! empty($this->getPaymentType())) {
+            $array['payment_type'] = $this->getPaymentType();
+            $array[$this->getPaymentOptionKey()] = $this->getPaymentOptions();
+        }
+
         return static::configurePayload($array);
     }
 
@@ -135,5 +148,62 @@ class Kasir implements Arrayable, ShouldConfigurePayload
         return config('kasir.production_mode') === true
             ? self::SNAP_PRODUCTION_BASE_URL
             : self::SNAP_SANDBOX_BASE_URL;
+    }
+
+    public function charge()
+    {
+        return Request::post(
+            self::getBaseUrl() . '/v2/charge',
+            config('kasir.server_key'),
+            static::toArray()
+        );
+    }
+
+    public function status(): MidtransResponse
+    {
+        $id = $this->transaction_details['order_id'];
+
+        return static::getStatus($id);
+    }
+
+    public static function getStatus($id): MidtransResponse
+    {
+        return Request::get(
+            static::getBaseUrl() . '/v2/' . $id . '/status',
+            config('kasir.server_key'),
+        );
+    }
+
+    /**
+     * Capture the transaction of a given ID or Response.
+     *
+     * @param  MidtransResponse|string  $transaction_id  Transaction ID or MidtransResponse
+     * @return MidtransResponse
+     *
+     * @throws GuzzleException
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public static function capture(MidtransResponse | string $transaction_id): MidtransResponse
+    {
+        if ($transaction_id instanceof MidtransResponse) {
+            $transaction_id = $transaction_id->transactionId();
+        }
+
+        $payload = get_defined_vars();
+
+        try {
+            return Request::post(
+                static::getBaseUrl() . '/v2/capture',
+                config('kasir.server_key'),
+                $payload
+            );
+        } catch (GuzzleException $e) {
+            $response = $e->getResponse();
+            $validation_messages = json_decode($response->getBody()->getContents())->validation_messages;
+            $messages = implode(', ', $validation_messages);
+
+            throw new MidtransApiException($messages, $response->getStatusCode());
+        }
     }
 }

@@ -4,7 +4,7 @@ use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Helper\Request;
 
 it('throws MidtransKeyException when validating client/server key', function ($server_key, $message) {
-    expect(fn () => Request::post('https://example.com', $server_key, []))
+    expect(fn () => Request::post('https://example.com', $server_key))
         ->toThrow(MidtransKeyException::class, $message);
 })->with([
     'null' => [

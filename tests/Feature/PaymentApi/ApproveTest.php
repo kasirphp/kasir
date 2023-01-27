@@ -3,7 +3,7 @@
 use Kasir\Kasir\Kasir;
 use Kasir\Kasir\Payment\CreditCard\CreditCard;
 
-test('capture an authorized card transaction as response', function () {
+test('approve a challenged card transaction as response', function () {
     $kasir = Kasir::make(1)
         ->creditCard(CreditCard::make('4511 1111 1111 1117', '01', '2025', '123'));
 
@@ -12,7 +12,7 @@ test('capture an authorized card transaction as response', function () {
 
     expect($charge->successful())->toBeTrue()
         ->and($approve->ok())->toBeTrue();
-})->only();
+});
 
 test('approve a challenged card transaction using response', function () {
     $kasir = Kasir::make(1)

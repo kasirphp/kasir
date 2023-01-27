@@ -116,4 +116,17 @@ class MidtransResponse extends Response
     {
         return Kasir::deny($this->transactionId());
     }
+
+    /**
+     * Cancel this transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function cancel(): MidtransResponse
+    {
+        return Kasir::cancel($this->transactionId());
+    }
 }

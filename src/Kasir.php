@@ -3,6 +3,7 @@
 namespace Kasir\Kasir;
 
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\CanConfigurePayload;
@@ -228,6 +229,33 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
                 config('kasir.server_key'),
             );
         } catch (GuzzleException $e) {
+            $response = $e->getResponse();
+
+            throw new MidtransApiException($response->getBody()->getContents(), $response->getStatusCode());
+        }
+    }
+
+    /**
+     * Deny this challenged transaction.
+     *
+     * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public static function deny(MidtransResponse | string $transaction_id): MidtransResponse
+    {
+        if ($transaction_id instanceof MidtransResponse) {
+            $transaction_id = $transaction_id->transactionId();
+        }
+
+        try {
+            return Request::post(
+                static::getBaseUrl() . '/v2/' . $transaction_id . '/deny',
+                config('kasir.server_key'),
+            );
+        } catch (GuzzleException | RequestException $e) {
             $response = $e->getResponse();
 
             throw new MidtransApiException($response->getBody()->getContents(), $response->getStatusCode());

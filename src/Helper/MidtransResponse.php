@@ -103,4 +103,17 @@ class MidtransResponse extends Response
     {
         return Kasir::approve($this->transactionId());
     }
+
+    /**
+     * Deny this challenged transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function deny(): MidtransResponse
+    {
+        return Kasir::deny($this->transactionId());
+    }
 }

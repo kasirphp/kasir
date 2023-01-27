@@ -69,8 +69,8 @@ If you want to contribute to Kasir package, you may want to test it in a real La
 - [x] Tokenize payment card information before being charged.
 - [x] Perform a transaction with various available payment methods and features.
 - [x] Capture an authorized transaction for card payment.
-- [ ] Approve a transaction with certain `order_id` which gets challenge status from Fraud Detection System.
-- [ ] Deny a transaction with a specific `order_id`, flagged as challenge by Fraud Detection System.
+- [x] Approve a transaction with certain `order_id` which gets challenge status from Fraud Detection System.
+- [x] Deny a transaction with a specific `order_id`, flagged as challenge by Fraud Detection System.
 - [ ] Cancel a transaction with a specific `order_id`. Cancelation can only be done before settlement process.
 - [ ] Expire a transaction with a specific `order_id`. Expiration can only be done before settlement process.
 - [ ] Refund a transaction with a specific `order_id`. Refund can only be done after settlement process.

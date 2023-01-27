@@ -228,7 +228,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
                 static::getBaseUrl() . '/v2/' . $transaction_id . '/approve',
                 config('kasir.server_key'),
             );
-        } catch (GuzzleException $e) {
+        } catch (GuzzleException | RequestException $e) {
             $response = $e->getResponse();
 
             throw new MidtransApiException($response->getBody()->getContents(), $response->getStatusCode());

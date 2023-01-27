@@ -209,7 +209,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
     }
 
     /**
-     * Approve this challenged transaction.
+     * Approve a challenged transaction with Transaction ID or Order ID.
      *
      * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
      * @return MidtransResponse
@@ -236,7 +236,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
     }
 
     /**
-     * Deny this challenged transaction.
+     * Deny a challenged transaction with Transaction ID or Order ID.
      *
      * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
      * @return MidtransResponse

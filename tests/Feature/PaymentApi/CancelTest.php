@@ -26,12 +26,12 @@ test('cancel a challenged card transaction using response', function () {
         ->and($cancel->ok())->toBeTrue();
 });
 
-test('cancel a challenged card transaction using transaction_id', function () {
+test('cancel a challenged card transaction using order_id', function () {
     $kasir = Kasir::make(1)
         ->creditCard(CreditCard::make('4411 1111 1111 1118', '01', '2025', '123'));
 
     $response = $kasir->charge();
-    $cancel = Kasir::cancel($response->transactionId());
+    $cancel = Kasir::cancel($kasir->getOrderId());
 
     expect($response->successful())->toBeTrue()
         ->and($cancel->ok())->toBeTrue();

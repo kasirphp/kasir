@@ -25,12 +25,12 @@ test('approve a challenged card transaction using response', function () {
         ->and($approve->ok())->toBeTrue();
 });
 
-test('approve a challenged card transaction using transaction_id', function () {
+test('approve a challenged card transaction using order_id', function () {
     $kasir = Kasir::make(1)
         ->creditCard(CreditCard::make('4511 1111 1111 1117', '01', '2025', '123'));
 
     $response = $kasir->charge();
-    $approve = Kasir::approve($response->transactionId());
+    $approve = Kasir::approve($kasir->getOrderId());
 
     expect($response->successful())->toBeTrue()
         ->and($approve->ok())->toBeTrue();

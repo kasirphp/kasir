@@ -25,12 +25,12 @@ test('deny a challenged card transaction using response', function () {
         ->and($deny->ok())->toBeTrue();
 });
 
-test('deny a challenged card transaction using transaction_id', function () {
+test('deny a challenged card transaction using order_id', function () {
     $kasir = Kasir::make(1)
         ->creditCard(CreditCard::make('4511 1111 1111 1117', '01', '2025', '123'));
 
     $response = $kasir->charge();
-    $deny = Kasir::deny($response->transactionId());
+    $deny = Kasir::deny($kasir->getOrderId());
 
     expect($response->successful())->toBeTrue()
         ->and($deny->ok())->toBeTrue();

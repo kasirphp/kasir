@@ -288,4 +288,31 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
             throw new MidtransApiException($response->getBody()->getContents(), $response->getStatusCode());
         }
     }
+
+    /**
+     * Expire a pending transaction with Transaction ID or Order ID.
+     *
+     * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public static function expire(MidtransResponse | string $transaction_id): MidtransResponse
+    {
+        if ($transaction_id instanceof MidtransResponse) {
+            $transaction_id = $transaction_id->transactionId();
+        }
+
+        try {
+            return Request::post(
+                static::getBaseUrl() . '/v2/' . $transaction_id . '/expire',
+                config('kasir.server_key'),
+            );
+        } catch (GuzzleException | RequestException $e) {
+            $response = $e->getResponse();
+
+            throw new MidtransApiException($response->getBody()->getContents(), $response->getStatusCode());
+        }
+    }
 }

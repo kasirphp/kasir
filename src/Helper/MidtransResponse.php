@@ -129,4 +129,17 @@ class MidtransResponse extends Response
     {
         return Kasir::cancel($this->transactionId());
     }
+
+    /**
+     * Expire this transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function expire(): MidtransResponse
+    {
+        return Kasir::expire($this->transactionId());
+    }
 }

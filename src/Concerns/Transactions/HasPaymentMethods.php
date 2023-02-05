@@ -2,7 +2,7 @@
 
 namespace Kasir\Kasir\Concerns\Transactions;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\BankTransfer\BcaVA;
 use Kasir\Kasir\Payment\BankTransfer\BniVA;
 use Kasir\Kasir\Payment\BankTransfer\BriVA;
@@ -25,7 +25,7 @@ use Kasir\Kasir\Payment\InternetBanking\DanamonOnline;
 use Kasir\Kasir\Payment\InternetBanking\KlikBca;
 use Kasir\Kasir\Payment\InternetBanking\UobEzpay;
 
-trait HasPaymentType
+trait HasPaymentMethods
 {
     protected string | null $payment_type = null;
 
@@ -49,7 +49,7 @@ trait HasPaymentType
             $type,
             $save_token_id
         );
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -66,7 +66,7 @@ trait HasPaymentType
     public function permataVA(string | null $va_number = null, string | null $recipient_name = null): static
     {
         $payment = PermataVA::make($va_number, $recipient_name);
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -101,7 +101,7 @@ trait HasPaymentType
             $payment_text_id
         );
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -118,7 +118,7 @@ trait HasPaymentType
     {
         $payment = BniVA::make($va_number);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -135,7 +135,7 @@ trait HasPaymentType
     {
         $payment = BriVA::make($va_number);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -179,7 +179,7 @@ trait HasPaymentType
             $bill_key
         );
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -197,7 +197,7 @@ trait HasPaymentType
     {
         $payment = BcaKlikpay::make($description, $misc_fee);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -215,7 +215,7 @@ trait HasPaymentType
     {
         $payment = KlikBca::make($description, $user_id);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -231,7 +231,7 @@ trait HasPaymentType
     {
         $payment = DanamonOnline::make();
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -247,7 +247,7 @@ trait HasPaymentType
     {
         $payment = BriMo::make();
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -264,7 +264,7 @@ trait HasPaymentType
     {
         $payment = CimbClicks::make($description);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -280,7 +280,7 @@ trait HasPaymentType
     {
         $payment = UobEzpay::make();
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -297,7 +297,7 @@ trait HasPaymentType
     {
         $payment = Qris::make($acquirer);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -332,7 +332,7 @@ trait HasPaymentType
             $recurring
         );
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -349,7 +349,7 @@ trait HasPaymentType
     {
         $payment = ShopeePay::make($callback_url);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -366,7 +366,7 @@ trait HasPaymentType
     {
         $payment = Indomaret::make($message);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -388,7 +388,7 @@ trait HasPaymentType
     ): static {
         $payment = Alfamart::make($alfamart_free_text_1, $alfamart_free_text_2, $alfamart_free_text_3);
 
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -403,7 +403,7 @@ trait HasPaymentType
     public function akulaku(): static
     {
         $payment = Akulaku::make();
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
@@ -418,26 +418,39 @@ trait HasPaymentType
     public function kredivo()
     {
         $payment = Kredivo::make();
-        $this->paymentType($payment);
+        $this->paymentMethod($payment);
 
         return $this;
     }
 
     /**
-     * Assign payment type.
+     * Assign payment method.
      *
-     * @param  PaymentType|null  $payment_type
+     * @param  PaymentMethod|null  $payment_method
      * @return $this
      */
-    public function paymentType(PaymentType | null $payment_type): static
+    public function paymentMethod(PaymentMethod | null $payment_method): static
     {
-        if ($payment_type) {
-            $this->payment_type = $payment_type->getType();
-            $this->payment_options = $payment_type->getOptions();
-            $this->payment_option_key = $payment_type->getOptionKey();
+        if ($payment_method) {
+            $this->payment_type = $payment_method->getType();
+            $this->payment_options = $payment_method->getOptions();
+            $this->payment_option_key = $payment_method->getOptionKey();
         }
 
         return $this;
+    }
+
+    /**
+     * Assign payment method.
+     *
+     * @param  PaymentMethod|null  $payment_method
+     * @return $this
+     *
+     * @deprecated Use paymentMethod() instead.
+     */
+    public function paymentType(PaymentMethod | null $payment_method): static
+    {
+        return $this->paymentMethod($payment_method);
     }
 
     public function getPaymentType(): string | null

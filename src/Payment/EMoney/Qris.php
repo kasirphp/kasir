@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\EMoney;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class Qris extends PaymentObject implements PaymentType
+class Qris extends PaymentObject implements PaymentMethod
 {
     /**
      * Create QRIS payment object.

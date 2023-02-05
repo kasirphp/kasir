@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\EMoney;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class ShopeePay extends PaymentObject implements PaymentType
+class ShopeePay extends PaymentObject implements PaymentMethod
 {
     /**
      * Create ShopeePay payment object.

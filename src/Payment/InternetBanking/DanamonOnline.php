@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\InternetBanking;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class DanamonOnline extends PaymentObject implements PaymentType
+class DanamonOnline extends PaymentObject implements PaymentMethod
 {
     /**
      * Create Danamon Online payment object.

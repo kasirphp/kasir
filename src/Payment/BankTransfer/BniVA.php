@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\BankTransfer;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class BniVA extends PaymentObject implements PaymentType
+class BniVA extends PaymentObject implements PaymentMethod
 {
     /**
      * Create BNI Virtual Account payment object.

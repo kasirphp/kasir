@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\BankTransfer;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class BriVA extends PaymentObject implements PaymentType
+class BriVA extends PaymentObject implements PaymentMethod
 {
     /**
      * Create BRI Virtual Account payment object.

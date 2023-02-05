@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\CStore;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class Indomaret extends PaymentObject implements PaymentType
+class Indomaret extends PaymentObject implements PaymentMethod
 {
     /**
      * Create Indomaret payment object.

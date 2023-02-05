@@ -12,7 +12,7 @@ use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
 use Kasir\Kasir\Concerns\Transactions\HasEnabledPayments;
 use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
-use Kasir\Kasir\Concerns\Transactions\HasPaymentType;
+use Kasir\Kasir\Concerns\Transactions\HasPaymentMethods;
 use Kasir\Kasir\Concerns\Transactions\HasShippingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
@@ -34,7 +34,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
     use HasCustomerDetails;
     use HasEnabledPayments;
     use HasItemDetails;
-    use HasPaymentType;
+    use HasPaymentMethods;
     use HasShippingAddress;
     use HasTransactionDetails;
     use Validation;

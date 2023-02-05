@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\CStore;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class Alfamart extends PaymentObject implements PaymentType
+class Alfamart extends PaymentObject implements PaymentMethod
 {
     /**
      * Create Alfamart payment object.

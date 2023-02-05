@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\BankTransfer;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class BcaVA extends PaymentObject implements PaymentType
+class BcaVA extends PaymentObject implements PaymentMethod
 {
     /**
      * Create BCA Virtual Account payment object.

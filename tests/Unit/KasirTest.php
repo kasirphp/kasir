@@ -16,7 +16,7 @@ it('has the correct array keys', function () {
         ->itemDetails([])
         ->customerDetails([])
         ->enablePayments([])
-        ->paymentType(null);
+        ->paymentMethod(null);
 
     expect($kasir->toArray())->toHaveKeys($keys);
 });

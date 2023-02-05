@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\BankTransfer;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class PermataVA extends PaymentObject implements PaymentType
+class PermataVA extends PaymentObject implements PaymentMethod
 {
     /**
      * Create Permata Virtual Account payment object.

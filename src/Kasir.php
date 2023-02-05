@@ -151,7 +151,16 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
             : self::SNAP_SANDBOX_BASE_URL;
     }
 
-    public function charge()
+    /**
+     * Charge the transaction.
+     *
+     * @throws ZeroGrossAmountException
+     * @throws MidtransKeyException
+     * @throws NoItemDetailsException
+     * @throws GuzzleException
+     * @throws NoPriceAndQuantityAttributeException
+     */
+    public function charge(): MidtransResponse
     {
         return Request::post(
             self::getBaseUrl() . '/v2/charge',
@@ -160,6 +169,16 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
         );
     }
 
+    /**
+     * Get status of current transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws GuzzleException
+     * @throws MidtransKeyException
+     * @throws GuzzleException
+     * @throws MidtransKeyException
+     */
     public function status(): MidtransResponse
     {
         $id = $this->transaction_details['order_id'];
@@ -167,7 +186,16 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
         return static::getStatus($id);
     }
 
-    public static function getStatus($id): MidtransResponse
+    /**
+     * Get status of given transaction ID.
+     *
+     * @param  string  $id  Transaction ID or Order ID or MidtransResponse.
+     * @return MidtransResponse
+     *
+     * @throws GuzzleException
+     * @throws MidtransKeyException
+     */
+    public static function getStatus(string $id): MidtransResponse
     {
         return Request::get(
             static::getBaseUrl() . '/v2/' . $id . '/status',

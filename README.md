@@ -43,23 +43,19 @@ If you want to contribute to Kasir package, you may want to test it in a real La
 3. Clone **your fork** in your Laravel app's root directory.
 4. In the `/kasir` directory, create a new branch for your fix, e.g. `fix-something`.
 5. Install the packages in your app's `composer.json`:
-
-```json
-{
-    ...
-    "require": {
-        "kasir/kasir": "*"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "kasir/*"
-        }
-    ],
-    ...
-}
-```
-
+    ```json
+    {
+        "require": {
+            "kasir/kasir": "*"
+        },
+        "repositories": [
+            {
+                "type": "path",
+                "url": "kasir/*"
+            }
+        ],
+    }
+    ```
 6. Run `composer update`.
 
 ## Capability

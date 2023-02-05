@@ -74,7 +74,7 @@ If you want to contribute to Kasir package, you may want to test it in a real La
 - [x] Cancel a transaction with a specific `order_id`. Cancellation can only be done before settlement process.
 - [x] Expire a transaction with a specific `order_id`. Expiration can only be done before settlement process.
 - [x] Refund a transaction with a specific `order_id`. Refund can only be done after settlement process.
-- [ ] Send refund to the customer's bank or the payment provider and update the transaction status to `refund`.
+- [x] Send refund to the customer's bank or the payment provider and update the transaction status to `refund`.
 - [x] Get the transaction status of a specific `order_id`.
 - [ ] Get the transaction status multiple B2B transactions related to certain `order_id`.
 - [ ] Register customer's card information (card number and expiry) to be used for One Click and Two Click transactions.

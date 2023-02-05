@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\BankTransfer;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class MandiriBill extends PaymentObject implements PaymentType
+class MandiriBill extends PaymentObject implements PaymentMethod
 {
     /**
      * Create Mandiri Bill payment object.

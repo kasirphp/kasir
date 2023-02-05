@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\CardlessCredit;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class Kredivo extends PaymentObject implements PaymentType
+class Kredivo extends PaymentObject implements PaymentMethod
 {
     /**
      * Create Kredivo payment object.

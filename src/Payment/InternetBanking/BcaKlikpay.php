@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\InternetBanking;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class BcaKlikpay extends PaymentObject implements PaymentType
+class BcaKlikpay extends PaymentObject implements PaymentMethod
 {
     /**
      * Create BCA Klikpay payment object.

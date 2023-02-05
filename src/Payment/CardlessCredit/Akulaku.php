@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\CardlessCredit;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class Akulaku extends PaymentObject implements PaymentType
+class Akulaku extends PaymentObject implements PaymentMethod
 {
     /**
      * Create Akulaku payment object.

@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\CreditCard;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class CreditCardPayment extends PaymentObject implements PaymentType
+class CreditCardPayment extends PaymentObject implements PaymentMethod
 {
     public static function make(
         CreditCard | CardToken | string | null $token_id = null,

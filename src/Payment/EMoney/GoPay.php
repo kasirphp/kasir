@@ -2,10 +2,10 @@
 
 namespace Kasir\Kasir\Payment\EMoney;
 
-use Kasir\Kasir\Contracts\PaymentType;
+use Kasir\Kasir\Contracts\PaymentMethod;
 use Kasir\Kasir\Payment\PaymentObject;
 
-class GoPay extends PaymentObject implements PaymentType
+class GoPay extends PaymentObject implements PaymentMethod
 {
     /**
      * Create GoPay payment object.

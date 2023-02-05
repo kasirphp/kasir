@@ -2,7 +2,7 @@
 
 namespace Kasir\Kasir\Contracts;
 
-interface PaymentType
+interface PaymentMethod
 {
     public function __construct(...$options);
 

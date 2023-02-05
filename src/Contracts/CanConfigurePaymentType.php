@@ -233,10 +233,10 @@ interface CanConfigurePaymentType
     /**
      * Assign payment type.
      *
-     * @param  PaymentType|null  $payment_type
+     * @param  PaymentMethod|null  $payment_method
      * @return $this
      */
-    public function paymentType(PaymentType | null $payment_type): static;
+    public function paymentMethod(PaymentMethod | null $payment_method): static;
 
     public function getPaymentType(): string | null;
 

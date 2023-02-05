@@ -43,46 +43,20 @@ If you want to contribute to Kasir package, you may want to test it in a real La
 3. Clone **your fork** in your Laravel app's root directory.
 4. In the `/kasir` directory, create a new branch for your fix, e.g. `fix-something`.
 5. Install the packages in your app's `composer.json`:
-
-```json
-{
-    ...
-    "require": {
-        "kasir/kasir": "*"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "kasir/*"
-        }
-    ],
-    ...
-}
-```
-
+    ```json
+    {
+        "require": {
+            "kasir/kasir": "*"
+        },
+        "repositories": [
+            {
+                "type": "path",
+                "url": "kasir/*"
+            }
+        ],
+    }
+    ```
 6. Run `composer update`.
-
-## Capability
-
-### Payment API
-
-- [x] Tokenize payment card information before being charged.
-- [x] Perform a transaction with various available payment methods and features.
-- [x] Capture an authorized transaction for card payment.
-- [ ] Approve a transaction with certain `order_id` which gets challenge status from Fraud Detection System.
-- [ ] Deny a transaction with a specific `order_id`, flagged as challenge by Fraud Detection System.
-- [ ] Cancel a transaction with a specific `order_id`. Cancelation can only be done before settlement process.
-- [ ] Expire a transaction with a specific `order_id`. Expiration can only be done before settlement process.
-- [ ] Refund a transaction with a specific `order_id`. Refund can only be done after settlement process.
-- [ ] Send refund to the customer's bank or the payment provider and update the transaction status to `refund`.
-- [x] Get the transaction status of a specific `order_id`.
-- [ ] Get the transaction status multiple B2B transactions related to certain `order_id`.
-- [ ] Register customer's card information (card number and expiry) to be used for One Click and Two Click transactions.
-- [ ] Get the point balance of the card in denomination amount.
-- [ ] Used to link the customer's account to create payment for certain channel.
-- [ ] Get customer payment account details.
-- [ ] Unbind a linked customer account.
-- [ ] Get Bin Metadata.
 
 ## License
 

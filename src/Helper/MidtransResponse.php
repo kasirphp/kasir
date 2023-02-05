@@ -3,10 +3,11 @@
 namespace Kasir\Kasir\Helper;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Http\Client\Response;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Kasir;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\MessageInterface;
 
 class MidtransResponse extends Response
 {
@@ -14,7 +15,7 @@ class MidtransResponse extends Response
 
     private array | null $actions;
 
-    public function __construct(ResponseInterface $response)
+    public function __construct(MessageInterface $response)
     {
         parent::__construct($response);
         $this->transaction_id = $this->json('transaction_id');
@@ -44,6 +45,16 @@ class MidtransResponse extends Response
     public function actionsName(): array | null
     {
         return $this->actions() ? array_column($this->actions(), 'name') : null;
+    }
+
+    /**
+     * Get Credit Card fraud status.
+     *
+     * @return string|null
+     */
+    public function fraudStatus(): string | null
+    {
+        return $this->json('fraud_status');
     }
 
     /**
@@ -79,5 +90,95 @@ class MidtransResponse extends Response
     public function capture(): MidtransResponse
     {
         return Kasir::capture($this->transactionId());
+    }
+
+    /**
+     * Approve this challenged transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function approve(): MidtransResponse
+    {
+        return Kasir::approve($this->transactionId());
+    }
+
+    /**
+     * Deny this challenged transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function deny(): MidtransResponse
+    {
+        return Kasir::deny($this->transactionId());
+    }
+
+    /**
+     * Cancel this transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function cancel(): MidtransResponse
+    {
+        return Kasir::cancel($this->transactionId());
+    }
+
+    /**
+     * Expire this transaction.
+     *
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function expire(): MidtransResponse
+    {
+        return Kasir::expire($this->transactionId());
+    }
+
+    /**
+     * Refund this transaction.
+     *
+     * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
+     * @param  string|null  $reason  Reason justifying the refund.
+     * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function refund(
+        int | null $amount = null,
+        string | null $reason = null,
+        string | null $refund_key = null
+    ): MidtransResponse {
+        return Kasir::refund($this->transactionId(), $amount, $reason, $refund_key);
+    }
+
+    /**
+     * Direct refund this transaction.
+     *
+     * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
+     * @param  string|null  $reason  Reason justifying the refund.
+     * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function directRefund(
+        int | null $amount = null,
+        string | null $reason = null,
+        string | null $refund_key = null
+    ): MidtransResponse {
+        return Kasir::directRefund($this->transactionId(), $amount, $reason, $refund_key);
     }
 }

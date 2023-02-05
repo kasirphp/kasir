@@ -1,7 +1,6 @@
 {
     "name": "kasir/kasir",
     "description": "Kasir helps integrating Midtrans in Laravel way.",
-    "version": "v1.0.0",
     "authors": [
         {
             "name": "Risang Baskoro",

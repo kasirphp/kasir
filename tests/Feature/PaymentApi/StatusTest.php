@@ -15,7 +15,12 @@ test('get transaction status from non-static method or static method with transa
     $status_static = Kasir::getStatus($order_id);
     $status_static_transaction_id = Kasir::getStatus($transaction_id);
 
-    expect($status_non_static->json())
+    expect($status_non_static->ok())
+        ->toBe($status_static->ok())
+        ->toBe($status_static_transaction_id->ok())
+        ->toBe(true)
+
+        ->and($status_non_static->json())
         ->toBe($status_static->json())
         ->toBe($status_static_transaction_id->json());
 });

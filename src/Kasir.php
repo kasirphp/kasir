@@ -174,33 +174,45 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
      *
      * @return MidtransResponse
      *
-     * @throws GuzzleException
-     * @throws MidtransKeyException
-     * @throws GuzzleException
+     * @throws MidtransApiException
      * @throws MidtransKeyException
      */
     public function status(): MidtransResponse
     {
-        $id = $this->transaction_details['order_id'];
+        $transaction_id = $this->transaction_details['order_id'];
 
-        return static::getStatus($id);
+        return static::getStatus($transaction_id);
     }
 
     /**
      * Get status of given transaction ID.
      *
-     * @param  string  $id  Transaction ID or Order ID or MidtransResponse.
+     * @param  MidtransResponse|string  $transaction_id
      * @return MidtransResponse
      *
-     * @throws GuzzleException
+     * @throws MidtransApiException
      * @throws MidtransKeyException
      */
-    public static function getStatus(string $id): MidtransResponse
+    public static function getStatus(MidtransResponse | string $transaction_id): MidtransResponse
     {
-        return Request::get(
-            static::getBaseUrl() . '/v2/' . $id . '/status',
-            config('kasir.server_key'),
-        );
+        if ($transaction_id instanceof MidtransResponse) {
+            $transaction_id = $transaction_id->transactionId();
+        }
+
+        try {
+            return Request::get(
+                static::getBaseUrl() . '/v2/' . $transaction_id . '/status',
+                config('kasir.server_key'),
+            );
+        } catch (GuzzleException | RequestException $e) {
+            $response = $e->getResponse();
+            $validation_messages = json_decode($response->getBody()->getContents())->validation_messages;
+            $messages = implode(', ', $validation_messages);
+
+            throw new MidtransApiException($messages, $response->getStatusCode());
+        } catch (MidtransKeyException $e) {
+            throw new $e;
+        }
     }
 
     /**

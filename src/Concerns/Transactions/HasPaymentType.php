@@ -428,8 +428,21 @@ trait HasPaymentType
      *
      * @param  PaymentType|null  $payment_type
      * @return $this
+     *
+     * @deprecated Use paymentMethod() instead.
      */
     public function paymentType(PaymentType | null $payment_type): static
+    {
+        return $this->paymentMethod($payment_type);
+    }
+
+    /**
+     * Assign payment method.
+     *
+     * @param  PaymentType|null  $payment_type
+     * @return $this
+     */
+    public function paymentMethod(PaymentType | null $payment_type): static
     {
         if ($payment_type) {
             $this->payment_type = $payment_type->getType();

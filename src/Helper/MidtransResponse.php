@@ -3,10 +3,11 @@
 namespace Kasir\Kasir\Helper;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Http\Client\Response;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Kasir;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\MessageInterface;
 
 class MidtransResponse extends Response
 {
@@ -14,7 +15,7 @@ class MidtransResponse extends Response
 
     private array | null $actions;
 
-    public function __construct(ResponseInterface $response)
+    public function __construct(MessageInterface $response)
     {
         parent::__construct($response);
         $this->transaction_id = $this->json('transaction_id');

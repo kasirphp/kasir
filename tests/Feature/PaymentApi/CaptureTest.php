@@ -28,12 +28,12 @@ test('capture an authorized card transaction using response', function () {
         ->and($capture->json('channel_response_code'))->toBe('00');
 });
 
-test('capture an authorized card transaction using transaction_id', function () {
+test('capture an authorized card transaction using order_id', function () {
     $kasir = Kasir::make(1)
         ->creditCard(CreditCard::make('4811 1111 1111 1114', '01', '2025', '123'));
 
     $response = $kasir->charge();
-    $capture = Kasir::capture($response->transactionId());
+    $capture = Kasir::capture($kasir->getOrderId());
 
     expect($response->ok())->toBeTrue()
         ->and($capture->ok())->toBeTrue()

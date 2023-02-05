@@ -142,4 +142,23 @@ class MidtransResponse extends Response
     {
         return Kasir::expire($this->transactionId());
     }
+
+    /**
+     * Refund this transaction.
+     *
+     * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
+     * @param  string|null  $reason  Reason justifying the refund.
+     * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public function refund(
+        int | null $amount = null,
+        string | null $reason = null,
+        string | null $refund_key = null
+    ): MidtransResponse {
+        return Kasir::refund($this->transactionId(), $amount, $reason, $refund_key);
+    }
 }

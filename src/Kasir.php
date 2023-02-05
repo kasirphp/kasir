@@ -315,4 +315,41 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
             throw new MidtransApiException($response->getBody()->getContents(), $response->getStatusCode());
         }
     }
+
+    /**
+     * Refund a transaction with Transaction ID or Order ID.
+     *
+     * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
+     * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
+     * @param  string|null  $reason  Reason justifying the refund.
+     * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
+     * @return MidtransResponse
+     *
+     * @throws MidtransApiException
+     * @throws MidtransKeyException
+     */
+    public static function refund(
+        MidtransResponse | string $transaction_id,
+        int | null $amount = null,
+        string | null $reason = null,
+        string | null $refund_key = null
+    ): MidtransResponse {
+        if ($transaction_id instanceof MidtransResponse) {
+            $transaction_id = $transaction_id->transactionId();
+        }
+
+        $payload = compact('amount', 'reason', 'refund_key');
+
+        try {
+            return Request::post(
+                static::getBaseUrl() . '/v2/' . $transaction_id . '/refund',
+                config('kasir.server_key'),
+                $payload ?: null
+            );
+        } catch (GuzzleException | RequestException $e) {
+            $response = $e->getResponse();
+
+            throw new MidtransApiException($response->getBody()->getContents(), $response->getStatusCode());
+        }
+    }
 }

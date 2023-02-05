@@ -58,28 +58,6 @@ If you want to contribute to Kasir package, you may want to test it in a real La
     ```
 6. Run `composer update`.
 
-## Capability
-
-### Payment API
-
-- [x] Tokenize payment card information before being charged.
-- [x] Perform a transaction with various available payment methods and features.
-- [x] Capture an authorized transaction for card payment.
-- [x] Approve a transaction with certain `order_id` which gets challenge status from Fraud Detection System.
-- [x] Deny a transaction with a specific `order_id`, flagged as challenge by Fraud Detection System.
-- [x] Cancel a transaction with a specific `order_id`. Cancellation can only be done before settlement process.
-- [x] Expire a transaction with a specific `order_id`. Expiration can only be done before settlement process.
-- [x] Refund a transaction with a specific `order_id`. Refund can only be done after settlement process.
-- [x] Send refund to the customer's bank or the payment provider and update the transaction status to `refund`.
-- [x] Get the transaction status of a specific `order_id`.
-- [ ] Get the transaction status multiple B2B transactions related to certain `order_id`.
-- [ ] Register customer's card information (card number and expiry) to be used for One Click and Two Click transactions.
-- [ ] Get the point balance of the card in denomination amount.
-- [ ] Used to link the customer's account to create payment for certain channel.
-- [ ] Get customer payment account details.
-- [ ] Unbind a linked customer account.
-- [ ] Get Bin Metadata.
-
 ## License
 
 Kasir is open-sourced software licensed under the [MIT license](LICENSE.md).

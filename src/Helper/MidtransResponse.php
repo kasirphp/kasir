@@ -178,6 +178,6 @@ class MidtransResponse extends Response
         string | null $reason = null,
         string | null $refund_key = null
     ): MidtransResponse {
-        return Kasir::directRefund($this->transactionId());
+        return Kasir::directRefund($this->transactionId(), $amount, $reason, $refund_key);
     }
 }

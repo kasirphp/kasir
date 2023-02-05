@@ -152,6 +152,18 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
     }
 
     /**
+     * Convert this class to Snap object.
+     *
+     * @throws ZeroGrossAmountException
+     * @throws NoItemDetailsException
+     * @throws NoPriceAndQuantityAttributeException
+     */
+    public function snap(): Snap
+    {
+        return Snap::fromArray($this->toArray());
+    }
+
+    /**
      * Charge the transaction.
      *
      * @throws ZeroGrossAmountException

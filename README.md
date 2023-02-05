@@ -22,12 +22,13 @@ Kasir helps integrate Midtrans in Laravel way.
 In your controller or Livewire component, you can write:
 
 ```php
-Snap::make(200000)
+$kasir = Kasir::make()
     ->customerDetails($user)
     ->billingAddress($billing_address)
     ->shippingAddress($shipping_address)
-    ->itemDetails($items)
-    ->redirect();
+    ->itemDetails($items);
+
+return $kasir->charge();
 ```
 
 ## Installation

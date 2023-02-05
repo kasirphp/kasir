@@ -13,14 +13,14 @@ on:
 jobs:
   update-wiki:
     runs-on: ubuntu-latest
-    name: Update wiki
+    name: update-docs
     steps:
       - name: Checkout base code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: base-code
       - name: Checkout wiki code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: ${{github.repository}}.wiki
           path: docs
@@ -30,4 +30,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git diff-index --quiet HEAD || git commit -m "Add changes" && git push
+          git diff-index --quiet HEAD || git commit -m "Update Docs" && git push

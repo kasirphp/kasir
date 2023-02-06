@@ -10,13 +10,13 @@ class BcaKlikpay extends PaymentObject implements PaymentMethod
     /**
      * Create BCA Klikpay payment object.
      *
-     * @param  string|null  $description  Description of the BCA KlickPay transaction.
+     * @param  string  $description  Description of the BCA KlickPay transaction.
      * @param  string|null  $misc_fee  Additional fee for documentation.
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#bca-klikpay
+     * @see https://docs.midtrans.com/reference/bca-klikpay-object
      */
-    public static function make(string $description = null, string $misc_fee = null): static
+    public static function make(string $description, string | null $misc_fee = null): static
     {
         $options = array_filter(get_defined_vars(), 'strlen');
         $key = 'bca_klikpay';

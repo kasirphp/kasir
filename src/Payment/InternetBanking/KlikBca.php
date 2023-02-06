@@ -10,13 +10,13 @@ class KlikBca extends PaymentObject implements PaymentMethod
     /**
      * Create KlikBCA payment object.
      *
-     * @param  string|null  $description  https://api-docs.midtrans.com/#klikbca
-     * @param  string|null  $user_id  KlikBCA User ID.
+     * @param  string  $description  https://api-docs.midtrans.com/#klikbca
+     * @param  string  $user_id  KlikBCA User ID.
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#klikbca
+     * @see https://docs.midtrans.com/reference/bca-klikbca-object
      */
-    public static function make(string $description = null, string $user_id = null): static
+    public static function make(string $description, string $user_id): static
     {
         $options = array_filter(get_defined_vars(), 'strlen');
 

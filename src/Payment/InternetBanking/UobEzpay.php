@@ -12,7 +12,7 @@ class UobEzpay extends PaymentObject implements PaymentMethod
      *
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#uob-ezpay
+     * @see https://docs.midtrans.com/reference/uob-ezpay
      */
     public static function make(): static
     {

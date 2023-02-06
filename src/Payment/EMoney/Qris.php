@@ -13,7 +13,7 @@ class Qris extends PaymentObject implements PaymentMethod
      * @param  string  $acquirer The acquirer for QRIS. Possible values are airpay shopee, gopay.
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#qris-object
+     * @see https://docs.midtrans.com/reference/qris
      */
     public static function make(string $acquirer = 'gopay'): static
     {

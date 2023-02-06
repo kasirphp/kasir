@@ -13,7 +13,7 @@ class BriVA extends PaymentObject implements PaymentMethod
      * @param  string|null  $va_number Custom VA number assigned by you.
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#bri-virtual-account
+     * @see https://docs.midtrans.com/reference/bank-transfer-object
      */
     public static function make(string | null $va_number = null): static
     {

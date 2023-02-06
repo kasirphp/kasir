@@ -12,7 +12,7 @@ class DanamonOnline extends PaymentObject implements PaymentMethod
      *
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#danamon-online-banking
+     * @see https://docs.midtrans.com/reference/danamon-online-banking-dob
      */
     public static function make(): static
     {

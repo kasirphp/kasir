@@ -18,13 +18,14 @@ class GoPay extends PaymentObject implements PaymentMethod
      * @param  bool  $recurring  Set the value to true to mark as a recurring transaction, only allowed for authorised merchant. Default value: false
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#gopay
+     * @see https://docs.midtrans.com/reference/gopay-1
+     * @see https://docs.midtrans.com/reference/gopay-object
      */
     public static function make(
         bool $enable_callback = false,
-        string $callback_url = null,
-        string $account_id = null,
-        string $payment_option_token = null,
+        string | null $callback_url = null,
+        string | null $account_id = null,
+        string | null $payment_option_token = null,
         bool $pre_auth = false,
         bool $recurring = false
     ): static {

@@ -12,7 +12,7 @@ class Akulaku extends PaymentObject implements PaymentMethod
      *
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#akulaku-paylater
+     * @see https://docs.midtrans.com/reference/akulaku-1
      */
     public static function make(): static
     {

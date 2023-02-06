@@ -12,7 +12,7 @@ class BriMo extends PaymentObject implements PaymentMethod
      *
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#brimo
+     * @see https://docs.midtrans.com/reference/brimo-1
      */
     public static function make(): static
     {

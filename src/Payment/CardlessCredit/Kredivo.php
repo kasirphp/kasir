@@ -12,7 +12,7 @@ class Kredivo extends PaymentObject implements PaymentMethod
      *
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#kredivo
+     * @see https://docs.midtrans.com/reference/kredivo-1
      */
     public static function make(): static
     {

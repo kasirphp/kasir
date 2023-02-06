@@ -19,7 +19,7 @@ class CreditCard
 
     public string | null $token = null;
 
-    public string | null$hash = null;
+    public string | null $hash = null;
 
     public function __construct(string $cardNumber, string $cardExpMonth, string $cardExpYear, string $cardCvv)
     {

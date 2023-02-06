@@ -13,9 +13,9 @@ class Indomaret extends PaymentObject implements PaymentMethod
      * @param  string  $message  Label displayed in Indomaret POS.
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#indomaret
+     * @see https://docs.midtrans.com/reference/indomaret-1
      */
-    public static function make(string $message = ''): static
+    public static function make(string $message): static
     {
         $options = array_filter(get_defined_vars(), 'strlen');
         $key = 'cstore';

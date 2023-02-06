@@ -6,8 +6,6 @@ interface PaymentMethod
 {
     public function __construct(...$options);
 
-    public static function make(): static;
-
     public function optionKey(string $key): static;
 
     public function options(array $options): static;

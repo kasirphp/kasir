@@ -14,7 +14,8 @@ class PermataVA extends PaymentObject implements PaymentMethod
      * @param  string|null  $recipient_name  Recipient name shown on the payment details.
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#permata-virtual-account
+     * @see https://docs.midtrans.com/reference/bank-transfer-object
+     * @see https://docs.midtrans.com/reference/bank-transfer-object#permata-va-object
      */
     public static function make(string | null $va_number = null, string | null $recipient_name = null): static
     {
@@ -22,7 +23,7 @@ class PermataVA extends PaymentObject implements PaymentMethod
         $options['bank'] = 'permata';
 
         if ($recipient_name) {
-            $options['recipient_name'] = $recipient_name;
+            $options['permata']['recipient_name'] = $recipient_name;
         }
 
         $type = 'bank_transfer';

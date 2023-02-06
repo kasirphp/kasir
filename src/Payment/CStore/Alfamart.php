@@ -15,12 +15,12 @@ class Alfamart extends PaymentObject implements PaymentMethod
      * @param  string|null  $alfamart_free_text_3  Customizable third row of text on the Alfamart printed receipt.
      * @return static
      *
-     * @see https://api-docs.midtrans.com/#alfamart
+     * @see https://docs.midtrans.com/reference/alfamart-1
      */
     public static function make(
-        string | null $alfamart_free_text_1 = '',
-        string | null $alfamart_free_text_2 = '',
-        string | null $alfamart_free_text_3 = ''
+        string | null $alfamart_free_text_1 = null,
+        string | null $alfamart_free_text_2 = null,
+        string | null $alfamart_free_text_3 = null
     ): static {
         $options = array_filter(get_defined_vars(), 'strlen');
         $key = 'cstore';

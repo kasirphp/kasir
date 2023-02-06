@@ -18,6 +18,11 @@ class MidtransResponse extends Response
     public function __construct(MessageInterface $response)
     {
         parent::__construct($response);
+
+        $this->response = $response->withStatus(
+            $this->json('status_code') ?? 200,
+            $this->json('status_message') ?? 'OK'
+        );
         $this->transaction_id = $this->json('transaction_id');
         $this->actions = $this->json('actions');
     }

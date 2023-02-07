@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is your merchant's server and client key. These values are
-    | used when the package needs to interact with Midtrans. You cab get your
+    | used when the package needs to interact with Midtrans. You can get your
     | merchant's key at Midtrans' dashboard settings page.
     |
     */

@@ -304,7 +304,7 @@ trait HasPaymentMethods
     /**
      * Using QRIS as payment method.
      *
-     * @param  string  $acquirer  The acquirer for QRIS. Possible values are airpay shopee, gopay.
+     * @param  string  $acquirer  The acquirer for QRIS. Possible values are 'airpay shopee', 'gopay'.
      * @return $this
      *
      * @see https://docs.midtrans.com/reference/qris

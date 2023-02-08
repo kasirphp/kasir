@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support question
+    url: https://github.com/kasirphp/kasir/discussions/new?category=q-a
+    about: Ask the community for help.
+  - name: Twitter Community
+    url: https://twitter.com/i/communities/1623376036779130881
+    about: For quick help, ask questions on Twitter.

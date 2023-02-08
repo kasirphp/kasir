@@ -1,0 +1,65 @@
+name: "Bug Report"
+description: "Report a problem you're experiencing"
+title: "[Bug]: "
+labels: [ "bug" ]
+body:
+ - type: markdown
+   attributes:
+    value: |
+     Before opening a bug report, please search the existing issues (both open and closed).
+     
+     ---
+     
+     Thank you for taking the time to file a bug report. To address this bug as fast as possible, we need some information. Please fill out the following form as best as you can.
+ - type: input
+   id: package-version
+   attributes:
+    label: Package Version
+    description: Please provide the full version of the package you have installed.
+    placeholder: v1.0.0
+   validations:
+    required: true
+ - type: input
+   id: laravel-version
+   attributes:
+    label: Laravel Version
+    description: Please provide the full Laravel version of your project.
+    placeholder: v9.0.0
+   validations:
+    required: true
+ - type: input
+   id: php-version
+   attributes:
+    label: PHP Version
+    description: Please provide the full PHP version of your server.
+    placeholder: PHP 8.0.0
+   validations:
+    required: true
+ - type: textarea
+   id: description
+   attributes:
+    label: Problem description
+    description: What happened when you experienced the problem?
+   validations:
+    required: true
+ - type: textarea
+   id: expectation
+   attributes:
+    label: Expected behavior
+    description: What did you expect to happen instead?
+   validations:
+    required: true
+ - type: textarea
+   id: steps
+   attributes:
+    label: Steps to reproduce
+    description: Which steps do we need to take to reproduce the problem? Any code examples need to be **as short as possible**, remove any code that is unrelated to the bug.  **This issue will be automatically closed and not reviewed if detailed replication steps are missing.**
+   validations:
+    required: true
+ - type: checkboxes
+   id:
+   attributes:
+    label: Terms of Agreement
+    options:
+     - label: I have searched this issue I am experiencing in [GitHub Issue](https://github.com/kasirphp/kasir/issues) and I ensure it is not a duplicated issue.
+       required: true

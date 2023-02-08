@@ -35,6 +35,13 @@ return $kasir->charge();
 
 Please refer to [Kasir Installation Page](https://github.com/kasirphp/kasir/wiki/Installation).
 
+## Community and Discussions
+
+<p align="center">
+    <a href="https://twitter.com/i/communities/1623376036779130881" target="_blank"><img alt="Twitter Community" src="https://img.shields.io/twitter/url?label=Twitter%20Community&style=social&url=https%3A%2F%2Ftwitter.com%2Fi%2Fcommunities%2F1623376036779130881"></a>
+    <a href="https://github.com/kasirphp/kasir/discussions"><img alt="Github Discussions" src="https://img.shields.io/twitter/url?label=GitHub%20Discussions&logo=GitHub&style=social&url=https%3A%2F%2Fgithub.com%2Fkasirphp%2Fkasir%2Fdiscussions"></a>
+</p>
+
 ## Contributing
 
 If you want to contribute to Kasir package, you may want to test it in a real Laravel project:

@@ -13,6 +13,8 @@ class MidtransResponse extends Response
 {
     private string | null $transaction_id;
 
+    private string | null $transaction_status;
+
     private array | null $actions;
 
     public function __construct(MessageInterface $response)
@@ -24,12 +26,28 @@ class MidtransResponse extends Response
             $this->json('status_message') ?? 'OK'
         );
         $this->transaction_id = $this->json('transaction_id');
+        $this->transaction_status = $this->json('transaction_status');
         $this->actions = $this->json('actions');
     }
 
+    /**
+     * Get the Transaction ID.
+     *
+     * @return string|null
+     */
     public function transactionId(): string | null
     {
         return $this->transaction_id;
+    }
+
+    /**
+     * Get the Transaction Status.
+     *
+     * @return string|null
+     */
+    public function transactionStatus(): string | null
+    {
+        return $this->transaction_status;
     }
 
     /**

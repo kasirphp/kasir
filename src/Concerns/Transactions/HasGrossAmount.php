@@ -8,13 +8,13 @@ trait HasGrossAmount
 
     public function grossAmount(int | null $gross_amount): static
     {
-        $this->transaction_details['gross_amount'] = $this->evaluate($gross_amount);
+        $this->gross_amount = $gross_amount;
 
         return $this;
     }
 
     public function getGrossAmount(): int | null
     {
-        return $this->evaluate($this->transaction_details)['gross_amount'];
+        return $this->evaluate($this->gross_amount);
     }
 }

@@ -11,10 +11,11 @@ use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
 use Kasir\Kasir\Concerns\Transactions\HasEnabledPayments;
+use Kasir\Kasir\Concerns\Transactions\HasGrossAmount;
 use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
+use Kasir\Kasir\Concerns\Transactions\HasOrderId;
 use Kasir\Kasir\Concerns\Transactions\HasPaymentMethods;
 use Kasir\Kasir\Concerns\Transactions\HasShippingAddress;
-use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
@@ -31,10 +32,11 @@ class Kasir implements Arrayable
     use HasBillingAddress;
     use HasCustomerDetails;
     use HasEnabledPayments;
+    use HasGrossAmount;
     use HasItemDetails;
+    use HasOrderId;
     use HasPaymentMethods;
     use HasShippingAddress;
-    use HasTransactionDetails;
     use Validation;
 
     const SANDBOX_BASE_URL = 'https://api.sandbox.midtrans.com';
@@ -74,7 +76,10 @@ class Kasir implements Arrayable
         $this->validate();
 
         $array = [
-            'transaction_details' => $this->transaction_details,
+            'transaction_details' => [
+                'gross_amount' => $this->getGrossAmount(),
+                'order_id' => $this->getOrderId(),
+            ],
         ];
 
         if (! is_null($this->getItemDetails())) {

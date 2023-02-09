@@ -40,17 +40,17 @@ abstract class PaymentObject
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): string | null
     {
         return $this->type;
     }
 
-    public function getOptionKey(): ?string
+    public function getOptionKey(): string | null
     {
         return $this->option_key;
     }
 
-    public function getOptions(): ?array
+    public function getOptions(): array | null
     {
         return $this->options;
     }

@@ -9,6 +9,7 @@ trait HasGrossAmount
     public function grossAmount(int | null $gross_amount): static
     {
         $this->gross_amount = $gross_amount;
+        $this->gross_amount = $this->calculateGrossAmount();
 
         return $this;
     }

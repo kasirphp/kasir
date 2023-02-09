@@ -10,6 +10,8 @@ trait HasItemDetails
     {
         $this->item_details = $item_details;
 
+        $this->grossAmount($this->calculateGrossAmount());
+
         return $this;
     }
 

@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\CanConfigurePayload;
+use Kasir\Kasir\Concerns\Endpoint;
 use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
@@ -27,6 +28,7 @@ use Kasir\Kasir\Helper\Request;
 
 class Kasir implements Arrayable
 {
+    use Endpoint;
     use CanConfigurePayload;
     use EvaluateClosures;
     use HasBillingAddress;
@@ -128,30 +130,6 @@ class Kasir implements Arrayable
         }
 
         return $static;
-    }
-
-    /**
-     * Get Base URL for the API
-     *
-     * @return string
-     */
-    public static function getBaseUrl(): string
-    {
-        return config('kasir.production_mode') === true
-            ? self::PRODUCTION_BASE_URL
-            : self::SANDBOX_BASE_URL;
-    }
-
-    /**
-     * Get Base URL for the SNAP API
-     *
-     * @return string
-     */
-    public static function getSnapBaseUrl(): string
-    {
-        return config('kasir.production_mode') === true
-            ? self::SNAP_PRODUCTION_BASE_URL
-            : self::SNAP_SANDBOX_BASE_URL;
     }
 
     /**

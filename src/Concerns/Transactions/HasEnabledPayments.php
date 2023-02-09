@@ -4,30 +4,9 @@ namespace Kasir\Kasir\Concerns\Transactions;
 
 trait HasEnabledPayments
 {
-    private array $available_payments = [
-        'credit_card',
-        'cimb_clicks',
-        'bca_klikbca',
-        'bca_klikpay',
-        'bri_epay',
-        'echannel',
-        'permata_va',
-        'bca_va',
-        'bni_va',
-        'bri_va',
-        'danamon_online',
-        'uob_ezpay',
-        'gopay',
-        'shopeepay',
-        'indomaret',
-        'alfamart',
-        'akulaku',
-        'kredivo',
-    ];
+    protected array | \Closure | null $enabled_payments = null;
 
-    protected array | null $enabled_payments = null;
-
-    protected array | null $disabled_payments = null;
+    protected array | \Closure | null $disabled_payments = null;
 
     public function enablePayments(array | \Closure | null $payments): static
     {

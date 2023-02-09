@@ -16,8 +16,6 @@ use Kasir\Kasir\Concerns\Transactions\HasPaymentMethods;
 use Kasir\Kasir\Concerns\Transactions\HasShippingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasTransactionDetails;
 use Kasir\Kasir\Concerns\Validation;
-use Kasir\Kasir\Contracts\CanConfigurePaymentType;
-use Kasir\Kasir\Contracts\ShouldConfigurePayload;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Exceptions\NoItemDetailsException;
@@ -26,7 +24,7 @@ use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 use Kasir\Kasir\Helper\MidtransResponse;
 use Kasir\Kasir\Helper\Request;
 
-class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentType
+class Kasir implements Arrayable
 {
     use CanConfigurePayload;
     use EvaluateClosures;
@@ -47,7 +45,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
 
     const SNAP_PRODUCTION_BASE_URL = 'https://app.midtrans.com/snap/v1';
 
-    public function __construct(?int $gross_amount)
+    public function __construct(int | null $gross_amount)
     {
         $this->grossAmount($gross_amount);
         $this->orderId($order_id ?? Str::orderedUuid());
@@ -56,7 +54,7 @@ class Kasir implements Arrayable, ShouldConfigurePayload, CanConfigurePaymentTyp
     /**
      * Initialize Kasir with base Gross Amount
      */
-    public static function make(?int $gross_amount = null): static
+    public static function make(int | null $gross_amount = null): static
     {
         return app(static::class, [
             'gross_amount' => $gross_amount ?? null,

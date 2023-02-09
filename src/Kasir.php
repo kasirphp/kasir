@@ -6,7 +6,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
-use Kasir\Kasir\Concerns\CanConfigurePayload;
+use Kasir\Kasir\Concerns\CanCalculateGrossAmount;
 use Kasir\Kasir\Concerns\Endpoint;
 use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
@@ -25,11 +25,12 @@ use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 use Kasir\Kasir\Helper\MidtransResponse;
 use Kasir\Kasir\Helper\Request;
+use Kasir\Kasir\Helper\Sanitizer;
 
 class Kasir implements Arrayable
 {
+    use CanCalculateGrossAmount;
     use Endpoint;
-    use CanConfigurePayload;
     use EvaluateClosures;
     use HasBillingAddress;
     use HasCustomerDetails;
@@ -111,7 +112,11 @@ class Kasir implements Arrayable
             $array[$this->getPaymentOptionKey()] = $this->getPaymentOptions();
         }
 
-        return static::configurePayload($array);
+        if (config('kasir.sanitize')) {
+            Sanitizer::json($array);
+        }
+
+        return $array;
     }
 
     public static function fromArray(array $data): static
@@ -123,11 +128,6 @@ class Kasir implements Arrayable
         $static->billingAddress($data['customer_details']['billing_address'] ?? null);
         $static->shippingAddress($data['customer_details']['shipping_address'] ?? null);
         $static->enablePayments($data['enabled_payments'] ?? null);
-
-        if (! empty($static->getItemDetails())) {
-            $gross_amount = self::calculateGrossAmount($data)['transaction_details']['gross_amount'];
-            $static->grossAmount($gross_amount);
-        }
 
         return $static;
     }

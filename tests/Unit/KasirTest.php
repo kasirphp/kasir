@@ -2,6 +2,24 @@
 
 use Kasir\Kasir\Kasir;
 
+it('calculates gross_amount', function () {
+    $kasir = Kasir::make()
+        ->grossAmount(100);
+
+    expect($kasir->getGrossAmount())->toBe(100);
+
+    $kasir = $kasir->itemDetails([
+        [
+            'id' => 'item-id',
+            'price' => 300,
+            'quantity' => 1,
+            'name' => 'item-name',
+        ],
+    ]);
+
+    expect($kasir->getGrossAmount())->toBe(300);
+});
+
 it('has the correct array keys', function () {
     $keys = [
         'transaction_details',
@@ -24,7 +42,6 @@ it('has the correct array keys', function () {
 it('has the correct keys', function ($key, $keys) {
     $kasir = Kasir::make()
         ->grossAmount(1)
-        ->orderId('order-id')
         ->itemDetails([])
         ->customerDetails([])
         ->billingAddress([])
@@ -49,7 +66,7 @@ it('has the correct keys', function ($key, $keys) {
     ],
 ]);
 
-it('configure transaction details from array', function ($items, $customer, $address, $payments) {
+it('configures transaction details from array', function ($items, $customer, $address, $payments) {
     $payload = [
         'transaction_details' => [
             'gross_amount' => rand(1, 100) * 1000,
@@ -63,10 +80,20 @@ it('configure transaction details from array', function ($items, $customer, $add
     $payload['enabled_payments'] = $payments;
 
     $kasir = Kasir::fromArray($payload);
+    $kasir_array = $kasir->toArray();
+    unset($kasir_array['transaction_details']['order_id']);
 
-    $configured_payload = Kasir::configurePayload($payload);
+    $manual = Kasir::make($payload['transaction_details']['gross_amount'])
+        ->orderId($payload['transaction_details']['order_id'])
+        ->itemDetails($payload['item_details'])
+        ->customerDetails($payload['customer_details'])
+        ->billingAddress($payload['customer_details']['billing_address'])
+        ->shippingAddress($payload['customer_details']['shipping_address'])
+        ->enablePayments($payload['enabled_payments']);
+    $manual_array = $manual->toArray();
+    unset($manual_array['transaction_details']['order_id']);
 
-    expect($kasir->toArray())->toBeArray()->toBe($configured_payload);
+    expect($kasir_array)->toBeArray()->toBe($manual_array);
 })->with('item_details')
     ->with('customer_details')
     ->with('address')

@@ -25,7 +25,6 @@ use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 use Kasir\Kasir\Helper\MidtransResponse;
 use Kasir\Kasir\Helper\Request;
-use Kasir\Kasir\Helper\Sanitizer;
 
 class Kasir implements Arrayable
 {
@@ -104,11 +103,7 @@ class Kasir implements Arrayable
             $array[$this->getPaymentOptionKey()] = $this->getPaymentOptions();
         }
 
-        if (config('kasir.sanitize')) {
-            Sanitizer::json($array);
-        }
-
-        return $array;
+        return static::configurePayload($array);
     }
 
     public static function fromArray(array $data): static
@@ -120,6 +115,11 @@ class Kasir implements Arrayable
         $static->billingAddress($data['customer_details']['billing_address'] ?? null);
         $static->shippingAddress($data['customer_details']['shipping_address'] ?? null);
         $static->enablePayments($data['enabled_payments'] ?? null);
+
+        if (! empty($static->getItemDetails())) {
+            $gross_amount = self::calculateGrossAmount($data)['transaction_details']['gross_amount'];
+            $static->grossAmount($gross_amount);
+        }
 
         return $static;
     }

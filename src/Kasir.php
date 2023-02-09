@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 use Kasir\Kasir\Concerns\CanConfigurePayload;
+use Kasir\Kasir\Concerns\Endpoint;
 use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
@@ -27,6 +28,7 @@ use Kasir\Kasir\Helper\Request;
 
 class Kasir implements Arrayable
 {
+    use Endpoint;
     use CanConfigurePayload;
     use EvaluateClosures;
     use HasBillingAddress;
@@ -55,6 +57,9 @@ class Kasir implements Arrayable
 
     /**
      * Initialize Kasir with base Gross Amount
+     *
+     * @param  int|null  $gross_amount
+     * @return static
      */
     public static function make(int | null $gross_amount = null): static
     {
@@ -66,6 +71,7 @@ class Kasir implements Arrayable
     /**
      * Convert passed data to an array.
      *
+     * @return array
      *
      * @throws ZeroGrossAmountException
      * @throws NoItemDetailsException
@@ -127,26 +133,6 @@ class Kasir implements Arrayable
     }
 
     /**
-     * Get Base URL for the API
-     */
-    public static function getBaseUrl(): string
-    {
-        return config('kasir.production_mode') === true
-            ? self::PRODUCTION_BASE_URL
-            : self::SANDBOX_BASE_URL;
-    }
-
-    /**
-     * Get Base URL for the SNAP API
-     */
-    public static function getSnapBaseUrl(): string
-    {
-        return config('kasir.production_mode') === true
-            ? self::SNAP_PRODUCTION_BASE_URL
-            : self::SNAP_SANDBOX_BASE_URL;
-    }
-
-    /**
      * Convert this class to Snap object.
      *
      * @throws ZeroGrossAmountException
@@ -179,6 +165,7 @@ class Kasir implements Arrayable
     /**
      * Get status of current transaction.
      *
+     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -193,6 +180,8 @@ class Kasir implements Arrayable
     /**
      * Get status of given transaction ID.
      *
+     * @param  MidtransResponse|string  $transaction_id
+     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -223,6 +212,7 @@ class Kasir implements Arrayable
      * Capture the transaction of a given ID or Response.
      *
      * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse
+     * @return MidtransResponse
      *
      * @throws GuzzleException
      * @throws MidtransApiException
@@ -255,6 +245,7 @@ class Kasir implements Arrayable
      * Approve a challenged transaction with Transaction ID or Order ID.
      *
      * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
+     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -281,6 +272,7 @@ class Kasir implements Arrayable
      * Deny a challenged transaction with Transaction ID or Order ID.
      *
      * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
+     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -307,6 +299,7 @@ class Kasir implements Arrayable
      * Cancel a pending transaction with Transaction ID or Order ID.
      *
      * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
+     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -333,6 +326,7 @@ class Kasir implements Arrayable
      * Expire a pending transaction with Transaction ID or Order ID.
      *
      * @param  MidtransResponse|string  $transaction_id  Transaction ID or Order ID or MidtransResponse.
+     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -362,6 +356,7 @@ class Kasir implements Arrayable
      * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
      * @param  string|null  $reason  Reason justifying the refund.
      * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
+     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -398,6 +393,7 @@ class Kasir implements Arrayable
      * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
      * @param  string|null  $reason  Reason justifying the refund.
      * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
+     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException

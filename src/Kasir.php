@@ -11,6 +11,7 @@ use Kasir\Kasir\Concerns\Endpoint;
 use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
+use Kasir\Kasir\Concerns\Transactions\HasDiscounts;
 use Kasir\Kasir\Concerns\Transactions\HasEnabledPayments;
 use Kasir\Kasir\Concerns\Transactions\HasGrossAmount;
 use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
@@ -34,6 +35,7 @@ class Kasir implements Arrayable
     use EvaluateClosures;
     use HasBillingAddress;
     use HasCustomerDetails;
+    use HasDiscounts;
     use HasEnabledPayments;
     use HasGrossAmount;
     use HasItemDetails;
@@ -91,6 +93,7 @@ class Kasir implements Arrayable
 
         if (! is_null($this->getItemDetails())) {
             $array['item_details'] = array_values($this->getItemDetails());
+            $array['item_details'] = array_merge($array['item_details'], array_values($this->getDiscountDetails() ?: []));
         }
 
         if (! is_null($this->getCustomerDetails())) {

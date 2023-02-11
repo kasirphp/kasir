@@ -38,7 +38,13 @@ trait HasDiscounts
 
         $this->discounts[] = $discount;
 
-        $this->calculateDiscountedPrice($amount, $percentage, $name, $id);
+        if ($this->getTaxes()) {
+            $this->reverseCalculateTaxedPrice();
+            $this->calculateDiscountedPrice($amount, $percentage, $name, $id);
+            $this->recalculateTaxedPrice();
+        } else {
+            $this->calculateDiscountedPrice($amount, $percentage, $name, $id);
+        }
 
         return $this;
     }
@@ -54,6 +60,7 @@ trait HasDiscounts
         $discounts = $this->evaluate($discounts);
         $this->discounts = array_merge($this->getDiscounts() ?: [], $discounts);
 
+        $this->reverseCalculateTaxedPrice();
         foreach ($discounts as $discount) {
             $this->discount_id++;
             $this->calculateDiscountedPrice(
@@ -63,6 +70,7 @@ trait HasDiscounts
                 $discount['id']
             );
         }
+        $this->recalculateTaxedPrice();
 
         return $this;
     }

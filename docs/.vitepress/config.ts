@@ -15,6 +15,8 @@ export default defineConfig({
 
     base: '/',
 
+    cleanUrls: true,
+
     vue: {
         reactivityTransform: true,
     },

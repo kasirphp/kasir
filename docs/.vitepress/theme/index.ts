@@ -9,7 +9,7 @@ export default {
     ...Theme,
     Layout() {
         return h(Theme.Layout, null, {
-            'home-features-before': () => h(HomeSponsors),
+            'home-features-after': () => h(HomeSponsors),
             'aside-ads-before': () => h(AsideSponsors)
         })
     },

@@ -3,17 +3,7 @@ title: Transaction Details
 
 ---
 
-<!-- TOC -->
-  * [Getting Started](#getting-started)
-  * [Creating Transaction](#creating-transaction)
-  * [Order ID](#order-id)
-  * [Gross Amount and Order ID in One Method](#gross-amount-and-order-id-in-one-method)
-  * [Customer Details](#customer-details)
-  * [Billing Address](#billing-address)
-  * [Shipping Address](#shipping-address)
-  * [Item Details](#item-details)
-  * [Next Step](#next-step)
-<!-- TOC -->
+[[toc]]
 
 ## Getting Started
 
@@ -23,7 +13,7 @@ customer's information, billing address, shipping address, item details, etc. Yo
 the `Kasir` object using predefined methods. All the methods also accept a `Closure` as a parameter. This anonymous
 function will be executed when it is used as the parameter.
 
-After creating a transaction, you can charge your customer using [CoreAPI](payment-methods) or [Snap](snap-api).
+After creating a transaction, you can charge your customer using [CoreAPI](core-api) or [Snap](snap-api).
 
 ## Creating Transaction
 

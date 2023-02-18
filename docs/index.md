@@ -8,6 +8,9 @@ hero:
   name: Kasir
   text: Developer Friendly Laravel Midtrans Package
   tagline: Integrate Laravel and Indonesian payment gateway the easy way.
+  image:
+    src: /logo.svg
+    alt: Kasir
   actions:
   - theme: brand
     text: Introduction

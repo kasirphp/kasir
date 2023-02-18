@@ -3,13 +3,7 @@ title: Installation
 
 ---
 
-<!-- TOC -->
-  * [Requirements](#requirements)
-  * [Installation](#installation)
-    * [Install via Composer](#install-via-composer)
-    * [Configure .env file](#configure-env-file)
-    * [Publish Configuration file](#publish-configuration-file)
-<!-- TOC -->
+[[toc]]
 
 ## Requirements
 
@@ -32,7 +26,7 @@ composer require kasir/kasir
 
 Then, add Midtrans' Client Key and Server Key to your `.env` file.
 
-```dotenv
+```
 MIDTRANS_CLIENT_KEY= // Your PRODUCTION Client Key
 MIDTRANS_SERVER_KEY= // Your PRODUCTION Server Key
 MIDTRANS_CLIENT_KEY_SANDBOX= // Your SANDBOX Client Key

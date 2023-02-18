@@ -1,4 +1,6 @@
-module.exports = {
+import { defineConfig } from 'vitepress'
+
+export default defineConfig({
     title: 'Kasir',
     description: 'Documentation for KasirPHP, a Laravel library for Midtrans payment gateway.',
 
@@ -21,7 +23,10 @@ module.exports = {
         logo: '/logo.svg',
         siteTitle: false,
         nav: navbar(),
-        socialLinks: socialLinks(),
+        socialLinks: [
+            {icon: 'twitter', link: 'https://twitter.com/i/communities/1623376036779130881'},
+            {icon: 'github', link: 'https://github.com/kasirphp'},
+        ],
         sidebar: {
             '/': sidebar(),
         },
@@ -30,7 +35,7 @@ module.exports = {
             message: '"Midtrans" and Midtrans Logo are trademark of Midtrans (PT Midtrans). Kasir is not affiliated by Midtrans.',
         }
     }
-}
+})
 
 function og() {
     return {
@@ -55,12 +60,5 @@ function sidebar() {
         {text: 'Payment Methods', link: '/payment-methods'},
         {text: 'Core API', link: '/core-api'},
         {text: 'Snap API', link: '/snap-api'},
-    ]
-}
-
-function socialLinks() {
-    return [
-        {icon: 'twitter', link: 'https://twitter.com/i/communities/1623376036779130881'},
-        {icon: 'github', link: 'https://github.com/kasirphp'},
     ]
 }

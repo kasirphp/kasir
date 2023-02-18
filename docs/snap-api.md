@@ -3,14 +3,7 @@ title: Snap
 
 ---
 
-<!-- TOC -->
-  * [Getting Started](#getting-started)
-  * [Convert from Kasir Instance](#convert-from-kasir-instance)
-  * [Snap Redirect](#snap-redirect)
-  * [Snap Pop-up](#snap-pop-up)
-  * [Configuring Enabled Payment Methods](#configuring-enabled-payment-methods)
-  * [Configuring Redirect URL After Payment](#configuring-redirect-url-after-payment)
-<!-- TOC -->
+[[toc]]
 
 ## Getting Started
 

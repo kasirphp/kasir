@@ -3,34 +3,7 @@ title: Payment Methods
 
 ---
 
-<!-- TOC -->
-  * [Getting Started](#getting-started)
-  * [Payment Methods](#payment-methods)
-    * [Card](#card)
-    * [Bank Transfer](#bank-transfer)
-      * [Permata Virtual Account](#permata-virtual-account)
-      * [BCA Virtual Account](#bca-virtual-account)
-      * [BNI Virtual Account](#bni-virtual-account)
-      * [BRI Virtual Account](#bri-virtual-account)
-      * [Mandiri Bill](#mandiri-bill)
-    * [Direct Debit](#direct-debit)
-      * [BCA Klikpay](#bca-klikpay)
-      * [KlikBCA](#klikbca)
-      * [Danamon Online](#danamon-online)
-      * [BRImo](#brimo)
-      * [CIMB Clicks](#cimb-clicks)
-      * [UOB EZpay](#uob-ezpay)
-    * [E-Money](#e-money)
-      * [QRIS](#qris)
-      * [GoPay](#gopay)
-      * [ShopeePay](#shopeepay)
-    * [Over the Counter](#over-the-counter)
-      * [Indomaret](#indomaret)
-      * [Alfamart](#alfamart)
-    * [Cardless Credit](#cardless-credit)
-      * [Akulaku](#akulaku)
-      * [Kredivo](#kredivo)
-<!-- TOC -->
+[[toc]]
 
 ## Getting Started
 

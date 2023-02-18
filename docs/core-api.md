@@ -3,19 +3,7 @@ title: Core API
 
 ---
 
-<!-- TOC -->
-
-* [Getting Started](#getting-started)
-* [Charge Transaction](#charge-transaction)
-* [Capture a Credit Card or GoPay Transaction](#capture-a-credit-card-or-gopay-transaction)
-* [Approve and Deny a Credit Card Transaction](#approve-and-deny-a-credit-card-transaction)
-* [Cancel a Transaction](#cancel-a-transaction)
-* [Expire a Transaction](#expire-a-transaction)
-* [Refund a Transaction](#refund-a-transaction)
-* [Direct Refund a Transaction](#direct-refund-a-transaction)
-* [Get Transaction Status](#get-transaction-status)
-
-<!-- TOC -->
+[[toc]]
 
 ## Getting Started
 
@@ -25,7 +13,7 @@ selected. You can charge, tokenize credit card, approve, deny, refund, or cancel
 Every method in this page will return a `MidtransResponse` instance, which inherits from Laravel `Response` class with
 additional features and methods.
 
-> Before you start using this API, you need to configure the [Payment Methods](payment-methods). You may also need to
+> Before you start using this API, you need to configure the (Payment Methods)[payment-methods]. You may also need to
 > configure the [Transaction Details](transaction-details).
 
 ## Charge Transaction

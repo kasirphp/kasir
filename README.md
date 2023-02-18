@@ -33,7 +33,7 @@ return $kasir->charge();
 
 ## Installation
 
-Please refer to [Kasir Installation Page](https://github.com/kasirphp/kasir/wiki/Installation).
+Please refer to [the documentation](https://kasirphp.com/installation).
 
 ## Community and Discussions
 
@@ -61,7 +61,7 @@ If you want to contribute to Kasir package, you may want to test it in a real La
                 "type": "path",
                 "url": "kasir/*"
             }
-        ],
+        ]
     }
     ```
 6. Run `composer update`.

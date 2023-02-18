@@ -23,5 +23,13 @@ hero:
     link: https://github.com/kasirphp/kasir
 
 features:
-    
+  - icon: ⚡️
+    title: Lightning Fast
+    details: Kasir is built to be fast. It uses Guzzle client under the hood and gives you Laravel Response.
+  - icon: 🛠️
+    title: Developer Friendly
+    details: No need to repeatedly setup client-key, headers, and other stuff. Just focus on your business logic.
+  - icon: 🤩
+    title: Easy to Use
+    details: Kasir is built to be easy to use. It's just a simple facade that you can use anywhere in your application.
 ---

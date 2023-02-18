@@ -89,3 +89,28 @@ it('calculates the right amount of discounts', function () {
         ->toBe($discountCombined1->toArray())
         ->toBe($discountCombined2->toArray());
 });
+
+test('taxes and discounts', function () {
+    $items = [
+        [
+            'id' => 'product-1',
+            'name' => 'Product 1',
+            'price' => 5000,
+            'quantity' => 1,
+        ], [
+            'id' => 'product-2',
+            'name' => 'Product 2',
+            'price' => 2500,
+            'quantity' => 2,
+        ],
+    ];
+
+    $kasir = Kasir::make()
+        ->itemDetails($items)
+        ->discount(10, true, 'Voucher', 'voucher')
+        ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
+        ->discount(2000, false, 'Promo', 'promo')
+        ->tax(11, true, 'PPN 11%', 'ppn');
+
+    expect($kasir->getGrossAmount())->toBe(8880);
+});

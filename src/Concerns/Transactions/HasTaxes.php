@@ -131,10 +131,13 @@ trait HasTaxes
 
     public function reverseCalculateTaxedPrice(): void
     {
-        foreach ($this->tax_details as $tax) {
-            $amount = $tax['price'];
-            $amount = abs($amount);
-            $this->gross_amount -= $amount;
+        if (! is_null($this->getTaxDetails())) {
+            dd('herllo');
+//            foreach ($this->getTaxDetails() as $tax) {
+//                $amount = $tax['price'];
+//                $amount = abs($amount);
+//                $this->gross_amount -= $amount;
+//            }
         }
     }
 }

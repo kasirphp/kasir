@@ -19,7 +19,7 @@ may be just what you need.
 
 ## Laravel Support
 
-Kasir is built to work with Laravel 8.x and Laravel 10.x. If you're using an older version of Laravel, you may need to
+Kasir is built to work with Laravel 9.x to Laravel 10.x. If you're using an older version of Laravel, you may need to
 upgrade your application to use Kasir.
 
 ## MidtransResponse Class

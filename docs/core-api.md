@@ -3,6 +3,8 @@ title: Core API
 
 ---
 
+# Core API
+
 [[toc]]
 
 ## Getting Started
@@ -13,8 +15,10 @@ selected. You can charge, tokenize credit card, approve, deny, refund, or cancel
 Every method in this page will return a `MidtransResponse` instance, which inherits from Laravel `Response` class with
 additional features and methods.
 
-> Before you start using this API, you need to configure the (Payment Methods)[payment-methods]. You may also need to
-> configure the [Transaction Details](transaction-details).
+::: tip
+Before you start using this API, you need to configure the [Payment Methods](payment-methods). You may also need to
+configure the [Transaction Details](transaction-details).
+:::
 
 ## Charge Transaction
 
@@ -27,7 +31,7 @@ return a `MidtransResponse` instance.
 $kasir = Kasir::make(10000)
     ->qris(); // or any payment method you choose.
 
-$response = $kasir->charge();
+$response = $kasir->charge(); // [!code focus]
 ```
 
 ## Capture a Credit Card or GoPay Transaction
@@ -45,7 +49,7 @@ $kasir = Kasir::make(10000)
 
 $response = $kasir->charge();
 
-$captured_transaction = Kasir::capture($response);
+$captured_transaction = Kasir::capture($response); // [!code focus]
 ```
 
 You can also capture a transaction using `MidtransResponse` instance.
@@ -63,8 +67,13 @@ To approve a challenged credit card transaction, you can use `approve()` static 
 a `MidtransResponse` or Order ID or Transaction ID.
 
 ```php
+// Using Kasir facade with this transaction's Order ID
+$approved_transaction = Kasir::approve($order_id);
+
+// Using Kasir facade with Midtrans Response as argument
 $approved_transaction = Kasir::approve($response);
-// or
+
+// Using Midtrans Response instance
 $approved_transaction = $response->approve();
 ```
 
@@ -72,8 +81,13 @@ To deny a challenged credit card transaction, you can use `deny()` static method
 a `MidtransResponse` or Order ID or Transaction ID.
 
 ```php
+// Using Kasir facade with this transaction's Order ID
+$denied_transaction = Kasir::deny($order_id);
+
+// Using Kasir facade with Midtrans Response as argument
 $denied_transaction = Kasir::deny($response);
-// or
+
+// Using Midtrans Response instance
 $denied_transaction = $response->deny();
 ```
 
@@ -86,9 +100,14 @@ To cancel a transaction, you can use `cancel()` static method. This method recei
 Transaction ID.
 
 ```php
-$canceled_transaction = Kasir::cancel($response);
-// or
-$canceled_transaction = $response->cancel();
+// Using Kasir facade with this transaction's Order ID
+$denied_transaction = Kasir::cancel($order_id);
+
+// Using Kasir facade with Midtrans Response as argument
+$denied_transaction = Kasir::cancel($response);
+
+// Using Midtrans Response instance
+$denied_transaction = $response->cancel();
 ```
 
 ## Expire a Transaction
@@ -100,9 +119,14 @@ To expire a transaction, you can use `expire()` static method. This method recei
 Transaction ID.
 
 ```php
-$expired_transaction = Kasir::expire($response);
-// or
-$expired_transaction = $response->expire();
+// Using Kasir facade with this transaction's Order ID
+$denied_transaction = Kasir::expire($order_id);
+
+// Using Kasir facade with Midtrans Response as argument
+$denied_transaction = Kasir::expire($response);
+
+// Using Midtrans Response instance
+$denied_transaction = $response->expire();
 ```
 
 ## Refund a Transaction
@@ -124,9 +148,14 @@ To refund a transaction, you can use `refund()` static method. This method recei
 Transaction ID.
 
 ```php
-$refunded_transaction = Kasir::refund($response);
-// or
-$refunded_transaction = $response->refund();
+// Using Kasir facade with this transaction's Order ID
+$denied_transaction = Kasir::refund($order_id);
+
+// Using Kasir facade with Midtrans Response as argument
+$denied_transaction = Kasir::refund($response);
+
+// Using Midtrans Response instance
+$denied_transaction = $response->refund();
 ```
 
 ## Direct Refund a Transaction
@@ -153,9 +182,14 @@ To direct refund a transaction, you can use `directRefund()` static method. This
 Order ID or Transaction ID.
 
 ```php
-$refunded_transaction = Kasir::directRefund($response);
-// or
-$refunded_transaction = $response->directRefund();
+// Using Kasir facade with this transaction's Order ID
+$denied_transaction = Kasir::directRefund($order_id);
+
+// Using Kasir facade with Midtrans Response as argument
+$denied_transaction = Kasir::directRefund($response);
+
+// Using Midtrans Response instance
+$denied_transaction = $response->directRefund();
 ```
 
 ## Get Transaction Status
@@ -165,16 +199,20 @@ Order
 ID or Transaction ID.
 
 ```php
-$transaction_status = Kasir::getStatus($order_id);
+// Using Kasir facade with this transaction's Order ID
+$denied_transaction = Kasir::getStatus($order_id);
+
+// Using Kasir facade with Midtrans Response as argument
+$denied_transaction = Kasir::getStatus($response);
 ```
 
 or you can use `status()` method on Kasir instance with Order ID.
 
 ```php
-$transaction = Kasir::make(10000)
+$kasir = Kasir::make(10000)
     ->creditCard(CreditCard::make($card_number, $card_exp_month, $card_exp_year, $card_cvv));
 
-$kasir->charge();
+$transaction->charge();
 
-$transaction_status = $kasir->status();
+$transaction_status = $transaction->status();
 ```

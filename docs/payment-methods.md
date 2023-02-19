@@ -3,6 +3,8 @@ title: Payment Methods
 
 ---
 
+# Payment Methods
+
 [[toc]]
 
 ## Getting Started
@@ -13,9 +15,7 @@ selected. You can tokenize, approve, deny, refund, or cancel a transactions.
 Every method in this page will return a `MidtransResponse` instance, which inherits from Laravel `Response` class with
 additional features and methods.
 
-## Payment Methods
-
-### Card
+## Card
 
 Using Card payment method, customers can make payments using a credit card or any online-transaction-capable debit card
 within Visa, MasterCard, JCB, or Amex network. Midtrans sends real-time notification when the customer completes the
@@ -42,7 +42,7 @@ $kasir = Kasir::make(10000)
     ->creditCard(CreditCard::make($card_number, $card_exp_month, $card_exp_year, $card_cvv));
 ```
 
-### Bank Transfer
+## Bank Transfer
 
 Bank Transfer is one of the payment methods offered by Midtrans. By using this method, your customers can make a payment
 via bank transfer and Midtrans will send real time notification when the payment is completed.
@@ -55,7 +55,7 @@ A list of bank transfer payment methods supported by Midtrans is given below.
 - BRI Virtual Account
 - Mandiri Bill
 
-#### Permata Virtual Account
+### Permata Virtual Account
 
 Use `->permataVA()` method to perform a Permata Virtual Account payment. This method receives these parameters:
 
@@ -67,7 +67,7 @@ $kasir = Kasir::make(10000)
     ->permataVA('1234567890', 'John Doe');
 ```
 
-#### BCA Virtual Account
+### BCA Virtual Account
 
 Use `->bcaVA()` method to perform a BCA Virtual Account payment. This method receives these parameters:
 
@@ -83,7 +83,7 @@ $kasir = Kasir::make(10000)
     ->bcaVA('1234567890', '12345', 'Inquiry Text', 'Inquiry Text', 'Payment Text', 'Payment Text');
 ```
 
-#### BNI Virtual Account
+### BNI Virtual Account
 
 Use `->bniVA()` method to perform a Mandiri Bill Payment. This method receives a `$va_number` parameter.
 
@@ -92,7 +92,7 @@ $kasir = Kasir::make(10000)
     ->bniVA('1234567890');
 ```
 
-#### BRI Virtual Account
+### BRI Virtual Account
 
 Use `->briVA()` method to perform a Mandiri Bill Payment. This method receives a `$va_number` parameter.
 
@@ -101,7 +101,7 @@ $kasir = Kasir::make(10000)
     ->briVA('1234567890');
 ```
 
-#### Mandiri Bill
+### Mandiri Bill
 
 Use `->mandiriBill()` method to perform a Mandiri Bill Payment. This method receives these parameters:
 
@@ -120,9 +120,9 @@ $kasir = Kasir::make(10000)
     ->mandiriBill('Payment for', 'Order #123');
 ```
 
-### Direct Debit
+## Direct Debit
 
-#### BCA Klikpay
+### BCA Klikpay
 
 Use `->bcaKlikpay()` method to perform a BCA Klikpay payment. This method receives these parameters:
 
@@ -134,7 +134,7 @@ $kasir = Kasir::make(10000)
     ->bcaKlikpay('Payment for Order #123');
 ```
 
-#### KlikBCA
+### KlikBCA
 
 Use `->klikBca()` method to perform a KlikBCA payment. This method receives these parameters:
 
@@ -146,7 +146,7 @@ $kasir = Kasir::make(10000)
     ->klikBca('Payment for Order #123', '1');
 ```
 
-#### Danamon Online
+### Danamon Online
 
 Use `->danamonOnline()` method to perform a Danamon Online payment.
 
@@ -155,7 +155,7 @@ $kasir = Kasir::make(10000)
     ->danamonOnline();
 ```
 
-#### BRImo
+### BRImo
 
 Use `->briMo()` method to perform a BRImo payment.
 
@@ -164,7 +164,7 @@ $kasir = Kasir::make(10000)
     ->briMo();
 ```
 
-#### CIMB Clicks
+### CIMB Clicks
 
 Use `->cimbClicks()` method to perform a CIMB Clicks payment. This method receives this parameter:
 
@@ -175,7 +175,7 @@ $kasir = Kasir::make(10000)
     ->cimbClicks('Payment for Order #123');
 ```
 
-#### UOB EZpay
+### UOB EZpay
 
 Use `->uobEzpay()` method to perform a UOB EZpay payment.
 
@@ -184,9 +184,9 @@ $kasir = Kasir::make(10000)
     ->uobEzpay();
 ```
 
-### E-Money
+## E-Money
 
-#### QRIS
+### QRIS
 
 Use `->qris()` method to perform a QRIS payment. This method receives 'acquirer' as a parameter. The possible value
 for `acquirer` is `'gopay'` or `'airpay shopee'`.
@@ -201,7 +201,7 @@ $kasir = Kasir::make(10000)
     ->qris('airpay shopee');
 ```
 
-#### GoPay
+### GoPay
 
 Use `->gopay()` method to perform a GoPay payment. This method receives these parameters:
 
@@ -221,7 +221,7 @@ $kasir = Kasir::make(10000)
     ->gopay(true, 'https://yourdomain.com/payment/success');
 ```
 
-#### ShopeePay
+### ShopeePay
 
 Use `->shopeepay()` method to perform a ShopeePay payment. This method receives `callback_url` as a parameter, which is
 the HTTP or Deeplink URL to which the customer is redirected from Shopee app after successful payment.
@@ -231,9 +231,9 @@ $kasir = Kasir::make(10000)
     ->shopeepay('https://yourdomain.com/payment/success');
 ```
 
-### Over the Counter
+## Over the Counter
 
-#### Indomaret
+### Indomaret
 
 Use `->indomaret()` method to perform a Indomaret payment. This method receives `message` as a parameter.
 
@@ -242,7 +242,7 @@ $kasir = Kasir::make(10000)
     ->indomaret('Payment for Order #123');
 ```
 
-#### Alfamart
+### Alfamart
 
 Use `->alfamart()` method to perform a Alfamart payment. This method receives these parameters:
 
@@ -255,9 +255,9 @@ $kasir = Kasir::make(10000)
     ->alfamart('Payment for', 'Order #123');
 ```
 
-### Cardless Credit
+## Cardless Credit
 
-#### Akulaku
+### Akulaku
 
 Use `->akulaku()` method to perform a Akulaku payment.
 
@@ -266,7 +266,7 @@ $kasir = Kasir::make(10000)
     ->akulaku();
 ```
 
-#### Kredivo
+### Kredivo
 
 Use `->kredivo()` method to perform a Kredivo payment.
 

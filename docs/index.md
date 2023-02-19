@@ -14,10 +14,10 @@ hero:
   actions:
   - theme: brand
     text: Introduction
-    link: /installation
+    link: /getting-started
   - theme: alt
     text: Why Kasir?
-    link: /installation
+    link: /why-kasir
   - theme: alt
     text: View on GitHub
     link: https://github.com/kasirphp/kasir
@@ -25,7 +25,7 @@ hero:
 features:
   - icon: ⚡️
     title: Lightning Fast
-    details: Kasir is built to be fast. It uses Guzzle client under the hood and gives you Laravel Response.
+    details: Kasir is built to be fast. It uses Guzzle client under the hood and gives you MidtransResponse.
   - icon: 🛠️
     title: Developer Friendly
     details: No need to repeatedly setup client-key, headers, and other stuff. Just focus on your business logic.

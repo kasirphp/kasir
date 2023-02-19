@@ -26,6 +26,7 @@ const dataHost = 'https://ghs.vercel.app'
 const dataUrl = `${dataHost}/sponsors/risangbaskoro`
 
 export function useSponsor() {
+    // @ts-ignore
     onMounted(async () => {
         if (data.value) {
             return

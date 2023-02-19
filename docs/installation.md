@@ -3,6 +3,8 @@ title: Installation
 
 ---
 
+# Installation
+
 [[toc]]
 
 ## Requirements
@@ -12,9 +14,8 @@ Kasir has a few requirements to run:
 - PHP 8.0+
 - Laravel 8.0+
 
-## Installation
 
-### Install via Composer
+## Install via Composer
 
 To get started charging your customer via Midtrans, install Kasir in your application using Composer:
 
@@ -22,7 +23,7 @@ To get started charging your customer via Midtrans, install Kasir in your applic
 composer require kasir/kasir
 ```
 
-### Configure .env file
+## Configure .env file
 
 Then, add Midtrans' Client Key and Server Key to your `.env` file.
 
@@ -43,7 +44,7 @@ key. Same applied to the server key.
 
 Don't forget to change your `KASIR_PRODUCTION` mode to `true` when deploying to production.
 
-### Publish Configuration file
+## Publish Configuration file
 
 Optionally, you can publish the configuration file:
 

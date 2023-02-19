@@ -3,6 +3,8 @@ title: Snap
 
 ---
 
+# Snap
+
 [[toc]]
 
 ## Getting Started
@@ -100,8 +102,8 @@ This method will request Midtrans for a Snap token.
 Create a button in your view and add some ID to your button element. Then, include `<x-kasir::snap-script />` blade
 component in your view, and pass the Snap token and button ID to the component.
 
-```html
-<!-- This is the Snap pop-up button. -->
+```blade
+<!-- This is your Snap pop-up button. -->
 <button id="pay-button">Pay!</button>
 
 <!-- This is the Snap pop-up script. -->
@@ -117,25 +119,25 @@ By default, Midtrans allows all payment methods to be used in payments. However,
 methods using the `enablePayments()` method. This method accepts an array of strings defining what the accepted payment
 methods are.
 
-The following example will enable only 'shopeepay' and 'bca_va' as the API's accepted payment methods:
+The following example will enable only `'shopeepay'` and `'bca_va'` as the API's accepted payment methods:
 
 ```php
 Snap::make()
     ->itemDetails($items)
     ->customerDetails($user)
-    ->enablePayments(['shopeepay', 'bca_va']);
+    ->enablePayments(['shopeepay', 'bca_va']); // [!code focus]
 ```
 
-You can also disable some payment methods using the disablePayment() method, which will prevent the API from making
+You can also disable some payment methods using the `disablePayment()` method, which will prevent the API from making
 payment requests using the defined payment methods.
 
-The following example will disable only 'credit_card' from the APIs accepted payment methods.
+The following example will disable only `'credit_card'` from the APIs accepted payment methods.
 
 ```php
 Snap::make()
     ->itemDetails($items)
     ->customerDetails($user)
-    ->disablePayments(['credit_card']); // This will disable credit card as the payment method.
+    ->disablePayments(['credit_card']); // [!code focus]
 ```
 
 The accepted array values are:

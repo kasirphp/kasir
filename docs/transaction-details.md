@@ -3,6 +3,8 @@ title: Transaction Details
 
 ---
 
+# Transaction Details
+
 [[toc]]
 
 ## Getting Started
@@ -62,10 +64,10 @@ $kasir = Kasir::make(1000)
 
 ## Gross Amount and Order ID in One Method
 
-> ::: warning
-> This method is **deprecated** and will be removed in the next major release. 
-> Please use `grossAmount()` and `orderId()` method instead.
-> ::: 
+::: warning
+This method is **deprecated** and will be removed in the next major release. 
+Please use `grossAmount()` and `orderId()` method instead.
+::: 
 
 You can also set the gross amount and order ID in one method by passing an array as a parameter.
 

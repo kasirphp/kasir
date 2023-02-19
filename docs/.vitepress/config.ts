@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import {defineConfig} from 'vitepress'
 
 export default defineConfig({
     title: 'Kasir',
@@ -57,10 +57,22 @@ function navbar() {
 
 function sidebar() {
     return [
-        {text: 'Installation', link: '/installation'},
-        {text: 'Transaction Details', link: '/transaction-details'},
-        {text: 'Payment Methods', link: '/payment-methods'},
-        {text: 'Core API', link: '/core-api'},
-        {text: 'Snap API', link: '/snap-api'},
+        {
+            text: 'Introduction',
+            items: [
+                {text: 'Why Kasir', link: '/why-kasir'},
+                {text: 'Getting Started', link: '/getting-started'},
+                {text: 'Installation', link: '/installation'},
+            ]
+        },
+        {
+            text: 'Guide',
+            items: [
+                {text: 'Transaction Details', link: '/transaction-details'},
+                {text: 'Payment Methods', link: '/payment-methods'},
+                {text: 'Core API', link: '/core-api'},
+                {text: 'Snap API', link: '/snap-api'},
+            ]
+        },
     ]
 }

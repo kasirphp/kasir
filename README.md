@@ -17,23 +17,9 @@
 
 Kasir helps integrate Midtrans in Laravel way.
 
-## Usage
+## Installation and Usage
 
-In your controller or Livewire component, you can write:
-
-```php
-$kasir = Kasir::make()
-    ->customerDetails($user)
-    ->billingAddress($billing_address)
-    ->shippingAddress($shipping_address)
-    ->itemDetails($items);
-
-return $kasir->charge();
-```
-
-## Installation
-
-Please refer to [the documentation](https://kasirphp.com/installation).
+Please refer to the [documentation](https://kasirphp.com).
 
 ## Community and Discussions
 

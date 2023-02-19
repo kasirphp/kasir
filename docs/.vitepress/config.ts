@@ -11,6 +11,9 @@ export default defineConfig({
         ['meta', {property: 'og:image', content: og().image}],
         ['meta', {property: 'og:url', content: og().url}],
         ['meta', {property: 'og:description', content: og().description}],
+        ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+        ['meta', { name: 'twitter:creator', content: '@risangbaskoro' }],
+        ['meta', { name: 'theme-color', content: '#2F80C2' }],
     ],
 
     base: '/',

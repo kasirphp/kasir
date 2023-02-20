@@ -4,6 +4,7 @@ namespace Kasir\Kasir\Helper;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Arr;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Kasir;
@@ -27,13 +28,11 @@ class MidtransResponse extends Response
         );
         $this->transaction_id = $this->json('transaction_id');
         $this->transaction_status = $this->json('transaction_status');
-        $this->actions = $this->json('actions');
+        $this->actions = Arr::keyBy($this->json('actions'), 'name');
     }
 
     /**
      * Get the Transaction ID.
-     *
-     * @return string|null
      */
     public function transactionId(): string | null
     {
@@ -42,8 +41,6 @@ class MidtransResponse extends Response
 
     /**
      * Get the Transaction Status.
-     *
-     * @return string|null
      */
     public function transactionStatus(): string | null
     {
@@ -52,8 +49,6 @@ class MidtransResponse extends Response
 
     /**
      * Get response actions.
-     *
-     * @return mixed
      */
     public function actions(): mixed
     {
@@ -62,8 +57,6 @@ class MidtransResponse extends Response
 
     /**
      * Get response action names.
-     *
-     * @return array|null
      */
     public function actionsName(): array | null
     {
@@ -72,8 +65,6 @@ class MidtransResponse extends Response
 
     /**
      * Get Credit Card fraud status.
-     *
-     * @return string|null
      */
     public function fraudStatus(): string | null
     {
@@ -83,8 +74,7 @@ class MidtransResponse extends Response
     /**
      * Get response action by name.
      *
-     * @param  string  $name
-     * @return mixed|null
+     * @return array|null
      */
     public function action(string $name): mixed
     {
@@ -92,19 +82,12 @@ class MidtransResponse extends Response
             return null;
         }
 
-        $array = array_filter($this->actions(), function ($action) use ($name) {
-            return $action['name'] === $name;
-        });
-
-        $result = call_user_func_array('array_merge', $array);
-
-        return ! empty($result) ? $result : null;
+        return $this->actions()[$name] ?? null;
     }
 
     /**
      * Capture this transaction.
      *
-     * @return MidtransResponse
      *
      * @throws GuzzleException
      * @throws MidtransApiException
@@ -118,7 +101,6 @@ class MidtransResponse extends Response
     /**
      * Approve this challenged transaction.
      *
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -131,7 +113,6 @@ class MidtransResponse extends Response
     /**
      * Deny this challenged transaction.
      *
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -144,7 +125,6 @@ class MidtransResponse extends Response
     /**
      * Cancel this transaction.
      *
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -157,7 +137,6 @@ class MidtransResponse extends Response
     /**
      * Expire this transaction.
      *
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -173,7 +152,6 @@ class MidtransResponse extends Response
      * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
      * @param  string|null  $reason  Reason justifying the refund.
      * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -192,7 +170,6 @@ class MidtransResponse extends Response
      * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
      * @param  string|null  $reason  Reason justifying the refund.
      * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException

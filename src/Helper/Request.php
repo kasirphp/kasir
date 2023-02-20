@@ -12,10 +12,7 @@ class Request extends BaseRequest
     /**
      * Send a GET request.
      *
-     * @param  string  $uri
-     * @param  string|null  $server_key
      * @param  array|null  $data_hash
-     * @return MidtransResponse
      *
      * @throws GuzzleException
      * @throws MidtransKeyException
@@ -34,10 +31,7 @@ class Request extends BaseRequest
     /**
      * Send a POST request.
      *
-     * @param  string  $uri
-     * @param  string|null  $server_key
      * @param  array|null  $data_hash
-     * @return MidtransResponse
      *
      * @throws GuzzleException
      * @throws MidtransKeyException
@@ -56,10 +50,7 @@ class Request extends BaseRequest
     /**
      * Send a PATCH request.
      *
-     * @param  string  $uri
-     * @param  string|null  $server_key
      * @param  array|null  $data_hash
-     * @return MidtransResponse
      *
      * @throws GuzzleException
      * @throws MidtransKeyException
@@ -78,8 +69,6 @@ class Request extends BaseRequest
     /**
      * Configure the request header.
      *
-     * @param  string|null  $server_key
-     * @return array
      *
      * @throws MidtransKeyException
      */
@@ -97,8 +86,6 @@ class Request extends BaseRequest
 
     /**
      * Configure the notification header.
-     *
-     * @return array
      */
     protected static function configureNotificationHeader(): array
     {
@@ -124,8 +111,6 @@ class Request extends BaseRequest
     /**
      * Encode the Authorization Key
      *
-     * @param  string|null  $server_key
-     * @return string
      *
      * @throws MidtransKeyException
      */

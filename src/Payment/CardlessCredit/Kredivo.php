@@ -10,7 +10,6 @@ class Kredivo extends PaymentObject implements PaymentMethod
     /**
      * Create Kredivo payment object.
      *
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/kredivo-1
      */

@@ -35,7 +35,6 @@ class Snap extends Kasir
     /**
      * Redirect To Snap Page
      *
-     * @return RedirectResponse
      *
      * @throws MidtransKeyException
      * @throws NoItemDetailsException
@@ -65,7 +64,6 @@ class Snap extends Kasir
     /**
      * Get Redirect Url for Snap
      *
-     * @return mixed
      *
      * @throws MidtransKeyException
      * @throws NoItemDetailsException

@@ -11,7 +11,6 @@ class Qris extends PaymentObject implements PaymentMethod
      * Create QRIS payment object.
      *
      * @param  string  $acquirer The acquirer for QRIS. Possible values are airpay shopee, gopay.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/qris
      */

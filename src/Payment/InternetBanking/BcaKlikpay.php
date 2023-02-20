@@ -12,7 +12,6 @@ class BcaKlikpay extends PaymentObject implements PaymentMethod
      *
      * @param  string  $description  Description of the BCA KlickPay transaction.
      * @param  string|null  $misc_fee  Additional fee for documentation.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bca-klikpay-object
      */

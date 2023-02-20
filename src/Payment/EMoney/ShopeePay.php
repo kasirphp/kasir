@@ -11,7 +11,6 @@ class ShopeePay extends PaymentObject implements PaymentMethod
      * Create ShopeePay payment object.
      *
      * @param  string|null  $callback_url  The URL to redirect the customer back from the ShopeePay app. Default value is the finish URL, configured on your MAP account.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/shopeepay-1
      * @see https://docs.midtrans.com/reference/shopeepay-object

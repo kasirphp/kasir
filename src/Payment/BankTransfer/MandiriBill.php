@@ -19,7 +19,6 @@ class MandiriBill extends PaymentObject implements PaymentMethod
      * @param  string|null  $bill_info7  Label 4.
      * @param  string|null  $bill_info8  Value for Label 4.
      * @param  string|null  $bill_key  Custom bill key assigned by you.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/e-channel-object
      */

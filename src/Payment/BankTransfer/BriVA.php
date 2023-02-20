@@ -11,7 +11,6 @@ class BriVA extends PaymentObject implements PaymentMethod
      * Create BRI Virtual Account payment object.
      *
      * @param  string|null  $va_number Custom VA number assigned by you.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bank-transfer-object
      */

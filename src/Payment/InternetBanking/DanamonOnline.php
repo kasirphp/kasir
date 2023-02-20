@@ -10,7 +10,6 @@ class DanamonOnline extends PaymentObject implements PaymentMethod
     /**
      * Create Danamon Online payment object.
      *
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/danamon-online-banking-dob
      */

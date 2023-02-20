@@ -32,8 +32,6 @@ class MidtransResponse extends Response
 
     /**
      * Get the Transaction ID.
-     *
-     * @return string|null
      */
     public function transactionId(): string | null
     {
@@ -42,8 +40,6 @@ class MidtransResponse extends Response
 
     /**
      * Get the Transaction Status.
-     *
-     * @return string|null
      */
     public function transactionStatus(): string | null
     {
@@ -52,8 +48,6 @@ class MidtransResponse extends Response
 
     /**
      * Get response actions.
-     *
-     * @return mixed
      */
     public function actions(): mixed
     {
@@ -62,8 +56,6 @@ class MidtransResponse extends Response
 
     /**
      * Get response action names.
-     *
-     * @return array|null
      */
     public function actionsName(): array | null
     {
@@ -72,8 +64,6 @@ class MidtransResponse extends Response
 
     /**
      * Get Credit Card fraud status.
-     *
-     * @return string|null
      */
     public function fraudStatus(): string | null
     {
@@ -83,7 +73,6 @@ class MidtransResponse extends Response
     /**
      * Get response action by name.
      *
-     * @param  string  $name
      * @return mixed|null
      */
     public function action(string $name): mixed
@@ -104,7 +93,6 @@ class MidtransResponse extends Response
     /**
      * Capture this transaction.
      *
-     * @return MidtransResponse
      *
      * @throws GuzzleException
      * @throws MidtransApiException
@@ -118,7 +106,6 @@ class MidtransResponse extends Response
     /**
      * Approve this challenged transaction.
      *
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -131,7 +118,6 @@ class MidtransResponse extends Response
     /**
      * Deny this challenged transaction.
      *
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -144,7 +130,6 @@ class MidtransResponse extends Response
     /**
      * Cancel this transaction.
      *
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -157,7 +142,6 @@ class MidtransResponse extends Response
     /**
      * Expire this transaction.
      *
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -173,7 +157,6 @@ class MidtransResponse extends Response
      * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
      * @param  string|null  $reason  Reason justifying the refund.
      * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException
@@ -192,7 +175,6 @@ class MidtransResponse extends Response
      * @param  int|null  $amount  Amount to be refunded. By default whole transaction amount is refunded.
      * @param  string|null  $reason  Reason justifying the refund.
      * @param  string|null  $refund_key  Merchant refund ID. If not passed then Midtrans creates a new one. It is recommended to use this parameter to avoid double refund attempt.
-     * @return MidtransResponse
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException

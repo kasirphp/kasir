@@ -11,7 +11,6 @@ class Indomaret extends PaymentObject implements PaymentMethod
      * Create Indomaret payment object.
      *
      * @param  string  $message  Label displayed in Indomaret POS.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/indomaret-1
      */

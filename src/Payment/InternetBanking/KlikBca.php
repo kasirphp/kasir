@@ -12,7 +12,6 @@ class KlikBca extends PaymentObject implements PaymentMethod
      *
      * @param  string  $description  https://api-docs.midtrans.com/#klikbca
      * @param  string  $user_id  KlikBCA User ID.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bca-klikbca-object
      */

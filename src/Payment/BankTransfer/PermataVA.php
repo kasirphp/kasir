@@ -12,7 +12,6 @@ class PermataVA extends PaymentObject implements PaymentMethod
      *
      * @param  string|null  $va_number  Custom VA number assigned by you.
      * @param  string|null  $recipient_name  Recipient name shown on the payment details.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bank-transfer-object
      * @see https://docs.midtrans.com/reference/bank-transfer-object#permata-va-object

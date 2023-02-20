@@ -16,7 +16,6 @@ class BcaVA extends PaymentObject implements PaymentMethod
      * @param  string|null  $inquiry_text_id  Indonesian Inquiry Text.
      * @param  string|null  $payment_text_en  English Payment Text.
      * @param  string|null  $payment_text_id  Indonesian Payment Text.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bank-transfer-object
      * @see https://docs.midtrans.com/reference/bank-transfer-object#bca-va-object

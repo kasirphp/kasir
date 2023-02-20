@@ -16,7 +16,6 @@ class CreditCardPayment extends PaymentObject implements PaymentMethod
      * @param  array|null  $bins  List of credit card's BIN (Bank Identification Number) that is allowed for transaction.
      * @param  string|null  $type  Used as preauthorization feature. Valid value: 'authorize'.
      * @param  bool|null  $save_token_id  Used on 'One Click' or 'Two Clicks' feature. Enabling it will return a 'saved_token_id' that can be used for the next transaction.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/credit-card-object
      */

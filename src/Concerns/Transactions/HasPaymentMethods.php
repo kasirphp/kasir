@@ -42,7 +42,6 @@ trait HasPaymentMethods
      * @param  array|null  $bins  List of credit card's BIN (Bank Identification Number) that is allowed for transaction.
      * @param  string|null  $type  Used as preauthorization feature. Valid value: 'authorize'.
      * @param  bool|null  $save_token_id  Used on 'One Click' or 'Two Clicks' feature. Enabling it will return a 'saved_token_id' that can be used for the next transaction.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/credit-card-object
      */
@@ -72,7 +71,6 @@ trait HasPaymentMethods
      *
      * @param  string|null  $va_number  Custom VA number assigned by you.
      * @param  string|null  $recipient_name  Recipient name shown on the payment details.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bank-transfer-object
      * @see https://docs.midtrans.com/reference/bank-transfer-object#permata-va-object
@@ -94,7 +92,6 @@ trait HasPaymentMethods
      * @param  string|null  $inquiry_text_id  Indonesian Inquiry Text.
      * @param  string|null  $payment_text_en  English Payment Text.
      * @param  string|null  $payment_text_id  Indonesian Payment Text.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bank-transfer-object
      * @see https://docs.midtrans.com/reference/bank-transfer-object#bca-va-object
@@ -125,7 +122,6 @@ trait HasPaymentMethods
      * Using BNI Virtual Account as payment method.
      *
      * @param  string|null  $va_number  Custom VA number assigned by you.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bank-transfer-object
      */
@@ -142,7 +138,6 @@ trait HasPaymentMethods
      * Using BRI Virtual Account as payment method.
      *
      * @param  string|null  $va_number  Custom VA number assigned by you.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bank-transfer-object
      */
@@ -167,7 +162,6 @@ trait HasPaymentMethods
      * @param  string|null  $bill_info7  Label 4.
      * @param  string|null  $bill_info8  Value for Label 4.
      * @param  string|null  $bill_key  Custom bill key assigned by you.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/e-channel-object
      */
@@ -204,7 +198,6 @@ trait HasPaymentMethods
      *
      * @param  string  $description  Description of the BCA KlikPay transaction.
      * @param  string|null  $misc_fee  Additional fee for documentation.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bca-klikpay-object
      */
@@ -222,7 +215,6 @@ trait HasPaymentMethods
      *
      * @param  string  $description  Description of KlikBCA transaction.
      * @param  string  $user_id  KlikBCA User ID.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/bca-klikbca-object
      */
@@ -238,7 +230,6 @@ trait HasPaymentMethods
     /**
      * Using Danamon Online as payment method.
      *
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/danamon-online-banking-dob
      */
@@ -254,7 +245,6 @@ trait HasPaymentMethods
     /**
      * Using BRImo as payment method.
      *
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/brimo-1
      */
@@ -271,7 +261,6 @@ trait HasPaymentMethods
      * Using CIMB Clicks as payment method.
      *
      * @param  string|null  $description  Description of CIMB transaction. This will be displayed on the CIMB email notification.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/cimb-clicks-1
      * @see https://docs.midtrans.com/reference/cimb-clicks-object
@@ -288,7 +277,6 @@ trait HasPaymentMethods
     /**
      * Using UOB EZpay as payment method.
      *
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/uob-ezpay
      */
@@ -327,7 +315,6 @@ trait HasPaymentMethods
      * @param  string|null  $payment_option_token  Required for GoPay Tokenization. Token to specify the payment option made by the customer from Get Pay Account API metadata.
      * @param  bool  $pre_auth  Set the value to true to reserve the specified amount from the customer balance. Once the customer balance is reserved, you can initiate a subsequent Capture API request. Default value: false.
      * @param  bool  $recurring  Set the value to true to mark as a recurring transaction, only allowed for authorised merchant. Default value: false
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/gopay-1
      * @see https://docs.midtrans.com/reference/gopay-object
@@ -358,7 +345,6 @@ trait HasPaymentMethods
      * Using ShopeePay as payment method.
      *
      * @param  string|null  $callback_url  The URL to redirect the customer back from the ShopeePay app. Default value is the finish URL, configured on your MAP account.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/shopeepay-1
      * @see https://docs.midtrans.com/reference/shopeepay-object
@@ -376,7 +362,6 @@ trait HasPaymentMethods
      * Using Indomaret as payment method.
      *
      * @param  string  $message  Label displayed in Indomaret POS.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/indomaret-1
      */
@@ -395,7 +380,6 @@ trait HasPaymentMethods
      * @param  string|null  $alfamart_free_text_1  Customizable first row of text on the Alfamart printed receipt.
      * @param  string|null  $alfamart_free_text_2  Customizable second row of text on the Alfamart printed receipt.
      * @param  string|null  $alfamart_free_text_3  Customizable third row of text on the Alfamart printed receipt.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/alfamart-1
      */
@@ -444,7 +428,6 @@ trait HasPaymentMethods
     /**
      * Assign payment method.
      *
-     * @param  PaymentMethod|null  $payment_method
      * @return $this
      */
     public function paymentMethod(PaymentMethod | null $payment_method): static
@@ -461,7 +444,6 @@ trait HasPaymentMethods
     /**
      * Assign payment method.
      *
-     * @param  PaymentMethod|null  $payment_method
      * @return $this
      *
      * @deprecated Use paymentMethod() instead.

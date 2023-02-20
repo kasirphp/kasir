@@ -10,7 +10,6 @@ class UobEzpay extends PaymentObject implements PaymentMethod
     /**
      * Create UOB EZPay payment object.
      *
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/uob-ezpay
      */

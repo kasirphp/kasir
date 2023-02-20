@@ -11,7 +11,6 @@ class CimbClicks extends PaymentObject implements PaymentMethod
      * Create CIMB Clicks payment object.
      *
      * @param  string|null  $description Description of CIMB transaction. This will be displayed on the CIMB email notification.
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/cimb-clicks-1
      * @see https://docs.midtrans.com/reference/cimb-clicks-object

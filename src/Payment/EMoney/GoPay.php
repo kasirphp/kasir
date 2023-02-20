@@ -16,7 +16,6 @@ class GoPay extends PaymentObject implements PaymentMethod
      * @param  string|null  $payment_option_token  Required for GoPay Tokenization. Token to specify the payment option made by the customer from Get Pay Account API metadata.
      * @param  bool  $pre_auth  Set the value to true to reserve the specified amount from the customer balance. Once the customer balance is reserved, you can initiate a subsequent Capture API request. Default value: false.
      * @param  bool  $recurring  Set the value to true to mark as a recurring transaction, only allowed for authorised merchant. Default value: false
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/gopay-1
      * @see https://docs.midtrans.com/reference/gopay-object

@@ -18,10 +18,6 @@ class Sanitizer
         $this->filters = [];
     }
 
-    /**
-     * @param  array  $json
-     * @return void
-     */
     public static function json(array &$json): void
     {
         $keys = [

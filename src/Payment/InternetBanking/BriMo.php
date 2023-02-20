@@ -10,7 +10,6 @@ class BriMo extends PaymentObject implements PaymentMethod
     /**
      * Create BRImo payment object.
      *
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/brimo-1
      */

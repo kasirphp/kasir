@@ -19,9 +19,6 @@ trait CanConfigurePayload
 
     /**
      * Calculate transaction_details.gross_amount from item_details
-     *
-     * @param $params
-     * @return array
      */
     public static function calculateGrossAmount($params): array
     {

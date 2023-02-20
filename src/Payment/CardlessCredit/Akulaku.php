@@ -10,7 +10,6 @@ class Akulaku extends PaymentObject implements PaymentMethod
     /**
      * Create Akulaku payment object.
      *
-     * @return static
      *
      * @see https://docs.midtrans.com/reference/akulaku-1
      */

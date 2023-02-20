@@ -12,7 +12,7 @@ export default defineConfig({
         ['meta', {property: 'og:url', content: og().url}],
         ['meta', {property: 'og:description', content: og().description}],
         ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-        ['meta', { name: 'twitter:creator', content: '@risangbaskoro' }],
+        ['meta', { name: 'twitter:team', content: '@risangbaskoro' }],
         ['meta', { name: 'theme-color', content: '#2F80C2' }],
     ],
 
@@ -33,6 +33,7 @@ export default defineConfig({
             {icon: 'github', link: 'https://github.com/kasirphp'},
         ],
         sidebar: {
+            '/creator': [],
             '/': sidebar(),
         },
         footer: {
@@ -55,6 +56,7 @@ function navbar() {
     return [
         {text: 'Home', link: '/'},
         {text: 'Documentation', items: sidebar()},
+        {text: 'Creator', link: '/creator'},
     ]
 }
 

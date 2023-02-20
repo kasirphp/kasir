@@ -15,7 +15,8 @@ customer's information, billing address, shipping address, item details, etc. Yo
 the `Kasir` object using predefined methods. All the methods also accept a `Closure` as a parameter. This anonymous
 function will be executed when it is used as the parameter.
 
-After creating a transaction, you can charge your customer using [CoreAPI](core-api) or [Snap](snap-api).
+After creating a transaction, you can charge your customer using [CoreAPI](core-api) or [Snap](snap-api) after setting
+up the [Payment Methods](payment-methods) configuration.
 
 ## Creating Transaction
 
@@ -65,9 +66,9 @@ $kasir = Kasir::make(1000)
 ## Gross Amount and Order ID in One Method
 
 ::: warning
-This method is **deprecated** and will be removed in the next major release. 
+This method is **deprecated** and will be removed in the next major release.
 Please use `grossAmount()` and `orderId()` method instead.
-::: 
+:::
 
 You can also set the gross amount and order ID in one method by passing an array as a parameter.
 
@@ -250,5 +251,5 @@ $kasir = Kasir::make(1000)
 ## Next Step
 
 After you have created the `Kasir` object with those configurations, you can use it to charge your costumer
-using [CoreAPI](core-api) or [Snap](snap-api). Additionally, you can also add [Payment Methods](payment-methods)
-configurations.
+using [CoreAPI](core-api) or [Snap](snap-api) after setting up the [Payment Methods](payment-methods)
+configuration.

@@ -4,6 +4,7 @@ namespace Kasir\Kasir\Helper;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Arr;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
 use Kasir\Kasir\Kasir;
@@ -27,7 +28,7 @@ class MidtransResponse extends Response
         );
         $this->transaction_id = $this->json('transaction_id');
         $this->transaction_status = $this->json('transaction_status');
-        $this->actions = $this->json('actions');
+        $this->actions = Arr::keyBy($this->json('actions'), 'name');
     }
 
     /**
@@ -73,7 +74,7 @@ class MidtransResponse extends Response
     /**
      * Get response action by name.
      *
-     * @return mixed|null
+     * @return array|null
      */
     public function action(string $name): mixed
     {
@@ -81,13 +82,7 @@ class MidtransResponse extends Response
             return null;
         }
 
-        $array = array_filter($this->actions(), function ($action) use ($name) {
-            return $action['name'] === $name;
-        });
-
-        $result = call_user_func_array('array_merge', $array);
-
-        return ! empty($result) ? $result : null;
+        return $this->actions()[$name] ?? null;
     }
 
     /**

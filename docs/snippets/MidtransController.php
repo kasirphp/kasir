@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-class PaymentController extends Controller
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+
+class MidtransController extends Controller
 {
     public function payment(Request $request)
     {
@@ -17,7 +20,7 @@ class PaymentController extends Controller
 
         $transaction_details = [
             'order_id' => rand(),
-            'gross_amount' => $request('amount'),
+            'gross_amount' => $request->get('amount'),
             'customer_details' => $user->toArray(),
         ];
 
@@ -26,15 +29,15 @@ class PaymentController extends Controller
             'item_details' => $user->cart()->items(),
         ];
 
-        if ($request('payment_method') === 'credit_card') {
+        if ($request->get('payment_method') === 'credit_card') {
             $method = [
                 'payment_type' => 'credit_card',
                 'credit_card' => [
-                    'token_id' => $token_id,
+                    'token_id' => 'your_customer_card_token_id',
                     'authentication' => true,
                 ],
             ];
-        } elseif ($request('payment_method') === 'qris') {
+        } elseif ($request->get('payment_method') === 'qris') {
             $method = [
                 'payment_type' => 'qris',
                 'qris' => [

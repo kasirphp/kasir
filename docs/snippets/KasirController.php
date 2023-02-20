@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Kasir\Kasir\Facades\Kasir;
 
-class PaymentController extends Controller
+class KasirController extends Controller
 {
     public function payment(Request $request)
     {
@@ -18,9 +20,9 @@ class PaymentController extends Controller
             ->customerDetails($user)
             ->itemDetails($user->cart()->items());
 
-        if ($request('payment_method') === 'credit_card') {
-            $kasir->creditCard($request('token_id'), true);
-        } elseif ($request('payment_method') === 'qris') {
+        if ($request->get('payment_method') === 'credit_card') {
+            $kasir->creditCard($request->get('token_id'), true);
+        } elseif ($request->get('payment_method') === 'qris') {
             $kasir->qris('gopay');
         }
 

@@ -77,8 +77,8 @@ Compare this when you are using Midtrans PHP and Kasir:
 
 ::: code-group
 
-<<< @/snippets/MidtransController.snippet{php}
-<<< @/snippets/KasirController.snippet{php}
+<<< @/snippets/MidtransController.php
+<<< @/snippets/KasirController.php
 
 :::
 

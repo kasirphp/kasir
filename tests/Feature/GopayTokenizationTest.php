@@ -2,16 +2,12 @@
 
 use Kasir\Kasir\GoPay;
 
-test('gopay', function () {
+test('gopay tokenization', function () {
     $bind = GoPay::bind('08123456789', 'https://google.com');
-    dump($bind->actions());
 
-    $account_id = $bind->accountId();
-    $status = GoPay::make($account_id)->status();
-    dump($status);
+    expect($bind->accountId())->toBeString();
 
-    $gopay = GoPay::make($account_id);
-    $paylater = $gopay->payLater();
-    $wallet = $gopay->wallet();
-    dump($paylater, $wallet);
-})->only();
+    if ($bind->actions()) {
+        expect($bind->action('activation-link-url')['url'])->toStartWith('https://api.sandbox.midtrans.com/v2/pay/account/');
+    }
+});

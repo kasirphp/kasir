@@ -172,7 +172,7 @@ class Kasir implements Arrayable
      */
     public function status(): MidtransResponse
     {
-        $transaction_id = $this->transaction_details['order_id'];
+        $transaction_id = $this->getOrderId();
 
         return static::getStatus($transaction_id);
     }

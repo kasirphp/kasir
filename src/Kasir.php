@@ -42,14 +42,6 @@ class Kasir implements Arrayable
     use HasShippingAddress;
     use Validation;
 
-    const SANDBOX_BASE_URL = 'https://api.sandbox.midtrans.com';
-
-    const PRODUCTION_BASE_URL = 'https://api.midtrans.com';
-
-    const SNAP_SANDBOX_BASE_URL = 'https://app.sandbox.midtrans.com/snap/v1';
-
-    const SNAP_PRODUCTION_BASE_URL = 'https://app.midtrans.com/snap/v1';
-
     public function __construct(int | null $gross_amount)
     {
         $this->grossAmount($gross_amount);

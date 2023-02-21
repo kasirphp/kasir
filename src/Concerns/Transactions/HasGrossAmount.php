@@ -4,9 +4,9 @@ namespace Kasir\Kasir\Concerns\Transactions;
 
 trait HasGrossAmount
 {
-    protected int | null $gross_amount;
+    protected int | \Closure | null $gross_amount;
 
-    public function grossAmount(int | null $gross_amount): static
+    public function grossAmount(int | \Closure | null $gross_amount): static
     {
         $this->gross_amount = $gross_amount;
         $this->gross_amount = $this->calculateGrossAmount();

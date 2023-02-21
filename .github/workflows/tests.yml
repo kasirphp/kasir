@@ -3,6 +3,11 @@ name: tests
 on:
   pull_request:
   push:
+    branches:
+      - 'master'
+      - 'v*.x'
+      - 'feature/**'
+      - 'hotfix/**'
     paths:
       - 'src/**'
       - 'tests/**'

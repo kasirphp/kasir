@@ -54,6 +54,11 @@ class GoPay
         return $this->actions;
     }
 
+    public function action(string $name): array | null
+    {
+        return $this->actions()[$name] ?? null;
+    }
+
     public function wallet()
     {
         return $this->paymentOption('wallet');

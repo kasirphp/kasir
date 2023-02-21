@@ -11,6 +11,7 @@ trait Endpoint
     protected static string $SNAP_SANDBOX_BASE_URL = 'https://app.sandbox.midtrans.com/snap/v1';
 
     protected static string $SNAP_PRODUCTION_BASE_URL = 'https://app.midtrans.com/snap/v1';
+
     /**
      * Get Base URL for the API
      *

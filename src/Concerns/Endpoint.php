@@ -14,8 +14,6 @@ trait Endpoint
 
     /**
      * Get Base URL for the API
-     *
-     * @return string
      */
     public static function getBaseUrl(): string
     {
@@ -26,8 +24,6 @@ trait Endpoint
 
     /**
      * Get Base URL for the SNAP API
-     *
-     * @return string
      */
     public static function getSnapBaseUrl(): string
     {

@@ -160,5 +160,4 @@ test('taxes and discounts', function () {
         ->and($taxDiscount5->getGrossAmount())
         ->and($taxDiscount6->getGrossAmount())
         ->toBe(8880);
-
 });

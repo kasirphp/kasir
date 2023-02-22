@@ -77,8 +77,6 @@ trait HasDiscounts
 
     /**
      * Get the discounts.
-     *
-     * @return array|null
      */
     public function getDiscounts(): array | null
     {
@@ -87,8 +85,6 @@ trait HasDiscounts
 
     /**
      * Get the discounts that will be appended to the item details.
-     *
-     * @return array|null
      */
     public function getDiscountDetails(): array | null
     {
@@ -102,7 +98,6 @@ trait HasDiscounts
      * @param  bool  $percentage  Whether the discount is a percentage or fixed value.
      * @param  string|null  $name  Name of the discount.
      * @param  string|null  $id  ID of the discount.
-     * @return void
      */
     public function calculateDiscountedPrice(
         int $amount,

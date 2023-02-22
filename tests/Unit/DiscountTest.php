@@ -105,12 +105,60 @@ test('taxes and discounts', function () {
         ],
     ];
 
-    $kasir = Kasir::make()
-        ->itemDetails($items)
+    $kasir = Kasir::make(10000);
+//        ->itemDetails($items);
+
+    expect($kasir->getGrossAmount())
+        ->toBe(10000);
+
+    $taxDiscount1 = (clone $kasir)
+        ->discount(10, true, 'Voucher', 'voucher')
+        ->discount(2000, false, 'Promo', 'promo')
+        ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
+        ->tax(11, true, 'PPN 11%', 'ppn');
+
+    $taxDiscount2 = (clone $kasir)
         ->discount(10, true, 'Voucher', 'voucher')
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->discount(2000, false, 'Promo', 'promo')
         ->tax(11, true, 'PPN 11%', 'ppn');
 
-    expect($kasir->getGrossAmount())->toBe(8880);
+    $taxDiscount3 = (clone $kasir)
+        ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
+        ->discount(10, true, 'Voucher', 'voucher')
+        ->discount(2000, false, 'Promo', 'promo')
+        ->tax(11, true, 'PPN 11%', 'ppn');
+
+    $taxDiscount4 = (clone $kasir)
+        ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
+        ->discount(10, true, 'Voucher', 'voucher')
+        ->tax(11, true, 'PPN 11%', 'ppn')
+        ->discount(2000, false, 'Promo', 'promo');
+
+    $taxDiscount5 = (clone $kasir)
+        ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
+        ->discount(10, true, 'Voucher', 'voucher')
+        ->tax(11, true, 'PPN 11%', 'ppn')
+        ->discount(2000, false, 'Promo', 'promo');
+
+    $taxDiscount6 = (clone $kasir)
+        ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
+        ->tax(11, true, 'PPN 11%', 'ppn')
+        ->discount(10, true, 'Voucher', 'voucher')
+        ->discount(2000, false, 'Promo', 'promo');
+
+    expect($taxDiscount1->toArray())
+        ->toBe($taxDiscount2->toArray())
+        ->toBe($taxDiscount3->toArray())
+        ->toBe($taxDiscount4->toArray())
+        ->toBe($taxDiscount5->toArray())
+        ->toBe($taxDiscount6->toArray())
+        ->and($taxDiscount1->getGrossAmount())
+        ->and($taxDiscount2->getGrossAmount())
+        ->and($taxDiscount3->getGrossAmount())
+        ->and($taxDiscount4->getGrossAmount())
+        ->and($taxDiscount5->getGrossAmount())
+        ->and($taxDiscount6->getGrossAmount())
+        ->toBe(8880);
+
 });

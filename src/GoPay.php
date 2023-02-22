@@ -3,10 +3,10 @@
 namespace Kasir\Kasir;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Helper\Request;
 use Spatie\Macroable\Macroable;
-use Str;
 
 class GoPay
 {

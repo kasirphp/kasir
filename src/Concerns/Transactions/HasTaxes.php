@@ -8,9 +8,9 @@ trait HasTaxes
 {
     private int $tax_id = 0;
 
-    protected array | null $taxes = null;
+    protected array|null $taxes = null;
 
-    protected array | null $tax_details = null;
+    protected array|null $tax_details = null;
 
     /**
      * Add a tax to the transaction.
@@ -24,14 +24,14 @@ trait HasTaxes
     public function tax(
         int $amount,
         bool $percentage = false,
-        string | null $name = null,
-        string | null $id = null
+        string|null $name = null,
+        string|null $id = null
     ): static {
         $this->tax_id++;
 
         $tax = [
-            'id' => $id ?? 'tax#' . $this->tax_id,
-            'name' => $name ?? 'Tax #' . $this->tax_id,
+            'id' => $id ?? 'tax#'.$this->tax_id,
+            'name' => $name ?? 'Tax #'.$this->tax_id,
             'amount' => $amount,
             'percentage' => $percentage,
         ];
@@ -49,7 +49,7 @@ trait HasTaxes
      * @param  array|Closure|null  $discounts  Discounts to add.
      * @return $this
      */
-    public function taxes(array | Closure | null $discounts): static
+    public function taxes(array|Closure|null $discounts): static
     {
         $discounts = $this->evaluate($discounts);
         $this->taxes = array_merge($this->getTaxes() ?: [], $discounts);
@@ -72,7 +72,7 @@ trait HasTaxes
      *
      * @return array|null
      */
-    public function getTaxes(): array | null
+    public function getTaxes(): array|null
     {
         return $this->evaluate($this->taxes);
     }
@@ -82,7 +82,7 @@ trait HasTaxes
      *
      * @return array|null
      */
-    public function getTaxDetails(): array | null
+    public function getTaxDetails(): array|null
     {
         return $this->evaluate($this->tax_details);
     }
@@ -99,8 +99,8 @@ trait HasTaxes
     public function calculateTaxedPrice(
         int $amount,
         bool $percentage = false,
-        string | null $name = null,
-        string | null $id = null
+        string|null $name = null,
+        string|null $id = null
     ): void {
         if ($percentage) {
             $amount = (int) ($this->gross_amount * ($amount / 100));
@@ -109,8 +109,8 @@ trait HasTaxes
         $this->gross_amount += $amount;
 
         $this->tax_details[] = [
-            'id' => $id ?? 'tax#' . $this->tax_id,
-            'name' => $name ?? 'Tax #' . $this->tax_id,
+            'id' => $id ?? 'tax#'.$this->tax_id,
+            'name' => $name ?? 'Tax #'.$this->tax_id,
             'price' => $amount,
             'quantity' => 1,
         ];
@@ -119,25 +119,26 @@ trait HasTaxes
     public function recalculateTaxedPrice(): void
     {
         $this->tax_details = null;
-        foreach ($this->getTaxes() as $tax) {
-            $this->calculateTaxedPrice(
-                $tax['amount'],
-                $tax['percentage'],
-                $tax['name'],
-                $tax['id']
-            );
+        if (! is_null($this->getTaxes())) {
+            foreach ($this->getTaxes() as $tax) {
+                $this->calculateTaxedPrice(
+                    $tax['amount'],
+                    $tax['percentage'],
+                    $tax['name'],
+                    $tax['id']
+                );
+            }
         }
     }
 
     public function reverseCalculateTaxedPrice(): void
     {
         if (! is_null($this->getTaxDetails())) {
-            dd('herllo');
-//            foreach ($this->getTaxDetails() as $tax) {
-//                $amount = $tax['price'];
-//                $amount = abs($amount);
-//                $this->gross_amount -= $amount;
-//            }
+            foreach ($this->getTaxDetails() as $tax) {
+                $amount = $tax['price'];
+                $amount = abs($amount);
+                $this->gross_amount -= $amount;
+            }
         }
     }
 }

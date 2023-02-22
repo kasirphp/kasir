@@ -105,8 +105,8 @@ test('taxes and discounts', function () {
         ],
     ];
 
-    $kasir = Kasir::make(10000);
-//        ->itemDetails($items);
+    $kasir = Kasir::make()
+        ->itemDetails($items);
 
     expect($kasir->getGrossAmount())
         ->toBe(10000);

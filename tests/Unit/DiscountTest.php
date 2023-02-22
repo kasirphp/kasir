@@ -90,7 +90,7 @@ it('calculates the right amount of discounts', function () {
         ->toBe($discountCombined2->toArray());
 });
 
-test('taxes and discounts', function () {
+it('calculates the right gross_amount for taxes and discounts in multiple method assignment combinations', function () {
     $items = [
         [
             'id' => 'product-1',

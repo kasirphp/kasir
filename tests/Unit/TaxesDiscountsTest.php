@@ -3,20 +3,22 @@
 use Kasir\Kasir\Kasir;
 
 it('calculates the right amount of discounts', function () {
+    $items = [
+        [
+            'id' => 'product-1',
+            'name' => 'Product 1',
+            'price' => 5000,
+            'quantity' => 1,
+        ], [
+            'id' => 'product-2',
+            'name' => 'Product 2',
+            'price' => 2500,
+            'quantity' => 2,
+        ],
+    ];
+
     $kasir = Kasir::make()
-        ->itemDetails([
-            [
-                'id' => 'product-1',
-                'name' => 'Product 1',
-                'price' => 5000,
-                'quantity' => 1,
-            ], [
-                'id' => 'product-2',
-                'name' => 'Product 2',
-                'price' => 2500,
-                'quantity' => 2,
-            ],
-        ]);
+        ->itemDetails($items);
 
     $discountMethods = (clone $kasir)
         ->discount(20, true, 'Voucher', 'voucher')
@@ -89,6 +91,80 @@ it('calculates the right amount of discounts', function () {
         ->toBe($discountCombined1->toArray())
         ->toBe($discountCombined2->toArray());
 });
+
+it('calculates the right amount of taxes', function () {
+    $items = [
+        [
+            'id' => 'product-1',
+            'name' => 'Product 1',
+            'price' => 5000,
+            'quantity' => 1,
+        ], [
+            'id' => 'product-2',
+            'name' => 'Product 2',
+            'price' => 2500,
+            'quantity' => 2,
+        ],
+    ];
+
+    $kasir = Kasir::make()
+        ->itemDetails($items);
+
+    $taxMethods = (clone $kasir)
+        ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
+        ->tax(11, true, 'PPN 11%', 'ppn');
+
+    $taxClosure = (clone $kasir)
+        ->taxes(fn () => [
+            [
+                'id' => 'snap-fee',
+                'name' => 'Biaya Metode Pembayaran',
+                'amount' => 1000,
+                'percentage' => false,
+            ], [
+                'id' => 'ppn',
+                'name' => 'PPN 11%',
+                'amount' => 11,
+                'percentage' => true,
+            ],
+        ]);
+
+    $taxCombined1 = (clone $kasir)
+        ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
+        ->taxes(fn () => [
+            [
+                'id' => 'ppn',
+                'name' => 'PPN 11%',
+                'amount' => 11,
+                'percentage' => true,
+            ],
+        ]);
+
+    $taxCombined2 = (clone $kasir)
+        ->taxes(fn () => [
+            [
+                'id' => 'snap-fee',
+                'name' => 'Biaya Metode Pembayaran',
+                'amount' => 1000,
+                'percentage' => false,
+            ],
+        ])
+        ->tax(11, true, 'PPN 11%', 'ppn');
+
+    expect($taxMethods->getGrossAmount())
+        ->and($taxClosure->getGrossAmount())
+        ->and($taxCombined1->getGrossAmount())
+        ->and($taxCombined2->getGrossAmount())
+        ->toBe(12210)
+        ->and($taxMethods->getTaxes())
+        ->toBe($taxClosure->getTaxes())
+        ->toBe($taxCombined1->getTaxes())
+        ->toBe($taxCombined2->getTaxes())
+        ->and($taxMethods->toArray())
+        ->toBe($taxClosure->toArray())
+        ->toBe($taxCombined1->toArray())
+        ->toBe($taxCombined2->toArray());
+})->only();
 
 it('calculates the right gross_amount for taxes and discounts in multiple method assignment combinations', function () {
     $items = [

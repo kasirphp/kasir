@@ -15,10 +15,10 @@ trait HasTaxes
     /**
      * Add a tax to the transaction.
      *
-     * @param  int  $amount  Amount of discount.
-     * @param  bool  $percentage  Whether the discount is a percentage or fixed value.
-     * @param  string|null  $name  Name of the discount.
-     * @param  string|null  $id  ID of the discount.
+     * @param  int  $amount  Amount of tax.
+     * @param  bool  $percentage  Whether the tax is a percentage or fixed value.
+     * @param  string|null  $name  Name of the tax.
+     * @param  string|null  $id  ID of the tax.
      * @return $this
      */
     public function tax(
@@ -46,21 +46,21 @@ trait HasTaxes
     /**
      * Add multiple taxes to the transaction.
      *
-     * @param  array|Closure|null  $discounts  Discounts to add.
+     * @param  array|Closure|null  $taxes  Taxes to add.
      * @return $this
      */
-    public function taxes(array | Closure | null $discounts): static
+    public function taxes(array | Closure | null $taxes): static
     {
-        $discounts = $this->evaluate($discounts);
-        $this->taxes = array_merge($this->getTaxes() ?: [], $discounts);
+        $taxes = $this->evaluate($taxes);
+        $this->taxes = array_merge($this->getTaxes() ?: [], $taxes);
 
-        foreach ($discounts as $discount) {
+        foreach ($taxes as $tax) {
             $this->tax_id++;
             $this->calculateTaxedPrice(
-                $discount['amount'],
-                $discount['percentage'],
-                $discount['name'],
-                $discount['id']
+                $tax['amount'],
+                $tax['percentage'],
+                $tax['name'],
+                $tax['id']
             );
         }
 
@@ -84,12 +84,12 @@ trait HasTaxes
     }
 
     /**
-     * Calculate the taxed gross_amount and append the discount to discount_details. Do not call this method directly.
+     * Calculate the taxed gross_amount and append the tax to tax_details. Do not call this method directly.
      *
-     * @param  int  $amount  Amount of discount.
-     * @param  bool  $percentage  Whether the discount is a percentage or fixed value.
-     * @param  string|null  $name  Name of the discount.
-     * @param  string|null  $id  ID of the discount.
+     * @param  int  $amount  Amount of tax.
+     * @param  bool  $percentage  Whether the tax is a percentage or fixed value.
+     * @param  string|null  $name  Name of the tax.
+     * @param  string|null  $id  ID of the tax.
      */
     public function calculateTaxedPrice(
         int $amount,

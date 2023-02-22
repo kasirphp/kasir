@@ -2,6 +2,15 @@ name: tests
 
 on:
   pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'resources/**'
+      - 'config/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpunit.xml'
+      - '.github/workflows/tests.yml'
   push:
     branches:
       - 'master'

@@ -31,8 +31,7 @@ class GoPay extends PaymentObject implements PaymentMethod
         $options = array_filter(get_defined_vars(), 'strlen');
 
         if ($account_id instanceof \Kasir\Kasir\GoPay) {
-            if (!$account_id->accountId())
-            {
+            if (! $account_id->accountId()) {
                 $account_id->status();
             }
             $options['account_id'] = $account_id->accountId();

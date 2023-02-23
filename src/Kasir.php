@@ -141,6 +141,22 @@ class Kasir implements Arrayable
     }
 
     /**
+     * Clone this class.
+     */
+    public function clone(): Kasir
+    {
+        return clone $this;
+    }
+
+    /**
+     * Clone this class.
+     */
+    public function copy(): Kasir
+    {
+        return $this->clone();
+    }
+
+    /**
      * Charge the transaction.
      *
      * @throws ZeroGrossAmountException

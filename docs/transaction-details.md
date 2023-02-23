@@ -248,6 +248,11 @@ $kasir = Kasir::make(1000)
     });
 ```
 
+## Copying the `Kasir` Object
+
+You can copy the `Kasir` object using the `copy()` or `clone()` method. This method will return a new `Kasir` object with the same
+configuration as the original `Kasir` object.
+
 ## Next Step
 
 After you have created the `Kasir` object with those configurations, you can use it to charge your costumer

@@ -20,12 +20,12 @@ it('calculates the right amount of discounts', function () {
     $kasir = Kasir::make()
         ->itemDetails($items);
 
-    $discountMethods = (clone $kasir)
+    $discountMethods = $kasir->copy()
         ->discount(20, true, 'Voucher', 'voucher')
         ->discount(1000, false, 'Promo', 'promo')
         ->discount(10, true);
 
-    $discountClosure = (clone $kasir)
+    $discountClosure = $kasir->copy()
         ->discounts(fn () => [
             [
                 'id' => 'voucher',
@@ -45,7 +45,7 @@ it('calculates the right amount of discounts', function () {
             ],
         ]);
 
-    $discountCombined1 = (clone $kasir)
+    $discountCombined1 = $kasir->copy()
         ->discounts(fn () => [
             [
                 'id' => 'voucher',
@@ -61,7 +61,7 @@ it('calculates the right amount of discounts', function () {
         ])
         ->discount(10, true);
 
-    $discountCombined2 = (clone $kasir)
+    $discountCombined2 = $kasir->copy()
         ->discount(20, true, 'Voucher', 'voucher')
         ->discounts(fn () => [
             [
@@ -110,11 +110,11 @@ it('calculates the right amount of taxes', function () {
     $kasir = Kasir::make()
         ->itemDetails($items);
 
-    $taxMethods = (clone $kasir)
+    $taxMethods = $kasir->copy()
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->tax(11, true, 'PPN 11%', 'ppn');
 
-    $taxClosure = (clone $kasir)
+    $taxClosure = $kasir->copy()
         ->taxes(fn () => [
             [
                 'id' => 'snap-fee',
@@ -129,7 +129,7 @@ it('calculates the right amount of taxes', function () {
             ],
         ]);
 
-    $taxCombined1 = (clone $kasir)
+    $taxCombined1 = $kasir->copy()
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->taxes(fn () => [
             [
@@ -140,7 +140,7 @@ it('calculates the right amount of taxes', function () {
             ],
         ]);
 
-    $taxCombined2 = (clone $kasir)
+    $taxCombined2 = $kasir->copy()
         ->taxes(fn () => [
             [
                 'id' => 'snap-fee',
@@ -187,37 +187,37 @@ it('calculates the right gross_amount for taxes and discounts in multiple method
     expect($kasir->getGrossAmount())
         ->toBe(10000);
 
-    $taxDiscount1 = (clone $kasir)
+    $taxDiscount1 = $kasir->copy()
         ->discount(10, true, 'Voucher', 'voucher')
         ->discount(2000, false, 'Promo', 'promo')
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->tax(11, true, 'PPN 11%', 'ppn');
 
-    $taxDiscount2 = (clone $kasir)
+    $taxDiscount2 = $kasir->copy()
         ->discount(10, true, 'Voucher', 'voucher')
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->discount(2000, false, 'Promo', 'promo')
         ->tax(11, true, 'PPN 11%', 'ppn');
 
-    $taxDiscount3 = (clone $kasir)
+    $taxDiscount3 = $kasir->copy()
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->discount(10, true, 'Voucher', 'voucher')
         ->discount(2000, false, 'Promo', 'promo')
         ->tax(11, true, 'PPN 11%', 'ppn');
 
-    $taxDiscount4 = (clone $kasir)
+    $taxDiscount4 = $kasir->copy()
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->discount(10, true, 'Voucher', 'voucher')
         ->tax(11, true, 'PPN 11%', 'ppn')
         ->discount(2000, false, 'Promo', 'promo');
 
-    $taxDiscount5 = (clone $kasir)
+    $taxDiscount5 = $kasir->copy()
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->discount(10, true, 'Voucher', 'voucher')
         ->tax(11, true, 'PPN 11%', 'ppn')
         ->discount(2000, false, 'Promo', 'promo');
 
-    $taxDiscount6 = (clone $kasir)
+    $taxDiscount6 = $kasir->copy()
         ->tax(1000, false, 'Biaya Metode Pembayaran', 'snap-fee')
         ->tax(11, true, 'PPN 11%', 'ppn')
         ->discount(10, true, 'Voucher', 'voucher')

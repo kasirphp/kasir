@@ -20,10 +20,6 @@ export default defineConfig({
 
     cleanUrls: true,
 
-    vue: {
-        reactivityTransform: true,
-    },
-
     themeConfig: {
         logo: '/logo.svg',
         siteTitle: false,

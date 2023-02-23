@@ -164,7 +164,7 @@ it('calculates the right amount of taxes', function () {
         ->toBe($taxClosure->toArray())
         ->toBe($taxCombined1->toArray())
         ->toBe($taxCombined2->toArray());
-})->only();
+});
 
 it('calculates the right gross_amount for taxes and discounts in multiple method assignment combinations', function () {
     $items = [

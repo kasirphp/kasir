@@ -1,6 +1,7 @@
 import {defineConfig} from 'vitepress'
 
 export default defineConfig({
+    lang: 'en-US',
     title: 'Kasir',
     description: 'Documentation for KasirPHP, a Laravel library for Midtrans payment gateway.',
 

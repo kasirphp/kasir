@@ -74,6 +74,7 @@ function sidebar() {
             text: 'Guide',
             items: [
                 {text: 'Transaction Details', link: '/transaction-details'},
+                {text: 'Discounts and Taxes', link: '/discounts-and-taxes'},
                 {text: 'Payment Methods', link: '/payment-methods'},
                 {text: 'Core API', link: '/core-api'},
                 {text: 'Snap API', link: '/snap-api'},

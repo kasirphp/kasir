@@ -11,12 +11,14 @@ use Kasir\Kasir\Concerns\Endpoint;
 use Kasir\Kasir\Concerns\EvaluateClosures;
 use Kasir\Kasir\Concerns\Transactions\HasBillingAddress;
 use Kasir\Kasir\Concerns\Transactions\HasCustomerDetails;
+use Kasir\Kasir\Concerns\Transactions\HasDiscounts;
 use Kasir\Kasir\Concerns\Transactions\HasEnabledPayments;
 use Kasir\Kasir\Concerns\Transactions\HasGrossAmount;
 use Kasir\Kasir\Concerns\Transactions\HasItemDetails;
 use Kasir\Kasir\Concerns\Transactions\HasOrderId;
 use Kasir\Kasir\Concerns\Transactions\HasPaymentMethods;
 use Kasir\Kasir\Concerns\Transactions\HasShippingAddress;
+use Kasir\Kasir\Concerns\Transactions\HasTaxes;
 use Kasir\Kasir\Concerns\Validation;
 use Kasir\Kasir\Exceptions\MidtransApiException;
 use Kasir\Kasir\Exceptions\MidtransKeyException;
@@ -34,12 +36,14 @@ class Kasir implements Arrayable
     use EvaluateClosures;
     use HasBillingAddress;
     use HasCustomerDetails;
+    use HasDiscounts;
     use HasEnabledPayments;
     use HasGrossAmount;
     use HasItemDetails;
     use HasOrderId;
     use HasPaymentMethods;
     use HasShippingAddress;
+    use HasTaxes;
     use Validation;
 
     public function __construct(int | null $gross_amount)
@@ -81,6 +85,8 @@ class Kasir implements Arrayable
 
         if (! is_null($this->getItemDetails())) {
             $array['item_details'] = array_values($this->getItemDetails());
+            $array['item_details'] = array_merge($array['item_details'], array_values($this->getDiscountDetails() ?: []));
+            $array['item_details'] = array_merge($array['item_details'], array_values($this->getTaxDetails() ?: []));
         }
 
         if (! is_null($this->getCustomerDetails())) {

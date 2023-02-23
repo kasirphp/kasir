@@ -58,11 +58,11 @@ trait HasDiscounts
     public function discounts(array | Closure | null $discounts): static
     {
         $discounts = $this->evaluate($discounts);
-        $this->discounts = array_merge($this->getDiscounts() ?: [], $discounts);
 
         $this->reverseCalculateTaxedPrice();
         foreach ($discounts as $discount) {
             $this->discount_id++;
+            $this->discounts[] = $discount;
             $this->calculateDiscountedPrice(
                 $discount['amount'],
                 $discount['percentage'],

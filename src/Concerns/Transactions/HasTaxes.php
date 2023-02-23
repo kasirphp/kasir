@@ -52,10 +52,10 @@ trait HasTaxes
     public function taxes(array | Closure | null $taxes): static
     {
         $taxes = $this->evaluate($taxes);
-        $this->taxes = array_merge($this->getTaxes() ?: [], $taxes);
 
         foreach ($taxes as $tax) {
             $this->tax_id++;
+            $this->taxes[] = $tax;
             $this->calculateTaxedPrice(
                 $tax['amount'],
                 $tax['percentage'],

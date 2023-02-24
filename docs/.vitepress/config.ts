@@ -49,7 +49,7 @@ function og() {
     return {
         title: 'Kasir',
         description: 'Documentation for KasirPHP, a Laravel library for Midtrans payment gateway.',
-        image: 'https://raw.githubusercontent.com/kasirphp/art/master/svg/logo.svg',
+        image: 'https://kasirphp.com/og-image.png',
         url: 'https://kasirphp.com',
     }
 }

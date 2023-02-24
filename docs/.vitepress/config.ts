@@ -58,6 +58,7 @@ function navbar() {
     return [
         {text: 'Home', link: '/'},
         {text: 'Documentation', items: sidebar()},
+        {text: 'Upgrading', items: upgradeGuides()},
         {text: 'Creator', link: '/creator'},
     ]
 }
@@ -82,5 +83,11 @@ function sidebar() {
                 {text: 'Snap API', link: '/snap-api'},
             ]
         },
+    ]
+}
+
+function upgradeGuides() {
+    return [
+        {text: 'v1.x to v2.x', link: '/upgrade-guide/v1x-to-v2x'},
     ]
 }

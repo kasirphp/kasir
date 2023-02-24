@@ -47,7 +47,7 @@ export default defineConfig({
 
 function og() {
     return {
-        title: 'Kasir',
+        title: 'Kasir: Developer Friendly Laravel Midtrans Package',
         description: 'Documentation for KasirPHP, a Laravel library for Midtrans payment gateway.',
         image: 'https://kasirphp.com/og-image.png',
         url: 'https://kasirphp.com',

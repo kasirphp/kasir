@@ -8,8 +8,8 @@ export default defineConfig({
     head: [
         ['link', {rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}],
         ['meta', {property: 'og:type', content: 'website'}],
-        ['meta', {property: 'og:title', content: og().title}],
-        ['meta', {property: 'og:image', content: og().image}],
+        ['meta', {name:'title', property: 'og:title', content: og().title}],
+        ['meta', {name:'image', property: 'og:image', content: og().image}],
         ['meta', {property: 'og:url', content: og().url}],
         ['meta', {property: 'og:description', content: og().description}],
         ['meta', { name: 'twitter:card', content: 'summary_large_image' }],

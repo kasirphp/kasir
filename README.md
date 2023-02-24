@@ -51,6 +51,7 @@ If you want to contribute to Kasir package, you may want to test it in a real La
     }
     ```
 6. Run `composer update`.
+7. When creating a Pull Request, make sure you have set your MIDTRANS_SERVER_KEY_SANDBOX and MIDTRANS_CLIENT_KEY_SANDBOX in your GitHub secrets for testing.
 
 ## License
 

@@ -64,7 +64,6 @@ class Kasir implements Arrayable
     /**
      * Convert passed data to an array.
      *
-     * @return array
      * @throws \Kasir\Kasir\Exceptions\NoItemDetailsException
      * @throws \Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException
      * @throws \Kasir\Kasir\Exceptions\ZeroGrossAmountException

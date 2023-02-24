@@ -11,6 +11,7 @@ use Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException;
 use Kasir\Kasir\Exceptions\ZeroGrossAmountException;
 use Kasir\Kasir\Helper\MidtransResponse;
 use Kasir\Kasir\Helper\Request;
+use Kasir\Kasir\Kasir;
 
 trait InteractsWithPaymentApi
 {
@@ -26,9 +27,9 @@ trait InteractsWithPaymentApi
     public function charge(): MidtransResponse
     {
         return Request::post(
-            self::getBaseUrl() . '/v2/charge',
+            Kasir::getBaseUrl() . '/v2/charge',
             config('kasir.server_key'),
-            static::toArray()
+            $this->toArray()
         );
     }
 
@@ -61,7 +62,7 @@ trait InteractsWithPaymentApi
 
         try {
             return Request::get(
-                static::getBaseUrl() . '/v2/' . $transaction_id . '/status',
+                Kasir::getBaseUrl() . '/v2/' . $transaction_id . '/status',
                 config('kasir.server_key'),
             );
         } catch (GuzzleException | RequestException $e) {
@@ -94,7 +95,7 @@ trait InteractsWithPaymentApi
 
         try {
             return Request::post(
-                static::getBaseUrl() . '/v2/capture',
+                Kasir::getBaseUrl() . '/v2/capture',
                 config('kasir.server_key'),
                 $payload
             );
@@ -123,7 +124,7 @@ trait InteractsWithPaymentApi
 
         try {
             return Request::post(
-                static::getBaseUrl() . '/v2/' . $transaction_id . '/approve',
+                Kasir::getBaseUrl() . '/v2/' . $transaction_id . '/approve',
                 config('kasir.server_key'),
             );
         } catch (GuzzleException | RequestException $e) {
@@ -149,7 +150,7 @@ trait InteractsWithPaymentApi
 
         try {
             return Request::post(
-                static::getBaseUrl() . '/v2/' . $transaction_id . '/deny',
+                Kasir::getBaseUrl() . '/v2/' . $transaction_id . '/deny',
                 config('kasir.server_key'),
             );
         } catch (GuzzleException | RequestException $e) {
@@ -175,7 +176,7 @@ trait InteractsWithPaymentApi
 
         try {
             return Request::post(
-                static::getBaseUrl() . '/v2/' . $transaction_id . '/cancel',
+                Kasir::getBaseUrl() . '/v2/' . $transaction_id . '/cancel',
                 config('kasir.server_key'),
             );
         } catch (GuzzleException | RequestException $e) {
@@ -201,7 +202,7 @@ trait InteractsWithPaymentApi
 
         try {
             return Request::post(
-                static::getBaseUrl() . '/v2/' . $transaction_id . '/expire',
+                Kasir::getBaseUrl() . '/v2/' . $transaction_id . '/expire',
                 config('kasir.server_key'),
             );
         } catch (GuzzleException | RequestException $e) {
@@ -236,7 +237,7 @@ trait InteractsWithPaymentApi
 
         try {
             return Request::post(
-                static::getBaseUrl() . '/v2/' . $transaction_id . '/refund',
+                Kasir::getBaseUrl() . '/v2/' . $transaction_id . '/refund',
                 config('kasir.server_key'),
                 $payload ?: null
             );
@@ -272,7 +273,7 @@ trait InteractsWithPaymentApi
 
         try {
             return Request::post(
-                static::getBaseUrl() . '/v2/' . $transaction_id . '/refund/online/direct',
+                Kasir::getBaseUrl() . '/v2/' . $transaction_id . '/refund/online/direct',
                 config('kasir.server_key'),
                 $payload ?: null
             );

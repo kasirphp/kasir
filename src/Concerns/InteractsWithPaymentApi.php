@@ -1,6 +1,7 @@
 <?php
 
 namespace Kasir\Kasir\Concerns;
+
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Kasir\Kasir\Exceptions\MidtransApiException;

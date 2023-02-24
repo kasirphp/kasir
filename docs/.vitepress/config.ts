@@ -24,6 +24,11 @@ export default defineConfig({
     themeConfig: {
         logo: '/logo.svg',
         siteTitle: false,
+        algolia: {
+            appId: 'DG5WH4TJAL',
+            apiKey: 'c28085e9480d674830daabf39fc176a1',
+            indexName: 'kasirphp',
+        },
         nav: navbar(),
         socialLinks: [
             {icon: 'twitter', link: 'https://twitter.com/i/communities/1623376036779130881'},

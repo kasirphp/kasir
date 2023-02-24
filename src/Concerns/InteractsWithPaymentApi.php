@@ -36,7 +36,6 @@ trait InteractsWithPaymentApi
     /**
      * Get status of current transaction.
      *
-     *
      * @throws MidtransApiException
      * @throws MidtransKeyException
      */
@@ -49,7 +48,6 @@ trait InteractsWithPaymentApi
 
     /**
      * Get status of given transaction ID.
-     *
      *
      * @throws MidtransApiException
      * @throws MidtransKeyException

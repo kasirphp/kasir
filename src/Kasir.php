@@ -52,6 +52,7 @@ class Kasir implements Arrayable
      * Initialize Kasir with base Gross Amount
      *
      * @param  int|null  $gross_amount
+     * @return \Kasir\Kasir\Kasir
      */
     public static function make(int | null $gross_amount = null): static
     {
@@ -63,10 +64,10 @@ class Kasir implements Arrayable
     /**
      * Convert passed data to an array.
      *
-     *
-     * @throws ZeroGrossAmountException
-     * @throws NoItemDetailsException
-     * @throws NoPriceAndQuantityAttributeException
+     * @return array
+     * @throws \Kasir\Kasir\Exceptions\NoItemDetailsException
+     * @throws \Kasir\Kasir\Exceptions\NoPriceAndQuantityAttributeException
+     * @throws \Kasir\Kasir\Exceptions\ZeroGrossAmountException
      */
     public function toArray(): array
     {
@@ -138,6 +139,8 @@ class Kasir implements Arrayable
 
     /**
      * Clone this class.
+     *
+     * @return \Kasir\Kasir\Kasir
      */
     public function clone(): Kasir
     {
@@ -146,6 +149,8 @@ class Kasir implements Arrayable
 
     /**
      * Clone this class.
+     *
+     * @return \Kasir\Kasir\Kasir
      */
     public function copy(): Kasir
     {

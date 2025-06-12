@@ -4,8 +4,6 @@
 
 <p align="center">
     <a href="https://packagist.org/packages/kasir/kasir"><img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/kasir/kasir"></a>
-    <a href="https://packagist.org/packages/kasir/kasir"><img alt="Packagist PHP Version" src="https://img.shields.io/packagist/dependency-v/kasir/kasir/illuminate/contracts"></a>
-    <a href="https://packagist.org/packages/kasir/kasir"><img alt="Packagist PHP Version" src="https://img.shields.io/packagist/dependency-v/kasir/kasir/php"></a>
     <a href="https://packagist.org/packages/kasir/kasir"><img src="https://img.shields.io/packagist/l/kasir/kasir" alt="License"></a>
 </p>
 
@@ -20,13 +18,6 @@ Kasir helps integrate Midtrans in Laravel way.
 ## Installation and Usage
 
 Please refer to the [documentation](https://kasirphp.com).
-
-## Community and Discussions
-
-<p align="center">
-    <a href="https://twitter.com/i/communities/1623376036779130881" target="_blank"><img alt="Twitter Community" src="https://img.shields.io/twitter/url?label=Twitter%20Community&style=social&url=https%3A%2F%2Ftwitter.com%2Fi%2Fcommunities%2F1623376036779130881"></a>
-    <a href="https://github.com/kasirphp/kasir/discussions"><img alt="Github Discussions" src="https://img.shields.io/twitter/url?label=GitHub%20Discussions&logo=GitHub&style=social&url=https%3A%2F%2Fgithub.com%2Fkasirphp%2Fkasir%2Fdiscussions"></a>
-</p>
 
 ## Contributing
 
